@@ -1,0 +1,236 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                tools:context=".Portada"
+                android:background="@android:color/holo_red_light"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ViewFlipper
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/viewFlipperPortada">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/RelativeLayoutDatosSupervisor">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Supervisor"
+                    android:id="@+id/textViewSuper"
+                    android:textSize="30sp"
+                    android:layout_marginTop="56dp"
+                    android:textColor="@android:color/black"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ubicacion"
+                    android:id="@+id/textViewUbi"
+                    android:layout_marginTop="78dp"
+                    android:textSize="30sp"
+                    android:textColor="@android:color/black"
+                    android:layout_below="@+id/textViewSuper"
+                    android:layout_centerHorizontal="true"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Siguiente"
+                    android:id="@+id/btnPortada"
+                    android:layout_marginTop="115dp"
+                    android:layout_toRightOf="@+id/textViewUbi"
+                    android:layout_toEndOf="@+id/textViewUbi"
+                    android:layout_below="@+id/textViewUbi"/>
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Settings"
+                    android:id="@+id/buttonSettings"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginStart="45dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="45dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textviewSuperNombre"
+                    android:textSize="25sp"
+                    android:layout_below="@+id/textViewSuper"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewSuperUbicacion"
+                    android:textSize="25sp"
+                    android:layout_below="@+id/textViewUbi"
+                    android:layout_alignLeft="@+id/textviewSuperNombre"
+                    android:layout_alignStart="@+id/textviewSuperNombre"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/RelativeLayoutSettings">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Supervisor"
+                    android:id="@+id/textViewSupervisor"
+                    android:textSize="30sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignRight="@+id/textView"
+                    android:layout_alignEnd="@+id/textView"
+                    android:layout_marginTop="39dp"
+                    android:textColor="@android:color/black"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/editTextNombreSupervisor"
+                    android:hint="Ingresa tu nombre"
+                    android:layout_below="@+id/textViewSupervisor"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:maxLength="30"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ubicacion"
+                    android:id="@+id/textView"
+                    android:layout_marginTop="32dp"
+                    android:textSize="30sp"
+                    android:layout_below="@+id/editTextNombreSupervisor"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@android:color/black"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/editTextUbicacion"
+                    android:hint="Ingresa tu ubicacion"
+                    android:layout_below="@+id/textView"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:maxLength="30"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Guardar"
+                    android:id="@+id/buttonGuardar"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="42dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Inventario:"
+                    android:id="@+id/textViewInventario"
+                    android:textSize="30sp"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="S:"
+                    android:id="@+id/textView2"
+                    android:layout_marginTop="21dp"
+                    android:textSize="25sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginStart="22dp"
+                    android:layout_below="@+id/textViewInventario"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editTextSmall"
+                    android:layout_alignBottom="@+id/textView2"
+                    android:layout_toRightOf="@+id/textView2"
+                    android:layout_toStartOf="@+id/textView"
+                    android:layout_toLeftOf="@+id/textView"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="M:"
+                    android:id="@+id/textViewM"
+                    android:textSize="25sp"
+                    android:textColor="@android:color/black"
+                    android:layout_alignBottom="@+id/editTextSmall"
+                    android:layout_alignLeft="@+id/buttonGuardar"
+                    android:layout_alignStart="@+id/buttonGuardar"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editTextMediuem"
+                    android:layout_alignBottom="@+id/textViewM"
+                    android:layout_toRightOf="@+id/textViewM"
+                    android:layout_alignRight="@+id/buttonGuardar"
+                    android:layout_alignEnd="@+id/buttonGuardar"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="L:"
+                    android:id="@+id/textViewL"
+                    android:textSize="25sp"
+                    android:textColor="@android:color/black"
+                    android:layout_alignBottom="@+id/editTextMediuem"
+                    android:layout_toRightOf="@+id/textView"
+                    android:layout_toEndOf="@+id/textView"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editTextLarge"
+                    android:layout_alignBottom="@+id/textViewL"
+                    android:layout_toRightOf="@+id/textViewL"
+                    android:layout_toEndOf="@+id/textViewL"/>
+
+
+            </RelativeLayout>
+        </ViewFlipper>
+    </RelativeLayout>
+</RelativeLayout>
