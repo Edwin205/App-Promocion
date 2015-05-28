@@ -21,10 +21,11 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
     ViewFlipper viewFlipper;
     Button btnNombre,btnEmail,btnTelefono,btnOtro,btnFinalizar;
     EditText etNombre,etEmail,etTelefono;
-
-
-
+    String nombreSupervisor;
+    String ubicacionSupervisor;
     TextView prueba ;
+    Supervisor supervisor;
+    TextView nombreSuper,ubicacionSuper;
 
 
     @Override
@@ -46,20 +47,42 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         //El viewFlipper
         viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
 
+
+
+        Intent intent = getIntent();
+        nombreSupervisor = intent.getStringExtra("nombreSupervisor");
+        ubicacionSupervisor = intent.getStringExtra("ubicacionSupervisor");
+
+
+        //Datos del supervisor
+        supervisor = new Supervisor();
+        supervisor.setNombreSupervisor(nombreSupervisor);
+        supervisor.setUbicacionSupervisor(ubicacionSupervisor);
+
+        //TextView's
+        nombreSuper = (TextView) findViewById(R.id.textViewNombreSprueba);
+        ubicacionSuper = (TextView) findViewById(R.id.textViewUbicacionSPrueba);
+
+
+
+
+
+
+
         //Si se da click en cualquier bototn de estos
         btnNombre.setOnClickListener(this);
         btnEmail.setOnClickListener(this);
         btnOtro.setOnClickListener(this);
         btnFinalizar.setOnClickListener(this);
-
         btnTelefono.setOnClickListener(this);
 
     }
 
 
-
     public void alta(View v){
 
+        String nombreSupervisor = supervisor.getNombreSupervisor();
+        String ubicacionSupervisor = supervisor.getUbicacionSupervisor();
 
 
         etNombre = (EditText) findViewById(R.id.editTextNombrePersona);
@@ -72,10 +95,10 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
 
 
-       prueba= (TextView) findViewById(R.id.textPrueba);
+       prueba = (TextView) findViewById(R.id.textPrueba);
         DataBase baseDatos = new DataBase(this);
         baseDatos.abrir();
-        baseDatos.insertarReg(nombre,email,telefono);
+        baseDatos.insertarReg(nombreSupervisor,ubicacionSupervisor,nombre,email,telefono);
         prueba.setText(baseDatos.leer());
         baseDatos.cerrar();
     }

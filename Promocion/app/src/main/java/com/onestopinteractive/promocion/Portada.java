@@ -44,18 +44,20 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                 public void onClick(View v) {
                     nombreSuper = (TextView) findViewById(R.id.textviewSuperNombre);
                     ubicacionSuper = (TextView) findViewById(R.id.textViewSuperUbicacion);
-                    String darError2 = ubicacionSuper.getText().toString();
-                    String darError = nombreSuper.getText().toString();
-                    boolean Error = true;
+                    String ubicacionSuperv = ubicacionSuper.getText().toString();
+                    String nombreSuperv = nombreSuper.getText().toString();
+                    boolean darError = true;
 
-                   if(darError != "" && darError2 != "")
-                       Error = false;
+                   if(nombreSuperv != "" && ubicacionSuperv != "")
+                       darError = false;
 
                     else
                    Toast.makeText(Portada.this,"Ingresa tus datos antes de continuar",Toast.LENGTH_SHORT).show();
 
-                    if(Error == false) {
+                    if(darError == false) {
                         Intent intent = new Intent(Portada.this,Registro.class);
+                        intent.putExtra("nombreSupervisor",nombreSuperv);
+                        intent.putExtra("ubicacionSupervisor",ubicacionSuperv);
                         startActivity(intent);
                     }
 
@@ -70,6 +72,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()) {
             case R.id.buttonSettings:
                 viewFlipper.setDisplayedChild(1);

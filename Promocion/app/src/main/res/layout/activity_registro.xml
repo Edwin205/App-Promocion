@@ -26,7 +26,7 @@
                 android:id="@+id/relativelayoutNombre"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                
+
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -65,6 +65,26 @@
                     android:layout_marginTop="34dp"
                     android:hint="Ingresa tu nombre"
                     android:maxLength="30"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewNombreSprueba"
+                    android:layout_alignTop="@+id/buttonNombre"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="54dp"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewUbicacionSPrueba"
+                    android:layout_below="@+id/textViewNombreSprueba"
+                    android:layout_toRightOf="@+id/textViewNombreSprueba"
+                    android:layout_toEndOf="@+id/textViewNombreSprueba"
+                    android:layout_marginTop="45dp"
+                    android:textSize="20sp"/>
 
             </RelativeLayout>
 

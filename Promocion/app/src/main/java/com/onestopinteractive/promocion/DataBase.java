@@ -24,7 +24,7 @@ public class DataBase  extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String Query = "create table Registro(" + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + "nombre TEXT, email TEXT, telefono TEXT)";
+        String Query = "create table Registro(" + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + "nombreSupervisor TEXT, ubicacionSupervisor TEXT, nombre TEXT, email TEXT, telefono TEXT)";
         db.execSQL(Query);
     }
 
@@ -32,12 +32,14 @@ public class DataBase  extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int versionAnte, int versionNue) {
         db.execSQL("drop table if exists Registro");
-        db.execSQL("create table Registro(" + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + "nombre TEXT, email TEXT, telefono TEXT)");
+        db.execSQL("create table Registro(" + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + "nombreSupervisor TEXT, ubicacionSupervisor TEXT, nombre TEXT, email TEXT, telefono TEXT)");
     }
 
-    public void insertarReg(String nombre,String email, String telefono)
+    public void insertarReg(String nombreSupervisor,String ubicacionSupervisor, String nombre,String email, String telefono)
     {
         ContentValues valores = new ContentValues();
+        valores.put("nombreSupervisor",nombreSupervisor);
+        valores.put("ubicacionSupervisor",ubicacionSupervisor);
         valores.put("nombre",nombre);
         valores.put("email",email);
         valores.put("telefono", telefono);
@@ -58,17 +60,19 @@ public class DataBase  extends SQLiteOpenHelper {
     public String leer()
     {
         String result = "";
-        String columnas[] = {_ID,"nombre","email","telefono"};
+        String columnas[] = {_ID,"nombreSupervisor","ubicacionSupervisor","nombre","email","telefono"};
         Cursor c = this.getReadableDatabase().query("Registro",columnas,null,null,null,null,null);
         c.moveToLast();
         int id,iu,ip,iq,ins,iubs;
         id = c.getColumnIndex(_ID);
+        ins = c.getColumnIndex("nombreSupervisor");
+        iubs = c.getColumnIndex("ubicacionSupervisor");
         iu = c.getColumnIndex("nombre");
         ip = c.getColumnIndex("email");
         iq = c.getColumnIndex("telefono");
 
 
-        result = c.getString(id)+" "+c.getString(iu)+" "+c.getString(ip)+" "+c.getString(iq);
+        result = c.getString(id)+" "+c.getString(ins)+" "+c.getString(iubs)+" "+c.getString(iu)+" "+c.getString(ip)+" "+c.getString(iq);
 
         return result;
 
