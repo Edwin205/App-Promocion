@@ -101,6 +101,10 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         baseDatos.insertarReg(nombreSupervisor,ubicacionSupervisor,nombre,email,telefono);
         prueba.setText(baseDatos.leer());
         baseDatos.cerrar();
+
+        etNombre.setText("");
+        etEmail.setText("");
+        etTelefono.setText("");
     }
 
 

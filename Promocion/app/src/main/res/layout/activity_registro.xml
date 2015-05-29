@@ -37,7 +37,9 @@
                     android:layout_marginBottom="225dp"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/holo_red_dark"/>
 
 
 
@@ -51,7 +53,7 @@
                     android:textSize="30sp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/white"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -64,7 +66,9 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="34dp"
                     android:hint="Ingresa tu nombre"
-                    android:maxLength="30"/>
+                    android:maxLength="30"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -105,7 +109,9 @@
                     android:layout_marginBottom="225dp"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/holo_red_dark"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -116,7 +122,7 @@
                     android:textSize="30sp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/white"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -127,7 +133,9 @@
                     android:layout_marginTop="34dp"
                     android:hint="Ingresa tu Email"
                     android:layout_below="@+id/textViewEmail"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"/>
 
 
             </RelativeLayout>
@@ -151,7 +159,8 @@
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    />
+                    android:background="@android:color/holo_red_dark"
+                    android:textColor="@android:color/white"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -162,7 +171,7 @@
                     android:textSize="30sp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/white"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -174,7 +183,9 @@
                     android:hint="Ingresa tu telefono"
                     android:layout_below="@+id/textViewTelefono"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"/>
+                    android:layout_alignParentStart="true"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"/>
 
                 <Button
                     android:layout_width="wrap_content"
