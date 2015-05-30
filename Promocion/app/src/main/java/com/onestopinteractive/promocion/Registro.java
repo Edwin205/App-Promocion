@@ -19,8 +19,8 @@ import android.widget.ViewFlipper;
 public class Registro extends ActionBarActivity implements View.OnClickListener {
 
     ViewFlipper viewFlipper;
-    Button btnNombre,btnEmail,btnTelefono,btnOtro,btnFinalizar;
-    EditText etNombre,etEmail,etTelefono;
+    Button btnNombre,btnEmail,btnTelefono,btnFechaNaci,btnOtro,btnFinalizar,btnOtroVip,btnFinalizarVIp,btnSuerte;
+    EditText etNombre,etEmail,etTelefono,etDia,etMes,etAno;
     String nombreSupervisor;
     String ubicacionSupervisor;
     TextView prueba ;
@@ -42,6 +42,10 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         btnTelefono = (Button) findViewById(R.id.buttonTelefono);
         btnOtro = (Button) findViewById(R.id.buttonOtro);
         btnFinalizar= (Button) findViewById(R.id.buttonFinalizar);
+        btnFechaNaci = (Button) findViewById(R.id.buttonFechaNaci);
+        btnOtroVip = (Button) findViewById(R.id.buttonVipOtro);
+        btnFinalizarVIp = (Button) findViewById(R.id.buttonVipFinalizar);
+        btnSuerte = (Button) findViewById(R.id.buttonSuerte);
 
 
         //El viewFlipper
@@ -75,6 +79,10 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         btnOtro.setOnClickListener(this);
         btnFinalizar.setOnClickListener(this);
         btnTelefono.setOnClickListener(this);
+        btnFechaNaci.setOnClickListener(this);
+        btnOtroVip.setOnClickListener(this);
+        btnFinalizarVIp.setOnClickListener(this);
+        btnSuerte.setOnClickListener(this);
 
     }
 
@@ -84,27 +92,34 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         String nombreSupervisor = supervisor.getNombreSupervisor();
         String ubicacionSupervisor = supervisor.getUbicacionSupervisor();
 
-
+        //Todos los editText utilizados
         etNombre = (EditText) findViewById(R.id.editTextNombrePersona);
         etEmail = (EditText) findViewById(R.id.editTextEmail);
         etTelefono = (EditText) findViewById(R.id.editTextTelefono);
+        etDia = (EditText) findViewById(R.id.editTextDia);
+        etMes = (EditText)findViewById(R.id.editTextMes);
+        etAno = (EditText) findViewById(R.id.editTextAno);
 
         String nombre = etNombre.getText().toString();
         String email = etEmail.getText().toString();
         String telefono =etTelefono.getText().toString();
+        String fechaNacimiento = etDia.getText().toString()+"/"+etMes.getText().toString()+"/"+etAno.getText().toString();
 
 
 
        prueba = (TextView) findViewById(R.id.textPrueba);
         DataBase baseDatos = new DataBase(this);
         baseDatos.abrir();
-        baseDatos.insertarReg(nombreSupervisor,ubicacionSupervisor,nombre,email,telefono);
+        baseDatos.insertarReg(nombreSupervisor, ubicacionSupervisor, nombre, email, telefono, fechaNacimiento);
         prueba.setText(baseDatos.leer());
         baseDatos.cerrar();
 
         etNombre.setText("");
         etEmail.setText("");
         etTelefono.setText("");
+        etDia.setText("");
+        etMes.setText("");
+        etAno.setText("");
     }
 
 
@@ -116,25 +131,41 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.buttonNombre:
-                viewFlipper.showNext();
+                viewFlipper.setDisplayedChild(1);
                 break;
 
             case R.id.buttonEmail:
-                viewFlipper.showNext();
+                viewFlipper.setDisplayedChild(2);
                 break;
 
             case R.id.buttonTelefono:
-                viewFlipper.showNext();
+                viewFlipper.setDisplayedChild(4);
+                break;
+
+            case R.id.buttonFechaNaci:
+                viewFlipper.setDisplayedChild(3);
+                break;
+
+            case R.id.buttonSuerte:
+                viewFlipper.setDisplayedChild(6);
                 break;
 
             case R.id.buttonOtro:
                 viewFlipper.setDisplayedChild(0);
                 break;
 
-
             case R.id.buttonFinalizar:
                 Intent intent = new Intent(Registro.this,Portada.class);
                 startActivity(intent);
+                break;
+
+            case R.id.buttonVipOtro:
+                viewFlipper.setDisplayedChild(0);
+                break;
+
+            case R.id.buttonVipFinalizar:
+                Intent intent2 = new Intent(Registro.this,Portada.class);
+                startActivity(intent2);
                 break;
         }
     }

@@ -187,22 +187,6 @@
                     android:textColor="@android:color/white"
                     android:textColorHint="@android:color/white"/>
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Alta"
-                    android:id="@+id/btn_alta"
-                    android:layout_weight="1"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:onClick="alta"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textPrueba"
-                    android:textSize="15sp"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -239,6 +223,308 @@
                     android:layout_alignLeft="@+id/buttonOtro"
                     android:layout_alignStart="@+id/buttonOtro"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textPrueba"
+                    android:textSize="15sp"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alta"
+                    android:id="@+id/btn_alta"
+                    android:layout_weight="1"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:onClick="alta"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutfechaNaci">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha de nacimiento"
+                    android:id="@+id/textViewFechaNacieminto"
+                    android:layout_marginTop="67dp"
+                    android:textSize="30sp"
+                    android:textColor="@android:color/white"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editText"
+                    android:layout_marginTop="67dp"
+                    android:layout_below="@+id/textViewFechaNacieminto"
+                    android:visibility="invisible"
+                    android:layout_alignLeft="@+id/textViewFechaNacieminto"
+                    android:layout_alignStart="@+id/textViewFechaNacieminto"
+                    android:layout_alignRight="@+id/textViewFechaNacieminto"
+                    android:layout_alignEnd="@+id/textViewFechaNacieminto"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/      /"
+                    android:id="@+id/textView"
+                    android:textSize="35sp"
+                    android:textColor="@android:color/white"
+                    android:layout_alignTop="@+id/editText"
+                    android:layout_centerHorizontal="true"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editTextDia"
+                    android:hint="DD"
+                    android:textSize="23sp"
+                    android:maxLength="2"
+                    android:singleLine="false"
+                    android:selectAllOnFocus="false"
+                    android:phoneNumber="false"
+                    android:visibility="visible"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"
+                    android:layout_alignTop="@+id/editText"
+                    android:layout_toLeftOf="@+id/textView"
+                    android:layout_alignLeft="@+id/textView2"
+                    android:layout_alignStart="@+id/textView2"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editTextMes"
+                    android:hint="MM"
+                    android:textSize="23sp"
+                    android:maxLength="2"
+                    android:textColorHint="@android:color/white"
+                    android:textColor="@android:color/white"
+                    android:layout_alignTop="@+id/editText"
+                    android:layout_alignLeft="@+id/sostenedor"
+                    android:layout_alignStart="@+id/sostenedor"
+                    android:layout_toLeftOf="@+id/textView3"
+                    android:layout_toStartOf="@+id/textView3"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editTextAno"
+                    android:hint="AAAA"
+                    android:textSize="23sp"
+                    android:autoText="false"
+                    android:maxLength="4"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"
+                    android:layout_alignTop="@+id/editText"
+                    android:layout_toRightOf="@+id/textView"
+                    android:layout_alignRight="@+id/textView4"
+                    android:layout_alignEnd="@+id/textView4"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sostenedor"
+                    android:layout_marginTop="71dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_below="@+id/editText"
+                    android:layout_toRightOf="@+id/editTextDia"
+                    android:layout_toEndOf="@+id/editTextDia"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView2"
+                    android:layout_marginLeft="36dp"
+                    android:layout_marginStart="36dp"
+                    android:layout_alignTop="@+id/sostenedor"
+                    android:layout_alignLeft="@+id/editText"
+                    android:layout_alignStart="@+id/editText"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView3"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginEnd="13dp"
+                    android:layout_above="@+id/textView2"
+                    android:layout_alignRight="@+id/textView"
+                    android:layout_alignEnd="@+id/textView"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView4"
+                    android:layout_marginRight="23dp"
+                    android:layout_marginEnd="23dp"
+                    android:layout_alignTop="@+id/textView3"
+                    android:layout_alignRight="@+id/editText"
+                    android:layout_alignEnd="@+id/editText"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Siguiente"
+                    android:id="@+id/buttonFechaNaci"
+                    android:layout_marginRight="39dp"
+                    android:layout_marginEnd="39dp"
+                    android:layout_marginBottom="225dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/holo_red_dark"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutSuerte">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Prueba tu Suerte !"
+                    android:id="@+id/textViewSuerte"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="49dp"
+                    android:textSize="30sp"
+                    android:textColor="@android:color/white"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Presiona y Suerte!"
+                    android:id="@+id/buttonSuerte"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="40sp"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/holo_red_dark"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutEventoVip">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Participaste"
+                    android:id="@+id/textViewVip"
+                    android:layout_marginTop="31dp"
+                    android:textSize="30sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VIP"
+                    android:id="@+id/textViewVIP"
+                    android:textSize="30sp"
+                    android:layout_below="@+id/textViewVip"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@android:color/white"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Otro"
+                    android:id="@+id/buttonVipOtro"
+                    android:layout_below="@+id/textViewVIP"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="54dp"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Finalizar"
+                    android:id="@+id/buttonVipFinalizar"
+                    android:layout_centerVertical="true"
+                    android:layout_alignLeft="@+id/buttonVipOtro"
+                    android:layout_marginTop="70dp"
+
+                    />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutGanador">
+
+                <TextView
+                android:text="Felicidades ganaste! Elige tu medida para continuar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/felicidades"
+                android:textSize="30sp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="37dp"
+                android:textColor="@android:color/white"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="S"
+                    android:id="@+id/buttonSmall"
+                    android:layout_below="@+id/felicidades"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="158dp"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/holo_red_dark"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="M"
+                    android:id="@+id/buttonMedium"
+                    android:layout_alignTop="@+id/buttonSmall"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/holo_red_dark"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="L"
+                    android:id="@+id/buttonLarge"
+                    android:layout_alignTop="@+id/buttonMedium"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/holo_red_dark"/>
 
             </RelativeLayout>
 
