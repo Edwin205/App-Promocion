@@ -20,7 +20,8 @@ import java.util.Random;
 public class Registro extends ActionBarActivity implements View.OnClickListener {
 
     ViewFlipper viewFlipper;
-    Button btnNombre,btnEmail,btnTelefono,btnFechaNaci,btnOtro,btnFinalizar,btnOtroVip,btnFinalizarVIp,btnSuerte;
+    Button btnNombre,btnEmail,btnTelefono,btnFechaNaci,btnOtro,btnFinalizar
+            ,btnOtroVip,btnFinalizarVIp,btnSuerte,btnS,btnM,btnL,btnSI,btnNO;
     EditText etNombre,etEmail,etTelefono,etDia,etMes,etAno;
     String nombreSupervisor;
     String ubicacionSupervisor;
@@ -49,11 +50,14 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         btnOtroVip = (Button) findViewById(R.id.buttonVipOtro);
         btnFinalizarVIp = (Button) findViewById(R.id.buttonVipFinalizar);
         btnSuerte = (Button) findViewById(R.id.buttonSuerte);
-
+        btnS = (Button) findViewById(R.id.buttonSmall);
+        btnM = (Button) findViewById(R.id.buttonMedium);
+        btnL = (Button) findViewById(R.id.buttonLarge);
+        btnSI = (Button) findViewById(R.id.buttonSI);
+        btnNO = (Button) findViewById(R.id.buttonNO);
 
         //El viewFlipper
         viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
-
 
 
         Intent intent = getIntent();
@@ -86,50 +90,13 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         btnOtroVip.setOnClickListener(this);
         btnFinalizarVIp.setOnClickListener(this);
         btnSuerte.setOnClickListener(this);
+        btnS.setOnClickListener(this);
+        btnM.setOnClickListener(this);
+        btnL.setOnClickListener(this);
+        btnSI.setOnClickListener(this);
+        btnNO.setOnClickListener(this);
 
     }
-
-
-    public void alta(){
-
-        String nombreSupervisor = supervisor.getNombreSupervisor();
-        String ubicacionSupervisor = supervisor.getUbicacionSupervisor();
-
-        //Todos los editText utilizados
-        etNombre = (EditText) findViewById(R.id.editTextNombrePersona);
-        etEmail = (EditText) findViewById(R.id.editTextEmail);
-        etTelefono = (EditText) findViewById(R.id.editTextTelefono);
-        etDia = (EditText) findViewById(R.id.editTextDia);
-        etMes = (EditText)findViewById(R.id.editTextMes);
-        etAno = (EditText) findViewById(R.id.editTextAno);
-
-        String nombre = etNombre.getText().toString();
-        String email = etEmail.getText().toString();
-        String telefono =etTelefono.getText().toString();
-        String fechaNacimiento = etDia.getText().toString()+"/"+etMes.getText().toString()+"/"+etAno.getText().toString();
-
-
-
-       prueba = (TextView) findViewById(R.id.textPrueba);
-        DataBase baseDatos = new DataBase(this);
-        baseDatos.abrir();
-        baseDatos.insertarReg(nombreSupervisor, ubicacionSupervisor, nombre, email, telefono, fechaNacimiento);
-        prueba.setText(baseDatos.leer());
-        baseDatos.cerrar();
-
-        etNombre.setText("");
-        etEmail.setText("");
-        etTelefono.setText("");
-        etDia.setText("");
-        etMes.setText("");
-        etAno.setText("");
-
-        Toast.makeText(Registro.this,"Se guardo el registro",Toast.LENGTH_SHORT).show();
-    }
-
-
-
-
 
 
     @Override
@@ -182,13 +149,64 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 Intent intent2 = new Intent(Registro.this,Portada.class);
                 startActivity(intent2);
                 break;
+
+            case R.id.buttonSmall:
+                viewFlipper.setDisplayedChild(8);
+                break;
+
+            case R.id.buttonMedium:
+                viewFlipper.setDisplayedChild(8);
+                break;
+
+            case R.id.buttonLarge:
+                viewFlipper.setDisplayedChild(8);
+                break;
+
+            case R.id.buttonSI:
+                break;
+
+            case R.id.buttonNO:
+                viewFlipper.setDisplayedChild(3);
+                alta();
+                break;
         }
     }
 
+    public void alta(){
+
+        String nombreSupervisor = supervisor.getNombreSupervisor();
+        String ubicacionSupervisor = supervisor.getUbicacionSupervisor();
+
+        //Todos los editText utilizados
+        etNombre = (EditText) findViewById(R.id.editTextNombrePersona);
+        etEmail = (EditText) findViewById(R.id.editTextEmail);
+        etTelefono = (EditText) findViewById(R.id.editTextTelefono);
+        etDia = (EditText) findViewById(R.id.editTextDia);
+        etMes = (EditText)findViewById(R.id.editTextMes);
+        etAno = (EditText) findViewById(R.id.editTextAno);
+
+        String nombre = etNombre.getText().toString();
+        String email = etEmail.getText().toString();
+        String telefono =etTelefono.getText().toString();
+        String fechaNacimiento = etDia.getText().toString()+"/"+etMes.getText().toString()+"/"+etAno.getText().toString();
 
 
 
+        prueba = (TextView) findViewById(R.id.textPrueba);
+        DataBase baseDatos = new DataBase(this);
+        baseDatos.abrir();
+        baseDatos.insertarReg(nombreSupervisor, ubicacionSupervisor, nombre, email, telefono, fechaNacimiento);
+        prueba.setText(baseDatos.leer());
+        baseDatos.cerrar();
 
+        etNombre.setText("");
+        etEmail.setText("");
+        etTelefono.setText("");
+        etDia.setText("");
+        etMes.setText("");
+        etAno.setText("");
 
+        Toast.makeText(Registro.this,"Se guardo el registro",Toast.LENGTH_SHORT).show();
+    }
 
 }

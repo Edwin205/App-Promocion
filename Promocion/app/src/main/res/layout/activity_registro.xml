@@ -528,14 +528,48 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutPersonalizada">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Personalizada ?"
+                    android:id="@+id/textViewPersonalizada"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="52dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="30sp"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SI"
+                    android:id="@+id/buttonSI"
+                    android:layout_marginBottom="150dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:background="@android:color/holo_red_dark"
+                    android:textColor="@android:color/white"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NO"
+                    android:id="@+id/buttonNO"
+                    android:layout_alignBottom="@+id/buttonSI"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@android:color/holo_red_dark"
+                    android:textColor="@android:color/white"/>
+
+            </RelativeLayout>
+
 
         </ViewFlipper>
-
-
-
-
-
     </RelativeLayout>
-
-
 </RelativeLayout>
