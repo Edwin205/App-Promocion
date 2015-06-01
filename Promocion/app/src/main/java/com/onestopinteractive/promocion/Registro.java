@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import java.util.Random;
 
 
 public class Registro extends ActionBarActivity implements View.OnClickListener {
@@ -26,6 +27,8 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
     TextView prueba ;
     Supervisor supervisor;
     TextView nombreSuper,ubicacionSuper;
+    Random ganadorAleatorio;
+    int ganador;
 
 
     @Override
@@ -87,7 +90,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
     }
 
 
-    public void alta(View v){
+    public void alta(){
 
         String nombreSupervisor = supervisor.getNombreSupervisor();
         String ubicacionSupervisor = supervisor.getUbicacionSupervisor();
@@ -120,6 +123,8 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         etDia.setText("");
         etMes.setText("");
         etAno.setText("");
+
+        Toast.makeText(Registro.this,"Se guardo el registro",Toast.LENGTH_SHORT).show();
     }
 
 
@@ -143,11 +148,21 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 break;
 
             case R.id.buttonFechaNaci:
-                viewFlipper.setDisplayedChild(3);
+                viewFlipper.setDisplayedChild(5);
                 break;
 
             case R.id.buttonSuerte:
-                viewFlipper.setDisplayedChild(6);
+
+                ganadorAleatorio = new Random();
+                ganador = ganadorAleatorio.nextInt(3);
+
+                if(ganador < 2) {
+                    viewFlipper.setDisplayedChild(6);
+                    alta();
+                }
+                else
+                viewFlipper.setDisplayedChild(7);
+
                 break;
 
             case R.id.buttonOtro:
