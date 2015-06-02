@@ -21,15 +21,18 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
     ViewFlipper viewFlipper;
     Button btnNombre,btnEmail,btnTelefono,btnFechaNaci,btnOtro,btnFinalizar
-            ,btnOtroVip,btnFinalizarVIp,btnSuerte,btnS,btnM,btnL,btnSI,btnNO;
-    EditText etNombre,etEmail,etTelefono,etDia,etMes,etAno;
+            ,btnOtroVip,btnFinalizarVIp,btnSuerte,btnS,btnM,btnL,btnSI
+            ,btnNO,btnSigPersonalizada,btnCalle,btnExterior,btnInterior,btnColonia,btnCiudad,btnCodigoPostal,btnEstado;
+
+    EditText etNombre,etEmail,etTelefono,etDia,etMes,etAno,etFrase,etCalle,etExterior,etInterior,etColonia ,etCiudad,etCodigoPostal,etEstado;
     String nombreSupervisor;
-    String ubicacionSupervisor;
-    TextView prueba ;
+    String ubicacionSupervisor,premio,personalizada;
+    TextView prueba,prubaFin ;
     Supervisor supervisor;
     TextView nombreSuper,ubicacionSuper;
     Random ganadorAleatorio;
     int ganador;
+   int cantidadSmall,cantidadMedium,cantidadLarge,porcentaje;
 
 
     @Override
@@ -55,14 +58,26 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         btnL = (Button) findViewById(R.id.buttonLarge);
         btnSI = (Button) findViewById(R.id.buttonSI);
         btnNO = (Button) findViewById(R.id.buttonNO);
+        btnSigPersonalizada = (Button) findViewById(R.id.buttonSigPersonalizacion);
+        btnCalle = (Button) findViewById(R.id.buttonCalle);
+        btnExterior = (Button) findViewById(R.id.buttonExterior);
+        btnInterior = (Button) findViewById(R.id.buttonInterior);
+        btnColonia = (Button) findViewById(R.id.buttonColonia);
+        btnCiudad = (Button) findViewById(R.id.buttonCiudad);
+        btnCodigoPostal = (Button) findViewById(R.id.buttonCodigoPostal);
+        btnEstado = (Button) findViewById(R.id.buttonEstado);
 
         //El viewFlipper
         viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
 
 
         Intent intent = getIntent();
+        cantidadSmall = Integer.parseInt(intent.getStringExtra("cantidadS"));
+        cantidadMedium = Integer.parseInt(intent.getStringExtra("cantidadM"));
+        cantidadLarge = Integer.parseInt(intent.getStringExtra("cantidadL"));
         nombreSupervisor = intent.getStringExtra("nombreSupervisor");
         ubicacionSupervisor = intent.getStringExtra("ubicacionSupervisor");
+        porcentaje = Integer.parseInt(intent.getStringExtra("porcentaje"));
 
 
         //Datos del supervisor
@@ -73,10 +88,6 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         //TextView's
         nombreSuper = (TextView) findViewById(R.id.textViewNombreSprueba);
         ubicacionSuper = (TextView) findViewById(R.id.textViewUbicacionSPrueba);
-
-
-
-
 
 
 
@@ -95,6 +106,18 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         btnL.setOnClickListener(this);
         btnSI.setOnClickListener(this);
         btnNO.setOnClickListener(this);
+        btnSigPersonalizada.setOnClickListener(this);
+        btnCalle.setOnClickListener(this);
+        btnExterior.setOnClickListener(this);
+        btnInterior.setOnClickListener(this);
+        btnColonia.setOnClickListener(this);
+        btnCiudad.setOnClickListener(this);
+        btnCodigoPostal.setOnClickListener(this);
+        btnEstado.setOnClickListener(this);
+
+        personalizada = "";
+
+
 
     }
 
@@ -121,14 +144,18 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
             case R.id.buttonSuerte:
 
                 ganadorAleatorio = new Random();
-                ganador = ganadorAleatorio.nextInt(3);
+                ganador = 1+ganadorAleatorio.nextInt(porcentaje);
 
-                if(ganador < 2) {
+                if(ganador == porcentaje) {
+                    viewFlipper.setDisplayedChild(7);
+                    premio = "Gano playera";
+
+                }
+                else {
                     viewFlipper.setDisplayedChild(6);
+                    premio = "Experiencia VIP";
                     alta();
                 }
-                else
-                viewFlipper.setDisplayedChild(7);
 
                 break;
 
@@ -151,23 +178,99 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 break;
 
             case R.id.buttonSmall:
-                viewFlipper.setDisplayedChild(8);
+
+                cantidadSmall -= 1;
+
+                if(cantidadSmall == 1) {
+                    Toast.makeText(Registro.this, "Es la ultima playera small", Toast.LENGTH_SHORT).show();
+                    viewFlipper.setDisplayedChild(8);
+                }
+
+                else if(cantidadSmall<=0)
+                    Toast.makeText(Registro.this,"Ya no quedan mas playeras Small",Toast.LENGTH_SHORT).show();
+
+                else {
+                    Toast.makeText(Registro.this,"Quedan"+cantidadSmall+" "+"playeras small",Toast.LENGTH_SHORT).show();
+                    viewFlipper.setDisplayedChild(8);
+                }
                 break;
 
             case R.id.buttonMedium:
-                viewFlipper.setDisplayedChild(8);
+                cantidadMedium -= 1;
+
+                if(cantidadMedium == 1) {
+                    Toast.makeText(Registro.this, "Es la ultima playera small", Toast.LENGTH_SHORT).show();
+                    viewFlipper.setDisplayedChild(8);
+                }
+
+                else if(cantidadMedium<=0)
+                    Toast.makeText(Registro.this,"Ya no quedan mas playeras Small",Toast.LENGTH_SHORT).show();
+
+                else {
+                    Toast.makeText(Registro.this,"Quedan"+cantidadMedium+" "+"playeras small",Toast.LENGTH_SHORT).show();
+                    viewFlipper.setDisplayedChild(8);
+                }
                 break;
 
             case R.id.buttonLarge:
-                viewFlipper.setDisplayedChild(8);
+                cantidadLarge -= 1;
+
+                if(cantidadLarge == 1) {
+                    Toast.makeText(Registro.this, "Es la ultima playera small", Toast.LENGTH_SHORT).show();
+                    viewFlipper.setDisplayedChild(8);
+                }
+
+                else if(cantidadLarge<=0)
+                    Toast.makeText(Registro.this,"Ya no quedan mas playeras Small",Toast.LENGTH_SHORT).show();
+
+                else {
+                    Toast.makeText(Registro.this,"Quedan"+cantidadLarge+" "+"playeras small",Toast.LENGTH_SHORT).show();
+                    viewFlipper.setDisplayedChild(8);
+                }
                 break;
 
             case R.id.buttonSI:
+                viewFlipper.setDisplayedChild(9);
+                personalizada = "Si";
                 break;
 
             case R.id.buttonNO:
                 viewFlipper.setDisplayedChild(3);
+                personalizada = "No";
                 alta();
+                break;
+
+            case R.id.buttonSigPersonalizacion:
+                viewFlipper.setDisplayedChild(10);
+                break;
+
+            case R.id.buttonCalle:
+                viewFlipper.setDisplayedChild(11);
+                break;
+
+            case R.id.buttonExterior:
+                viewFlipper.setDisplayedChild(12);
+                break;
+
+            case R.id.buttonInterior:
+                viewFlipper.setDisplayedChild(13);
+                break;
+
+            case R.id.buttonColonia:
+                viewFlipper.setDisplayedChild(14);
+                break;
+
+            case R.id.buttonCiudad:
+                viewFlipper.setDisplayedChild(15);
+                break;
+
+            case R.id.buttonCodigoPostal:
+                viewFlipper.setDisplayedChild(16);
+                break;
+
+            case R.id.buttonEstado:
+                alta();
+                viewFlipper.setDisplayedChild(3);
                 break;
         }
     }
@@ -184,19 +287,36 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         etDia = (EditText) findViewById(R.id.editTextDia);
         etMes = (EditText)findViewById(R.id.editTextMes);
         etAno = (EditText) findViewById(R.id.editTextAno);
+        etFrase = (EditText) findViewById(R.id.editTextPersonalizacion);
+        etCalle = (EditText) findViewById(R.id.editTextCalle);
+        etExterior = (EditText) findViewById(R.id.editTextExterior);
+        etInterior = (EditText) findViewById(R.id.editTextInterior);
+        etColonia = (EditText) findViewById(R.id.editTextColonia);
+        etCiudad = (EditText) findViewById(R.id.editTextCiudad);
+        etCodigoPostal = (EditText) findViewById(R.id.editTextCodigoPostal);
+        etEstado = (EditText) findViewById(R.id.editTextEstado);
 
         String nombre = etNombre.getText().toString();
         String email = etEmail.getText().toString();
         String telefono =etTelefono.getText().toString();
         String fechaNacimiento = etDia.getText().toString()+"/"+etMes.getText().toString()+"/"+etAno.getText().toString();
-
-
+        String frase = etFrase.getText().toString();
+        String calle = etCalle.getText().toString();
+        String noExterior  = etExterior.getText().toString();
+        String noInterior = etInterior.getText().toString();
+        String colonia = etColonia.getText().toString();
+        String ciudad = etCiudad.getText().toString();
+        String codigoPostal = etCodigoPostal.getText().toString();
+        String estado = etEstado.getText().toString();
 
         prueba = (TextView) findViewById(R.id.textPrueba);
+        prubaFin = (TextView) findViewById(R.id.textViewPruebaFin);
         DataBase baseDatos = new DataBase(this);
         baseDatos.abrir();
-        baseDatos.insertarReg(nombreSupervisor, ubicacionSupervisor, nombre, email, telefono, fechaNacimiento);
+        baseDatos.insertarReg(nombreSupervisor, ubicacionSupervisor, nombre, email,
+                telefono, fechaNacimiento, premio, personalizada, calle, frase, noExterior, noInterior, colonia, ciudad, codigoPostal, estado);
         prueba.setText(baseDatos.leer());
+        prubaFin.setText(baseDatos.leer());
         baseDatos.cerrar();
 
         etNombre.setText("");
@@ -205,6 +325,14 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         etDia.setText("");
         etMes.setText("");
         etAno.setText("");
+        etFrase.setText("");
+        etCalle.setText("");
+        etExterior.setText("");
+        etInterior.setText("");
+        etColonia.setText("");
+        etCiudad.setText("");
+        etCodigoPostal.setText("");
+        etEstado.setText("");
 
         Toast.makeText(Registro.this,"Se guardo el registro",Toast.LENGTH_SHORT).show();
     }

@@ -32,7 +32,7 @@
                     android:id="@+id/textViewSuper"
                     android:textSize="30sp"
                     android:layout_marginTop="56dp"
-                    android:textColor="@android:color/black"
+                    android:textColor="@android:color/white"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"/>
 
@@ -43,7 +43,7 @@
                     android:id="@+id/textViewUbi"
                     android:layout_marginTop="78dp"
                     android:textSize="30sp"
-                    android:textColor="@android:color/black"
+                    android:textColor="@android:color/white"
                     android:layout_below="@+id/textViewSuper"
                     android:layout_centerHorizontal="true"/>
 
@@ -55,7 +55,9 @@
                     android:layout_marginTop="115dp"
                     android:layout_toRightOf="@+id/textViewUbi"
                     android:layout_toEndOf="@+id/textViewUbi"
-                    android:layout_below="@+id/textViewUbi"/>
+                    android:layout_below="@+id/textViewUbi"
+                    android:background="@android:color/holo_red_dark"
+                    android:textColor="@android:color/white"/>
 
                 <Button
                     style="?android:attr/buttonStyleSmall"
@@ -68,7 +70,9 @@
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_marginBottom="45dp"/>
+                    android:layout_marginBottom="45dp"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/holo_red_dark"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -76,7 +80,8 @@
                     android:id="@+id/textviewSuperNombre"
                     android:textSize="25sp"
                     android:layout_below="@+id/textViewSuper"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@android:color/white"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -85,7 +90,8 @@
                     android:textSize="25sp"
                     android:layout_below="@+id/textViewUbi"
                     android:layout_alignLeft="@+id/textviewSuperNombre"
-                    android:layout_alignStart="@+id/textviewSuperNombre"/>
+                    android:layout_alignStart="@+id/textviewSuperNombre"
+                    android:textColor="@android:color/white"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -103,7 +109,7 @@
                     android:layout_alignRight="@+id/textView"
                     android:layout_alignEnd="@+id/textView"
                     android:layout_marginTop="39dp"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/white"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -115,7 +121,8 @@
                     android:layout_below="@+id/textViewSupervisor"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:maxLength="30"/>
+                    android:maxLength="30"
+                    android:textColor="@android:color/white"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -126,7 +133,7 @@
                     android:textSize="30sp"
                     android:layout_below="@+id/editTextNombreSupervisor"
                     android:layout_centerHorizontal="true"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/white"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -138,7 +145,8 @@
                     android:layout_below="@+id/textView"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:maxLength="30"/>
+                    android:maxLength="30"
+                    android:textColor="@android:color/white"/>
 
                 <Button
                     android:layout_width="wrap_content"
@@ -148,7 +156,8 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="42dp"
-                    />
+                    android:background="@android:color/holo_red_dark"
+                    android:textColor="@android:color/white"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -156,7 +165,7 @@
                     android:text="Inventario:"
                     android:id="@+id/textViewInventario"
                     android:textSize="30sp"
-                    android:textColor="@android:color/black"
+                    android:textColor="@android:color/white"
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"/>
@@ -168,7 +177,7 @@
                     android:id="@+id/textView2"
                     android:layout_marginTop="21dp"
                     android:textSize="25sp"
-                    android:textColor="@android:color/black"
+                    android:textColor="@android:color/white"
                     android:layout_marginLeft="22dp"
                     android:layout_marginStart="22dp"
                     android:layout_below="@+id/textViewInventario"
@@ -184,7 +193,9 @@
                     android:layout_alignBottom="@+id/textView2"
                     android:layout_toRightOf="@+id/textView2"
                     android:layout_toStartOf="@+id/textView"
-                    android:layout_toLeftOf="@+id/textView"/>
+                    android:layout_toLeftOf="@+id/textView"
+                    android:textColor="@android:color/white"
+                    android:text="0"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -192,7 +203,7 @@
                     android:text="M:"
                     android:id="@+id/textViewM"
                     android:textSize="25sp"
-                    android:textColor="@android:color/black"
+                    android:textColor="@android:color/white"
                     android:layout_alignBottom="@+id/editTextSmall"
                     android:layout_alignLeft="@+id/buttonGuardar"
                     android:layout_alignStart="@+id/buttonGuardar"/>
@@ -206,7 +217,9 @@
                     android:layout_alignBottom="@+id/textViewM"
                     android:layout_toRightOf="@+id/textViewM"
                     android:layout_alignRight="@+id/buttonGuardar"
-                    android:layout_alignEnd="@+id/buttonGuardar"/>
+                    android:layout_alignEnd="@+id/buttonGuardar"
+                    android:textColor="@android:color/white"
+                    android:text="0"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -214,7 +227,7 @@
                     android:text="L:"
                     android:id="@+id/textViewL"
                     android:textSize="25sp"
-                    android:textColor="@android:color/black"
+                    android:textColor="@android:color/white"
                     android:layout_alignBottom="@+id/editTextMediuem"
                     android:layout_toRightOf="@+id/textView"
                     android:layout_toEndOf="@+id/textView"/>
@@ -227,7 +240,47 @@
                     android:id="@+id/editTextLarge"
                     android:layout_alignBottom="@+id/textViewL"
                     android:layout_toRightOf="@+id/textViewL"
-                    android:layout_toEndOf="@+id/textViewL"/>
+                    android:layout_toEndOf="@+id/textViewL"
+                    android:textColor="@android:color/white"
+                    android:text="0"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 de cada"
+                    android:id="@+id/textViewunoDe"
+                    android:layout_below="@+id/textView2"
+                    android:layout_alignLeft="@+id/textView2"
+                    android:layout_alignStart="@+id/textView2"
+                    android:layout_marginTop="29dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editTextPorcentaje"
+                    android:maxLength="1"
+                    android:text="2"
+                    android:textSize="20sp"
+                    android:layout_alignBottom="@+id/textViewunoDe"
+                    android:layout_toRightOf="@+id/textViewInventario"
+                    android:layout_toStartOf="@+id/textViewGana"
+                    android:textColor="@android:color/white"
+                    android:layout_toLeftOf="@+id/textViewGana"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="gana."
+                    android:id="@+id/textViewGana"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp"
+                    android:layout_alignBottom="@+id/editTextPorcentaje"
+                    android:layout_alignRight="@+id/textViewSupervisor"
+                    android:layout_alignEnd="@+id/textViewSupervisor"/>
 
 
             </RelativeLayout>

@@ -30,7 +30,9 @@ public class DataBase  extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String Query = "create table Registro(" + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "nombreSupervisor TEXT, ubicacionSupervisor TEXT, nombre TEXT, email TEXT, telefono TEXT,fechaNacimiento TEXT,timeStamp TEXT)";
+                + "nombreSupervisor TEXT, ubicacionSupervisor TEXT, nombre TEXT, email TEXT, telefono TEXT," +
+                "fechaNacimiento TEXT,premio TEXT,personalizada TEXT,personalizacion TEXT,calle TEXT,noExterior TEXT,noInterior TEXT,colonia TEXT,ciudad TEXT,codigoPostal TEXT,estado TEXT,timeStamp TEXT)";
+
         db.execSQL(Query);
     }
 
@@ -39,10 +41,15 @@ public class DataBase  extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int versionAnte, int versionNue) {
         db.execSQL("drop table if exists Registro");
         db.execSQL("create table Registro(" + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "nombreSupervisor TEXT, ubicacionSupervisor TEXT, nombre TEXT, email TEXT, telefono TEXT,fechaNacimiento TEXT,timeStamp TEXT)");
+                + "nombreSupervisor TEXT, ubicacionSupervisor TEXT, nombre TEXT, email TEXT, telefono TEXT," +
+                "fechaNacimiento TEXT,premio TEXT,personalizada TEXT,personalizacion TEXT,calle TEXT,noExterior TEXT,noInterior TEXT,colonia TEXT,ciudad TEXT,codigoPostal TEXT,estado TEXT,timeStamp TEXT)");
+
     }
 
-    public void insertarReg(String nombreSupervisor,String ubicacionSupervisor, String nombre,String email, String telefono,String fechaNacimiento)
+    public void insertarReg(String nombreSupervisor,String ubicacionSupervisor,
+                            String nombre,String email,
+                            String telefono,String fechaNacimiento,String premio,String personalizada,String personalizacion,String calle,String noExterior,String noInterior,String colonia,String ciudad,String codigoPostal
+                          ,String estado)
     {
         ContentValues valores = new ContentValues();
 
@@ -52,6 +59,16 @@ public class DataBase  extends SQLiteOpenHelper {
         valores.put("email",email);
         valores.put("telefono", telefono);
         valores.put("fechaNacimiento",fechaNacimiento);
+        valores.put("premio",premio);
+        valores.put("personalizada",personalizada);
+        valores.put("personalizacion",personalizacion);
+        valores.put("calle",calle);
+        valores.put("noExterior",noExterior);
+        valores.put("noInterior",noInterior);
+        valores.put("colonia",colonia);
+        valores.put("ciudad",ciudad);
+        valores.put("codigoPostal",codigoPostal);
+        valores.put("estado",estado);
         valores.put("timeStamp",getDateTime());
         this.getWritableDatabase().insert("Registro", null, valores);
 
@@ -78,22 +95,34 @@ public class DataBase  extends SQLiteOpenHelper {
     public String leer()
     {
         String result = "";
-        String columnas[] = {_ID,"nombreSupervisor","ubicacionSupervisor","nombre","email","telefono,fechaNacimiento,timeStamp"};
+        String columnas[] = {_ID,"nombreSupervisor","ubicacionSupervisor","nombre","email","telefono","fechaNacimiento",
+                "premio","personalizada","personalizacion","calle","noExterior","noInterior","colonia","ciudad","codigoPostal","estado","timeStamp"};
         Cursor c = this.getReadableDatabase().query("Registro",columnas,null,null,null,null,null);
         c.moveToLast();
-        int id,iu,ip,iq,ins,iubs,ifn,its;
+        int id,nombre,email,telefono,nombreSupervisor,ubicacionSupervisor,fechaNacimiento,timeStamp,premio,personalizada,personalizacion,calle,noExterior,noInterior,colonia,ciudad,codigoPostal,estado;
         id = c.getColumnIndex(_ID);
-        ins = c.getColumnIndex("nombreSupervisor");
-        iubs = c.getColumnIndex("ubicacionSupervisor");
-        iu = c.getColumnIndex("nombre");
-        ip = c.getColumnIndex("email");
-        iq = c.getColumnIndex("telefono");
-        ifn = c.getColumnIndex("fechaNacimiento");
-        its = c.getColumnIndex("timeStamp");
+        nombreSupervisor = c.getColumnIndex("nombreSupervisor");
+        ubicacionSupervisor = c.getColumnIndex("ubicacionSupervisor");
+        nombre = c.getColumnIndex("nombre");
+        email = c.getColumnIndex("email");
+        telefono = c.getColumnIndex("telefono");
+        fechaNacimiento = c.getColumnIndex("fechaNacimiento");
+        premio = c.getColumnIndex("premio");
+        personalizada = c.getColumnIndex("personalizada");
+        personalizacion = c.getColumnIndex("personalizacion");
+        calle = c.getColumnIndex("calle");
+        noExterior = c.getColumnIndex("noExterior");
+        noInterior = c.getColumnIndex("noInterior");
+        colonia = c.getColumnIndex("colonia");
+        ciudad = c.getColumnIndex("ciudad");
+        codigoPostal = c.getColumnIndex("codigoPostal");
+        estado = c.getColumnIndex("estado");
+        timeStamp = c.getColumnIndex("timeStamp");
 
 
-        result = c.getString(id)+" "+c.getString(ins)+" "+c.getString(iubs)+" "+c.getString(iu)+" "+c.getString(ip)+" "+c.getString(iq)
-        +" "+c.getString(ifn)+" "+c.getString(its);
+        result = c.getString(id)+" "+c.getString(nombreSupervisor)+" "+c.getString(ubicacionSupervisor)+" "+c.getString(nombre)+" "+c.getString(email)+" "+c.getString(telefono)
+        +" "+c.getString(fechaNacimiento)+" "+c.getString(premio)+" "+c.getString(personalizada)+" "+c.getString(personalizacion)+" "+c.getString(calle)+" "+c.getString(noExterior)+" "+c.getString(noInterior)+" "+c.getString(colonia)
+                +" "+c.getString(ciudad)+" "+c.getString(codigoPostal)+" "+c.getString(estado)+" "+c.getString(timeStamp);
 
         return result;
 

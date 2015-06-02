@@ -17,8 +17,10 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
     ViewFlipper viewFlipper;
     Button buttonSettings;
     Button buttonGuardar;
-    EditText superUbicacion,superNombre;
+    EditText superUbicacion,superNombre,tallaS,tallaM,tallaL,porcentajeGanador;
     TextView nombreSuper,ubicacionSuper;
+    String cantidadS,cantidadM,cantidadL,porcentaje;
+
 
 
     @Override
@@ -27,7 +29,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
         setContentView(R.layout.portada);
 
 
-       viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipperPortada);
+        viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipperPortada);
         buttonGuardar = (Button) findViewById(R.id.buttonGuardar);
         buttonSettings = (Button) findViewById(R.id.buttonSettings);
         buttonSettings.setOnClickListener(this);
@@ -55,7 +57,25 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                    Toast.makeText(Portada.this,"Ingresa tus datos antes de continuar",Toast.LENGTH_SHORT).show();
 
                     if(darError == false) {
+
+                        tallaS = (EditText) findViewById(R.id.editTextSmall);
+                        tallaM = (EditText) findViewById(R.id.editTextMediuem);
+                        tallaL = (EditText) findViewById(R.id.editTextLarge);
+                        porcentajeGanador = (EditText) findViewById(R.id.editTextPorcentaje);
+
+                         cantidadS = tallaS.getText().toString();
+                         cantidadM = tallaM.getText().toString();
+                         cantidadL = tallaL.getText().toString();
+                         porcentaje = porcentajeGanador.getText().toString();
+
+
+
+
                         Intent intent = new Intent(Portada.this,Registro.class);
+                        intent.putExtra("cantidadS",cantidadS);
+                        intent.putExtra("cantidadM",cantidadM);
+                        intent.putExtra("cantidadL",cantidadL);
+                        intent.putExtra("porcentaje",porcentaje);
                         intent.putExtra("nombreSupervisor",nombreSuperv);
                         intent.putExtra("ubicacionSupervisor",ubicacionSuperv);
                         startActivity(intent);
@@ -84,6 +104,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                 nombreSuper = (TextView) findViewById(R.id.textviewSuperNombre);
                 ubicacionSuper = (TextView) findViewById(R.id.textViewSuperUbicacion);
 
+
                 String nombreSupervisor = superNombre.getText().toString();
                 String ubicacionSupervisor = superUbicacion.getText().toString();
 
@@ -91,9 +112,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                 ubicacionSuper.setText(ubicacionSupervisor);
 
                 Toast.makeText(Portada.this,"Se cambio de supervisor",Toast.LENGTH_SHORT).show();
-
                 viewFlipper.setDisplayedChild(0);
-
                 break;
         }
     }

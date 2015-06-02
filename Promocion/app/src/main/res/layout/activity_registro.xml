@@ -90,6 +90,14 @@
                     android:layout_marginTop="45dp"
                     android:textSize="20sp"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewPruebaNum"
+                    android:layout_below="@+id/textViewUbicacionSPrueba"
+                    android:layout_toLeftOf="@+id/buttonNombre"
+                    android:layout_toStartOf="@+id/buttonNombre"/>
+
             </RelativeLayout>
 
 
@@ -223,16 +231,13 @@
                     android:layout_alignLeft="@+id/buttonOtro"
                     android:layout_alignStart="@+id/buttonOtro"/>
 
-                <Button
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Alta"
-                    android:id="@+id/btn_alta"
-                    android:layout_weight="1"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:onClick="alta"/>
+                    android:text="New Text"
+                    android:id="@+id/textViewPruebaFin"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp"/>
 
 
             </RelativeLayout>
@@ -562,6 +567,359 @@
                     android:text="NO"
                     android:id="@+id/buttonNO"
                     android:layout_alignBottom="@+id/buttonSI"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@android:color/holo_red_dark"
+                    android:textColor="@android:color/white"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutPersonalizacion">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Coloca como la quieres personalizar"
+                    android:id="@+id/textView5"
+                    android:layout_marginTop="42dp"
+                    android:textSize="30sp"
+                    android:textColor="@android:color/white"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/editTextPersonalizacion"
+                    android:layout_below="@+id/textView5"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="69dp"
+                    android:hint="Ejemplo : Jaime Perez"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Siguiente"
+                    android:id="@+id/buttonSigPersonalizacion"
+                    android:layout_below="@+id/editTextPersonalizacion"
+                    android:layout_alignRight="@+id/editTextPersonalizacion"
+                    android:layout_alignEnd="@+id/editTextPersonalizacion"
+                    android:layout_marginTop="46dp"
+                    android:background="@android:color/holo_red_dark"
+                    android:textColor="@android:color/white"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutCalle">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Calle"
+                    android:id="@+id/textViewCalle"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="54dp"
+                    android:textSize="40sp"
+                    android:textColor="@android:color/white"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/editTextCalle"
+                    android:layout_marginTop="57dp"
+                    android:layout_below="@+id/textViewCalle"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Ingresa tu calle"
+                    android:textColorHint="@android:color/white"
+                    android:textColor="@android:color/white"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Siguiente"
+                    android:id="@+id/buttonCalle"
+                    android:layout_marginTop="67dp"
+                    android:layout_below="@+id/editTextCalle"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@android:color/holo_red_dark"
+                    android:textColor="@android:color/white"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutExterior">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="No. Exterior"
+                    android:id="@+id/textViewExterior"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="54dp"
+                    android:textIsSelectable="false"
+                    android:textSize="40sp"
+                    android:textColor="@android:color/white"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editTextExterior"
+                    android:layout_below="@+id/textViewExterior"
+                    android:layout_alignLeft="@+id/textViewExterior"
+                    android:layout_alignStart="@+id/textViewExterior"
+                    android:layout_marginTop="65dp"
+                    android:hint="Ingresa numero exterior"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Siguiente"
+                    android:id="@+id/buttonExterior"
+                    android:layout_below="@+id/editTextExterior"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="60dp"
+                    android:background="@android:color/holo_red_dark"
+                    android:textColor="@android:color/white"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutInterior">
+
+                <TextView
+                    android:text="Numero Interior"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="54dp"
+                    android:id="@+id/textViewInterior"
+                    android:textSize="40sp"
+                    android:textColor="@android:color/white"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editTextInterior"
+                    android:layout_below="@+id/textViewInterior"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="60dp"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"
+                    android:hint="Ingresa numero interior"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Siguiente"
+                    android:id="@+id/buttonInterior"
+                    android:layout_below="@+id/editTextInterior"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="62dp"
+                    android:background="@android:color/holo_red_dark"
+                    android:textColor="@android:color/white"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutColonia">
+
+                <TextView
+                    android:text="Colonia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="54dp"
+                    android:id="@+id/textViewColonia"
+                    android:textColor="@android:color/white"
+                    android:textSize="40sp"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/editTextColonia"
+                    android:layout_below="@+id/textViewColonia"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="62dp"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"
+                    android:hint="Ingresa tu colonia"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Siguiente"
+                    android:id="@+id/buttonColonia"
+                    android:layout_marginTop="67dp"
+                    android:layout_below="@+id/editTextColonia"
+                    android:layout_alignRight="@+id/editTextColonia"
+                    android:layout_alignEnd="@+id/editTextColonia"
+                    android:background="@android:color/holo_red_dark"
+                    android:textColor="@android:color/white"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutCiudad">
+
+
+                <TextView
+                    android:text="Ciudad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="57dp"
+                    android:id="@+id/textViewCiudad"
+                    android:textSize="40sp"
+                    android:textColor="@android:color/white"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/editTextCiudad"
+                    android:layout_marginTop="57dp"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"
+                    android:hint="Ingresa tu ciudad"
+                    android:layout_below="@+id/textViewCiudad"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Siguiente"
+                    android:id="@+id/buttonCiudad"
+                    android:layout_marginTop="47dp"
+                    android:layout_below="@+id/editTextCiudad"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@android:color/holo_red_dark"
+                    android:textColor="@android:color/white"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutCodigoPostal">
+
+                <TextView
+                    android:text="CodigoPostal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="57dp"
+                    android:id="@+id/textViewCodigoPostal"
+                    android:textSize="40sp"
+                    android:textColor="@android:color/white"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editTextCodigoPostal"
+                    android:layout_marginTop="57dp"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"
+                    android:hint="Ingresa tu codigo postal"
+                    android:layout_below="@+id/textViewCodigoPostal"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Siguiente"
+                    android:id="@+id/buttonCodigoPostal"
+                    android:layout_marginTop="47dp"
+                    android:layout_below="@+id/editTextCodigoPostal"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@android:color/holo_red_dark"
+                    android:textColor="@android:color/white"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutEstado">
+
+                <TextView
+                    android:text="Estado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="57dp"
+                    android:id="@+id/textViewEstado"
+                    android:textSize="40sp"
+                    android:textColor="@android:color/white"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/editTextEstado"
+                    android:layout_marginTop="57dp"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"
+                    android:hint="Ingresa tu estado"
+                    android:layout_below="@+id/textViewEstado"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Siguiente"
+                    android:id="@+id/buttonEstado"
+                    android:layout_marginTop="47dp"
+                    android:layout_below="@+id/editTextEstado"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:background="@android:color/holo_red_dark"
