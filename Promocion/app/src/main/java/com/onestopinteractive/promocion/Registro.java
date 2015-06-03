@@ -1,13 +1,16 @@
 package com.onestopinteractive.promocion;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,7 +30,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
     EditText etNombre,etEmail,etTelefono,etDia,etMes,etAno,etFrase,etCalle,etExterior,etInterior,etColonia ,etCiudad,etCodigoPostal,etEstado;
     String nombreSupervisor;
     String ubicacionSupervisor,premio,personalizada;
-    TextView prueba,prubaFin ;
+    TextView prueba,prubaFin;
     Supervisor supervisor;
     TextView nombreSuper,ubicacionSuper;
     Random ganadorAleatorio;
@@ -39,7 +42,6 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Todos los EditText a utlizar
 
 
         //Todos los botones que se utlizan
@@ -119,6 +121,9 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
 
 
+
+
+
     }
 
 
@@ -138,6 +143,9 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 break;
 
             case R.id.buttonFechaNaci:
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                        InputMethodManager.HIDE_NOT_ALWAYS);
                 viewFlipper.setDisplayedChild(5);
                 break;
 
@@ -269,6 +277,8 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 break;
 
             case R.id.buttonEstado:
+                InputMethodManager inputM = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputM.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
                 alta();
                 viewFlipper.setDisplayedChild(3);
                 break;
@@ -336,5 +346,6 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
         Toast.makeText(Registro.this,"Se guardo el registro",Toast.LENGTH_SHORT).show();
     }
+
 
 }
