@@ -30,7 +30,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
     EditText etNombre,etEmail,etTelefono,etDia,etMes,etAno,etFrase,etCalle,etExterior,etInterior,etColonia ,etCiudad,etCodigoPostal,etEstado,etTicket;
     String nombreSupervisor;
     String ubicacionSupervisor,premio,personalizada;
-    TextView prueba,prubaFin;
+
     Supervisor supervisor;
     TextView nombreSuper,ubicacionSuper;
     Random ganadorAleatorio;
@@ -229,54 +229,58 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
             case R.id.buttonSmall:
 
-                cantidadSmall -= 1;
+
 
                 if(cantidadSmall == 1) {
-                    Toast.makeText(Registro.this, "Es la ultima playera small", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Es la ultima playera chica", Toast.LENGTH_SHORT).show();
                     viewFlipper.setDisplayedChild(8);
                 }
 
                 else if(cantidadSmall<=0)
-                    Toast.makeText(Registro.this,"Ya no quedan mas playeras Small",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this,"Ya no quedan mas playeras chica",Toast.LENGTH_SHORT).show();
 
                 else {
-                    Toast.makeText(Registro.this,"Quedan"+cantidadSmall+" "+"playeras small",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this,"Quedan"+cantidadSmall+" "+"playeras chicas",Toast.LENGTH_SHORT).show();
                     viewFlipper.setDisplayedChild(8);
                 }
+                cantidadSmall -= 1;
                 break;
 
             case R.id.buttonMedium:
-                cantidadMedium -= 1;
+
 
                 if(cantidadMedium == 1) {
-                    Toast.makeText(Registro.this, "Es la ultima playera small", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Es la ultima playera medianas", Toast.LENGTH_SHORT).show();
                     viewFlipper.setDisplayedChild(8);
                 }
 
                 else if(cantidadMedium<=0)
-                    Toast.makeText(Registro.this,"Ya no quedan mas playeras Small",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this,"Ya no quedan mas playeras medianas",Toast.LENGTH_SHORT).show();
 
                 else {
-                    Toast.makeText(Registro.this,"Quedan"+cantidadMedium+" "+"playeras small",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this,"Quedan"+cantidadMedium+" "+"playeras medianas",Toast.LENGTH_SHORT).show();
                     viewFlipper.setDisplayedChild(8);
                 }
+                cantidadMedium -= 1;
                 break;
 
+
             case R.id.buttonLarge:
-                cantidadLarge -= 1;
+
 
                 if(cantidadLarge == 1) {
-                    Toast.makeText(Registro.this, "Es la ultima playera small", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Es la ultima playera grandes", Toast.LENGTH_SHORT).show();
                     viewFlipper.setDisplayedChild(8);
                 }
 
                 else if(cantidadLarge<=0)
-                    Toast.makeText(Registro.this,"Ya no quedan mas playeras Small",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this,"Ya no quedan mas playeras grandes",Toast.LENGTH_SHORT).show();
 
                 else {
-                    Toast.makeText(Registro.this,"Quedan"+cantidadLarge+" "+"playeras small",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this,"Quedan"+cantidadLarge+" "+"playeras grandes",Toast.LENGTH_SHORT).show();
                     viewFlipper.setDisplayedChild(8);
                 }
+                cantidadLarge -= 1;
                 break;
 
             case R.id.buttonSI:
@@ -305,41 +309,112 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 break;
 
             case R.id.buttonCalle:
-                viewFlipper.setDisplayedChild(11);
+                EditText cCalle= (EditText) findViewById(R.id.editTextCalle);
+                String comCalle = cCalle.getText().toString();
+                int lenghtCall = comCalle.length();
+
+                if(lenghtCall>=4)
+                    viewFlipper.setDisplayedChild(11);
+
+                else
+                    Toast.makeText(Registro.this, "Ingresa una calle correcta", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.buttonExterior:
-                viewFlipper.setDisplayedChild(12);
+                EditText cExterior= (EditText) findViewById(R.id.editTextExterior);
+                String comExterior = cExterior.getText().toString();
+                int lenghtExt = comExterior.length();
+
+                if(lenghtExt>=1)
+                    viewFlipper.setDisplayedChild(12);
+
+                else
+                    Toast.makeText(Registro.this, "Ingresa un numero correcto", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.buttonInterior:
-                viewFlipper.setDisplayedChild(13);
+                EditText cInterior= (EditText) findViewById(R.id.editTextInterior);
+                String comInterior = cInterior.getText().toString();
+                int lenghtInt = comInterior.length();
+
+                if(lenghtInt>=1)
+                    viewFlipper.setDisplayedChild(13);
+
+                else
+                    Toast.makeText(Registro.this, "Ingresa un numero correcto", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.buttonColonia:
-                viewFlipper.setDisplayedChild(14);
+                EditText cColonia= (EditText) findViewById(R.id.editTextColonia);
+                String comColonia = cColonia.getText().toString();
+                int lenghtCol = comColonia.length();
+
+                if(lenghtCol>=5)
+                    viewFlipper.setDisplayedChild(14);
+
+                else
+                    Toast.makeText(Registro.this, "Ingresa una colonia correcta", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.buttonCiudad:
-                viewFlipper.setDisplayedChild(15);
+                EditText cCiudad= (EditText) findViewById(R.id.editTextCiudad);
+                String comCiudad = cCiudad.getText().toString();
+                int lenghtCiu = comCiudad.length();
+
+                if(lenghtCiu>=4)
+                    viewFlipper.setDisplayedChild(15);
+
+                else
+                    Toast.makeText(Registro.this, "Ingresa una ciudad correcta", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.buttonCodigoPostal:
-                viewFlipper.setDisplayedChild(16);
+                EditText cCodigoPos= (EditText) findViewById(R.id.editTextCodigoPostal);
+                String comCodigoPos = cCodigoPos.getText().toString();
+                int lenghtCodPos = comCodigoPos.length();
+
+                if(lenghtCodPos>=3)
+                    viewFlipper.setDisplayedChild(16);
+
+                else
+                    Toast.makeText(Registro.this, "Ingresa un codigo postal correcto", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.buttonEstado:
-                InputMethodManager inputM = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputM.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
-                alta();
-                viewFlipper.setDisplayedChild(3);
+
+
+                EditText cEstado= (EditText) findViewById(R.id.editTextEstado);
+                String comEstado = cEstado.getText().toString();
+                int lenghtEst = comEstado.length();
+
+                if(lenghtEst>=4){
+                    InputMethodManager inputM = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputM.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+                    alta();
+                    viewFlipper.setDisplayedChild(3);
+                    Toast.makeText(Registro.this, "Se completo el registro", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(Registro.this, "Ingresa un estado correcto", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.buttonTicket:
-                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
-                        InputMethodManager.HIDE_NOT_ALWAYS);
-                viewFlipper.setDisplayedChild(5);
+
+                EditText cTicket= (EditText) findViewById(R.id.editTextTicket);
+                String comTicket = cTicket.getText().toString();
+                int lenghtTicket = comTicket.length();
+
+                if(lenghtTicket>=6)
+                {
+                    InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                            InputMethodManager.HIDE_NOT_ALWAYS);
+                    viewFlipper.setDisplayedChild(5);
+                }
+
+                else
+                    Toast.makeText(Registro.this, "Ingresa un numero de ticket correcto", Toast.LENGTH_SHORT).show();
+
                 break;
         }
     }
@@ -380,14 +455,14 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         String estado = etEstado.getText().toString();
         String ticket = etTicket.getText().toString();
 
-        prueba = (TextView) findViewById(R.id.textPrueba);
-        prubaFin = (TextView) findViewById(R.id.textViewPruebaFin);
+        //prueba = (TextView) findViewById(R.id.textPrueba);
+        //prubaFin = (TextView) findViewById(R.id.textViewPruebaFin);
         DataBase baseDatos = new DataBase(this);
         baseDatos.abrir();
         baseDatos.insertarReg(nombreSupervisor, ubicacionSupervisor, nombre, email,
                 telefono, fechaNacimiento, ticket, premio, personalizada, frase, calle, noExterior, noInterior, colonia, ciudad, codigoPostal, estado);
-        prueba.setText(baseDatos.leer());
-        prubaFin.setText(baseDatos.leer());
+        //prueba.setText(baseDatos.leer());
+       // prubaFin.setText(baseDatos.leer());
         baseDatos.cerrar();
 
         etNombre.setText("");

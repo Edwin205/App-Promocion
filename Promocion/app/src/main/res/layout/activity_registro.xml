@@ -252,14 +252,6 @@
                     android:layout_alignLeft="@+id/buttonOtro"
                     android:layout_alignStart="@+id/buttonOtro"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="New Text"
-                    android:id="@+id/textViewPruebaFin"
-                    android:textColor="@android:color/white"
-                    android:textSize="15sp"/>
-
 
             </RelativeLayout>
 
@@ -503,12 +495,6 @@
                     android:layout_alignLeft="@+id/buttonVipOtro"
                     android:layout_alignStart="@+id/buttonVipOtro"
                     android:layout_marginTop="33dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textPrueba"
-                    android:textSize="15sp"/>
 
 
             </RelativeLayout>
