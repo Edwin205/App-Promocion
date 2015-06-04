@@ -25,9 +25,9 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
     ViewFlipper viewFlipper;
     Button btnNombre,btnEmail,btnTelefono,btnFechaNaci,btnOtro,btnFinalizar
             ,btnOtroVip,btnFinalizarVIp,btnSuerte,btnS,btnM,btnL,btnSI
-            ,btnNO,btnSigPersonalizada,btnCalle,btnExterior,btnInterior,btnColonia,btnCiudad,btnCodigoPostal,btnEstado;
+            ,btnNO,btnSigPersonalizada,btnCalle,btnExterior,btnInterior,btnColonia,btnCiudad,btnCodigoPostal,btnEstado,btnTicket;
 
-    EditText etNombre,etEmail,etTelefono,etDia,etMes,etAno,etFrase,etCalle,etExterior,etInterior,etColonia ,etCiudad,etCodigoPostal,etEstado;
+    EditText etNombre,etEmail,etTelefono,etDia,etMes,etAno,etFrase,etCalle,etExterior,etInterior,etColonia ,etCiudad,etCodigoPostal,etEstado,etTicket;
     String nombreSupervisor;
     String ubicacionSupervisor,premio,personalizada;
     TextView prueba,prubaFin;
@@ -68,6 +68,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         btnCiudad = (Button) findViewById(R.id.buttonCiudad);
         btnCodigoPostal = (Button) findViewById(R.id.buttonCodigoPostal);
         btnEstado = (Button) findViewById(R.id.buttonEstado);
+        btnTicket =(Button) findViewById(R.id.buttonTicket);
 
         //El viewFlipper
         viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
@@ -116,6 +117,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         btnCiudad.setOnClickListener(this);
         btnCodigoPostal.setOnClickListener(this);
         btnEstado.setOnClickListener(this);
+        btnTicket.setOnClickListener(this);
 
         personalizada = "";
 
@@ -130,23 +132,63 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+
+
             case R.id.buttonNombre:
-                viewFlipper.setDisplayedChild(1);
+                EditText cNombre= (EditText) findViewById(R.id.editTextNombrePersona);
+                String comNombre = cNombre.getText().toString();
+                int length = comNombre.length();
+
+                if(length>=4)
+                    viewFlipper.setDisplayedChild(1);
+
+                else
+                    Toast.makeText(Registro.this, "Ingresa tu nombre completo", Toast.LENGTH_SHORT).show();
+
                 break;
 
             case R.id.buttonEmail:
-                viewFlipper.setDisplayedChild(2);
+
+                EditText cEmail = (EditText) findViewById(R.id.editTextEmail);
+                String comEmial = cEmail.getText().toString();
+                int longitud = comEmial.length();
+                char valor;
+
+                for(char i = 0; i < longitud; i++)
+                {
+                    valor = comEmial.charAt(i);
+                    if(valor == '@' && i == 0){
+                        Toast.makeText(Registro.this, "Escribe un correo valido", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    if(valor == '@')
+                    {
+                        viewFlipper.setDisplayedChild(2);
+                        break;
+                    }
+                    else if(i == longitud-1){
+                        Toast.makeText(Registro.this, "Escribe un correo valido", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                }
+
                 break;
 
             case R.id.buttonTelefono:
-                viewFlipper.setDisplayedChild(4);
+                EditText cTelefono= (EditText) findViewById(R.id.editTextTelefono);
+                String comTelefono = cTelefono.getText().toString();
+                int lengthTelefono = comTelefono.length();
+
+                if(lengthTelefono>=5)
+                    viewFlipper.setDisplayedChild(4);
+
+                else
+                    Toast.makeText(Registro.this, "Ingresa un numero de telefono valido", Toast.LENGTH_SHORT).show();
                 break;
 
+
             case R.id.buttonFechaNaci:
-                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
-                        InputMethodManager.HIDE_NOT_ALWAYS);
-                viewFlipper.setDisplayedChild(5);
+                viewFlipper.setDisplayedChild(17);
                 break;
 
             case R.id.buttonSuerte:
@@ -249,7 +291,17 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 break;
 
             case R.id.buttonSigPersonalizacion:
-                viewFlipper.setDisplayedChild(10);
+
+                EditText cPersonaliza= (EditText) findViewById(R.id.editTextPersonalizacion);
+                String comPersonaliza = cPersonaliza.getText().toString();
+                int lengthPer = comPersonaliza.length();
+
+                if(lengthPer>=4)
+                    viewFlipper.setDisplayedChild(10);
+
+                else
+                    Toast.makeText(Registro.this, "Ingresa tu nombre completo", Toast.LENGTH_SHORT).show();
+                
                 break;
 
             case R.id.buttonCalle:
@@ -282,6 +334,13 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 alta();
                 viewFlipper.setDisplayedChild(3);
                 break;
+
+            case R.id.buttonTicket:
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                        InputMethodManager.HIDE_NOT_ALWAYS);
+                viewFlipper.setDisplayedChild(5);
+                break;
         }
     }
 
@@ -305,6 +364,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         etCiudad = (EditText) findViewById(R.id.editTextCiudad);
         etCodigoPostal = (EditText) findViewById(R.id.editTextCodigoPostal);
         etEstado = (EditText) findViewById(R.id.editTextEstado);
+        etTicket =(EditText) findViewById(R.id.editTextTicket);
 
         String nombre = etNombre.getText().toString();
         String email = etEmail.getText().toString();
@@ -318,13 +378,14 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         String ciudad = etCiudad.getText().toString();
         String codigoPostal = etCodigoPostal.getText().toString();
         String estado = etEstado.getText().toString();
+        String ticket = etTicket.getText().toString();
 
         prueba = (TextView) findViewById(R.id.textPrueba);
         prubaFin = (TextView) findViewById(R.id.textViewPruebaFin);
         DataBase baseDatos = new DataBase(this);
         baseDatos.abrir();
         baseDatos.insertarReg(nombreSupervisor, ubicacionSupervisor, nombre, email,
-                telefono, fechaNacimiento, premio, personalizada, calle, frase, noExterior, noInterior, colonia, ciudad, codigoPostal, estado);
+                telefono, fechaNacimiento, ticket, premio, personalizada, frase, calle, noExterior, noInterior, colonia, ciudad, codigoPostal, estado);
         prueba.setText(baseDatos.leer());
         prubaFin.setText(baseDatos.leer());
         baseDatos.cerrar();
@@ -343,6 +404,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         etCiudad.setText("");
         etCodigoPostal.setText("");
         etEstado.setText("");
+        etTicket.setText("");
 
         Toast.makeText(Registro.this,"Se guardo el registro",Toast.LENGTH_SHORT).show();
     }

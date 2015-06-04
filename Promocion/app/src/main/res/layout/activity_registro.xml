@@ -33,7 +33,7 @@
                     android:text="Siguiente"
                     android:id="@+id/buttonNombre"
                     android:textColor="@android:color/white"
-                    android:background="@android:color/holo_red_light"
+                    android:background="@android:color/black"
                     android:layout_marginTop="34dp"
                     android:layout_below="@+id/editTextNombrePersona"
                     android:layout_alignParentRight="true"
@@ -58,12 +58,7 @@
                     android:layout_centerHorizontal="true"
                     android:fontFamily="@string/abc_action_bar_home_description"
                     android:typeface="sans"
-                    />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                </RelativeLayout>
+                    android:textStyle="bold"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -74,13 +69,12 @@
                     android:layout_marginTop="28dp"
                     android:hint="Nombre Completo*"
                     android:maxLength="30"
-                    android:textColor="#555555"
-                    android:textColorHint="#555555"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
                     android:layout_below="@+id/textViewNombre"
                     android:layout_alignRight="@+id/buttonNombre"
                     android:layout_alignEnd="@+id/buttonNombre"
                     android:textSize="22dp"
-                    android:background="#fff"
                     />
 
                 <TextView
@@ -119,13 +113,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Siguiente"
                     android:id="@+id/buttonEmail"
                     android:textColor="@android:color/white"
-                    android:background="@android:color/holo_red_light"
+                    android:background="#ff000000"
                     android:layout_marginTop="35dp"
                     android:layout_below="@+id/editTextEmail"
                     android:layout_alignParentRight="true"
@@ -142,7 +137,8 @@
                     android:textSize="40sp"
                     android:textColor="@android:color/white"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -152,13 +148,13 @@
                     android:id="@+id/editTextEmail"
                     android:layout_marginTop="28dp"
                     android:hint="Correo Electronico*"
-                    android:textColor="#555555"
-                    android:textColorHint="#555555"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
                     android:layout_below="@+id/textViewEmail"
                     android:layout_alignRight="@+id/buttonEmail"
                     android:layout_alignEnd="@+id/buttonEmail"
                     android:textSize="22sp"
-                    android:background="#fff"/>
+                    android:maxLength="30"/>
 
 
             </RelativeLayout>
@@ -173,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:text="Siguiente"
                     android:id="@+id/buttonTelefono"
-                    android:background="@android:color/holo_red_light"
+                    android:background="#ff000000"
                     android:textColor="@android:color/white"
                     android:layout_marginTop="36dp"
                     android:layout_below="@+id/editTextTelefono"
@@ -190,7 +186,8 @@
                     android:textSize="40sp"
                     android:textColor="@android:color/white"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -200,13 +197,14 @@
                     android:id="@+id/editTextTelefono"
                     android:layout_marginTop="27dp"
                     android:hint="Telèfono*"
-                    android:textColor="#555555"
-                    android:textColorHint="#555555"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
                     android:layout_below="@+id/textViewTelefono"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:background="#fff"
-                    android:textSize="22sp"/>
+
+                    android:textSize="22sp"
+                    android:maxLength="20"/>
 
             </RelativeLayout>
 
@@ -223,24 +221,34 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="62dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="30sp"/>
+                    android:textColor="#fff"
+                    android:textSize="40sp"
+                    android:textStyle="bold"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Otro"
                     android:id="@+id/buttonOtro"
+                    android:layout_marginTop="70dp"
+                    android:background="#ff000000"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="#fff"
                     android:layout_below="@+id/textViewGracias"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="54dp"/>
+                    android:layout_centerHorizontal="true"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Finalizar"
                     android:id="@+id/buttonFinalizar"
-                    android:layout_centerVertical="true"
+                    android:background="#ff000000"
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:textSize="17sp"
+                    android:layout_marginTop="42dp"
+                    android:layout_below="@+id/buttonOtro"
                     android:layout_alignLeft="@+id/buttonOtro"
                     android:layout_alignStart="@+id/buttonOtro"/>
 
@@ -266,10 +274,11 @@
                     android:text="Fecha de nacimiento"
                     android:id="@+id/textViewFechaNacieminto"
                     android:layout_marginTop="22dp"
-                    android:textSize="30sp"
+                    android:textSize="32sp"
                     android:textColor="@android:color/white"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -308,7 +317,7 @@
                     android:selectAllOnFocus="false"
                     android:phoneNumber="false"
                     android:visibility="visible"
-                    android:textColor="@android:color/white"
+                    android:textColor="#fff"
                     android:textColorHint="@android:color/white"
                     android:layout_alignTop="@+id/editText"
                     android:layout_toLeftOf="@+id/textView"
@@ -396,10 +405,12 @@
                     android:text="Siguiente"
                     android:id="@+id/buttonFechaNaci"
                     android:textColor="@android:color/white"
-                    android:background="@android:color/holo_red_dark"
-                    android:layout_above="@+id/textView2"
+                    android:background="#ff000000"
+                    android:layout_below="@+id/editTextAno"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_alignParentEnd="true"
+                    android:textStyle="bold"
+                    android:textSize="18sp"/>
 
             </RelativeLayout>
 
@@ -411,26 +422,28 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Prueba tu Suerte !"
+                    android:text="¡Prueba tu Suerte!"
                     android:id="@+id/textViewSuerte"
                     android:layout_marginTop="24dp"
-                    android:textSize="30sp"
+                    android:textSize="35sp"
                     android:textColor="@android:color/white"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Presiona y Suerte!"
+                    android:text="¡Presiona y Suerte!"
                     android:id="@+id/buttonSuerte"
                     android:textSize="40sp"
                     android:textColor="@android:color/white"
-                    android:background="@android:color/holo_red_dark"
+                    android:background="#ff000000"
                     android:layout_marginTop="137dp"
                     android:layout_below="@+id/textViewSuerte"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"/>
+                    android:layout_alignParentStart="true"
+                    android:textStyle="bold"/>
 
 
             </RelativeLayout>
@@ -446,20 +459,22 @@
                     android:text="Participaste"
                     android:id="@+id/textViewVip"
                     android:layout_marginTop="31dp"
-                    android:textSize="30sp"
+                    android:textSize="40sp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:textColor="@android:color/white"/>
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="VIP"
                     android:id="@+id/textViewVIP"
-                    android:textSize="30sp"
+                    android:textSize="40sp"
                     android:layout_below="@+id/textViewVip"
                     android:layout_centerHorizontal="true"
-                    android:textColor="@android:color/white"/>
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"/>
 
                 <Button
                     android:layout_width="wrap_content"
@@ -468,18 +483,26 @@
                     android:id="@+id/buttonVipOtro"
                     android:layout_below="@+id/textViewVIP"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="54dp"/>
+                    android:layout_marginTop="54dp"
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:background="#ff000000"
+                    android:textSize="17sp"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Finalizar"
                     android:id="@+id/buttonVipFinalizar"
-                    android:layout_centerVertical="true"
-                    android:layout_alignLeft="@+id/buttonVipOtro"
-                    android:layout_marginTop="70dp"
 
-                    />
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:background="#ff000000"
+                    android:layout_below="@+id/buttonVipOtro"
+                    android:layout_alignLeft="@+id/buttonVipOtro"
+                    android:layout_alignStart="@+id/buttonVipOtro"
+                    android:layout_marginTop="33dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -496,21 +519,23 @@
                 android:id="@+id/relativelayoutGanador">
 
                 <TextView
-                android:text="Felicidades ganaste! Elige tu medida para continuar"
+                android:text="Ya tienes tu playera, ¡Personalízala y póntela!"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/felicidades"
-                android:textSize="30sp"
+                android:textSize="28sp"
                 android:layout_marginTop="24dp"
                 android:textColor="@android:color/white"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"/>
+                android:layout_alignParentStart="true"
+                android:textStyle="bold"
+                    />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="S"
+                    android:text="CH"
                     android:id="@+id/buttonSmall"
                     android:layout_below="@+id/felicidades"
                     android:layout_alignParentLeft="true"
@@ -518,7 +543,7 @@
                     android:layout_marginTop="158dp"
                     android:textSize="20sp"
                     android:textColor="@android:color/white"
-                    android:background="@android:color/holo_red_dark"/>
+                    android:background="#ff000000"/>
 
                 <Button
                     android:layout_width="wrap_content"
@@ -529,19 +554,19 @@
                     android:layout_centerHorizontal="true"
                     android:textSize="20sp"
                     android:textColor="@android:color/white"
-                    android:background="@android:color/holo_red_dark"/>
+                    android:background="#ff000000"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="L"
+                    android:text="G"
                     android:id="@+id/buttonLarge"
                     android:layout_alignTop="@+id/buttonMedium"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:textSize="20sp"
                     android:textColor="@android:color/white"
-                    android:background="@android:color/holo_red_dark"/>
+                    android:background="#ff000000"/>
 
             </RelativeLayout>
 
@@ -550,28 +575,18 @@
                 android:layout_height="match_parent"
                 android:id="@+id/relativelayoutPersonalizada">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Personalizada ?"
-                    android:id="@+id/textViewPersonalizada"
-                    android:layout_marginTop="25dp"
-                    android:textColor="@android:color/white"
-                    android:textSize="30sp"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"/>
-
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="SI"
                     android:id="@+id/buttonSI"
-                    android:background="@android:color/holo_red_dark"
+                    android:background="#ff000000"
                     android:textColor="@android:color/white"
-                    android:layout_below="@+id/textViewPersonalizada"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_marginTop="205dp"/>
+                    android:layout_marginTop="205dp"
+                    android:textStyle="bold"
+                    android:textSize="17sp"/>
 
                 <Button
                     android:layout_width="wrap_content"
@@ -581,8 +596,21 @@
                     android:layout_alignBottom="@+id/buttonSI"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:background="@android:color/holo_red_dark"
-                    android:textColor="@android:color/white"/>
+                    android:background="#ff000000"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:textSize="17sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¿Personalizada?"
+                    android:id="@+id/textView6"
+                    android:layout_marginTop="25dp"
+                    android:textColor="#fff"
+                    android:textSize="40sp"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
 
             </RelativeLayout>
 
@@ -591,17 +619,19 @@
                 android:layout_height="match_parent"
                 android:id="@+id/relativelayoutPersonalizacion">
 
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Coloca como la quieres personalizar"
+                    android:text="Personaliza tu camiseta"
                     android:id="@+id/textView5"
                     android:layout_marginTop="23dp"
                     android:textSize="30sp"
                     android:textColor="@android:color/white"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"/>
+                    android:layout_alignParentStart="true"
+                    android:textStyle="bold"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -609,25 +639,31 @@
                     android:inputType="textPersonName"
                     android:ems="10"
                     android:id="@+id/editTextPersonalizacion"
-                    android:layout_marginTop="19dp"
-                    android:hint="Ejemplo : Jaime Perez"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@android:color/white"
+                    android:layout_marginTop="39dp"
+                    android:hint="Nombre o Apodo*"
+                    android:textColor="#fff"
+                    android:textSize="22sp"
                     android:layout_below="@+id/textView5"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"/>
+                    android:layout_alignParentStart="true"
+                    android:textColorHint="#fff"
+                    android:maxLength="10"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Siguiente"
                     android:id="@+id/buttonSigPersonalizacion"
-                    android:background="@android:color/holo_red_dark"
+                    android:background="#ff000000"
                     android:textColor="@android:color/white"
+                    android:layout_marginTop="36dp"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
                     android:layout_below="@+id/editTextPersonalizacion"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="17dp"/>
+                    android:layout_alignParentEnd="true"/>
+
+
 
             </RelativeLayout>
 
@@ -635,6 +671,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/relativelayoutCalle">
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -645,7 +682,8 @@
                     android:textSize="40sp"
                     android:textColor="@android:color/white"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -653,22 +691,26 @@
                     android:inputType="textPersonName"
                     android:ems="10"
                     android:id="@+id/editTextCalle"
-                    android:layout_marginTop="21dp"
-                    android:hint="Ingresa tu calle"
-                    android:textColorHint="@android:color/white"
-                    android:textColor="@android:color/white"
+                    android:layout_marginTop="35dp"
+                    android:hint="Calle*"
+                    android:textColorHint="#fff"
+                    android:textColor="#fff"
+                    android:textSize="22sp"
                     android:layout_below="@+id/textViewCalle"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"/>
+                    android:layout_alignRight="@+id/buttonCalle"
+                    android:layout_alignEnd="@+id/buttonCalle"
+                    android:maxLength="30"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Siguiente"
                     android:id="@+id/buttonCalle"
-                    android:layout_marginTop="34dp"
-                    android:background="@android:color/holo_red_dark"
+                    android:layout_marginTop="30dp"
+                    android:background="#ff000000"
                     android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
                     android:layout_below="@+id/editTextCalle"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"/>
@@ -679,6 +721,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/relativelayoutExterior">
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -691,7 +734,8 @@
                     android:textSize="40sp"
                     android:textColor="@android:color/white"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -699,13 +743,17 @@
                     android:inputType="number"
                     android:ems="10"
                     android:id="@+id/editTextExterior"
-                    android:layout_marginTop="22dp"
-                    android:hint="Ingresa numero exterior"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@android:color/white"
+                    android:layout_marginTop="35dp"
+                    android:hint="No. Exterior*"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
+                    android:textSize="22sp"
                     android:layout_below="@+id/textViewExterior"
                     android:layout_alignLeft="@+id/textViewExterior"
-                    android:layout_alignStart="@+id/textViewExterior"/>
+                    android:layout_alignStart="@+id/textViewExterior"
+                    android:layout_alignRight="@+id/textViewExterior"
+                    android:layout_alignEnd="@+id/textViewExterior"
+                    android:maxLength="10"/>
 
                 <Button
                     android:layout_width="wrap_content"
@@ -713,11 +761,13 @@
                     android:text="Siguiente"
                     android:id="@+id/buttonExterior"
                     android:layout_marginTop="32dp"
-                    android:background="@android:color/holo_red_dark"
+                    android:background="#ff000000"
                     android:textColor="@android:color/white"
                     android:layout_below="@+id/editTextExterior"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_alignParentEnd="true"
+                    android:textSize="17sp"
+                    android:textStyle="bold"/>
 
             </RelativeLayout>
 
@@ -725,6 +775,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/relativelayoutInterior">
+
 
                 <TextView
                     android:text="Numero Interior"
@@ -735,7 +786,8 @@
                     android:textSize="40sp"
                     android:textColor="@android:color/white"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -743,12 +795,14 @@
                     android:inputType="number"
                     android:ems="10"
                     android:id="@+id/editTextInterior"
-                    android:layout_marginTop="23dp"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@android:color/white"
-                    android:hint="Ingresa numero interior"
+                    android:layout_marginTop="33dp"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
+                    android:hint="No. Interior*"
+                    android:textSize="22sp"
                     android:layout_below="@+id/textViewInterior"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:maxLength="10"/>
 
                 <Button
                     android:layout_width="wrap_content"
@@ -756,11 +810,13 @@
                     android:text="Siguiente"
                     android:id="@+id/buttonInterior"
                     android:layout_marginTop="33dp"
-                    android:background="@android:color/holo_red_dark"
+                    android:background="#ff000000"
                     android:textColor="@android:color/white"
                     android:layout_below="@+id/editTextInterior"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_alignParentEnd="true"
+                    android:textSize="17sp"
+                    android:textStyle="bold"/>
 
 
             </RelativeLayout>
@@ -769,6 +825,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/relativelayoutColonia">
+
 
                 <TextView
                     android:text="Colonia"
@@ -779,7 +836,8 @@
                     android:textColor="@android:color/white"
                     android:textSize="40sp"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -787,25 +845,29 @@
                     android:inputType="textPersonName"
                     android:ems="10"
                     android:id="@+id/editTextColonia"
-                    android:layout_marginTop="22dp"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@android:color/white"
-                    android:hint="Ingresa tu colonia"
+                    android:layout_marginTop="37dp"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
+                    android:hint="Colonia*"
+                    android:textSize="22sp"
                     android:layout_below="@+id/textViewColonia"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"/>
+                    android:layout_alignRight="@+id/buttonColonia"
+                    android:layout_alignEnd="@+id/buttonColonia"
+                    android:maxLength="20"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Siguiente"
                     android:id="@+id/buttonColonia"
-                    android:layout_marginTop="36dp"
-                    android:background="@android:color/holo_red_dark"
+                    android:layout_marginTop="32dp"
+                    android:background="#ff000000"
                     android:textColor="@android:color/white"
                     android:layout_below="@+id/editTextColonia"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_alignParentEnd="true"
+                    android:textStyle="bold"
+                    android:textSize="17sp"/>
 
 
             </RelativeLayout>
@@ -825,7 +887,8 @@
                     android:textSize="40sp"
                     android:textColor="@android:color/white"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -833,13 +896,15 @@
                     android:inputType="textPersonName"
                     android:ems="10"
                     android:id="@+id/editTextCiudad"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@android:color/white"
-                    android:hint="Ingresa tu ciudad"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
+                    android:hint="Ciudad*"
+                    android:layout_marginTop="36dp"
+                    android:textSize="22sp"
                     android:layout_below="@+id/textViewCiudad"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="21dp"/>
+                    android:layout_alignRight="@+id/buttonCiudad"
+                    android:layout_alignEnd="@+id/buttonCiudad"
+                    android:maxLength="20"/>
 
                 <Button
                     android:layout_width="wrap_content"
@@ -847,11 +912,13 @@
                     android:text="Siguiente"
                     android:id="@+id/buttonCiudad"
                     android:layout_marginTop="37dp"
-                    android:background="@android:color/holo_red_dark"
+                    android:background="#ff000000"
                     android:textColor="@android:color/white"
                     android:layout_below="@+id/editTextCiudad"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_alignParentEnd="true"
+                    android:textStyle="bold"
+                    android:textSize="17sp"/>
 
             </RelativeLayout>
 
@@ -859,6 +926,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/relativelayoutCodigoPostal">
+
 
                 <TextView
                     android:text="CodigoPostal"
@@ -869,7 +937,9 @@
                     android:textSize="40sp"
                     android:textColor="@android:color/white"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"
+                    />
 
                 <EditText
                     android:layout_width="match_parent"
@@ -877,13 +947,15 @@
                     android:inputType="number"
                     android:ems="10"
                     android:id="@+id/editTextCodigoPostal"
-                    android:layout_marginTop="21dp"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@android:color/white"
-                    android:hint="Ingresa tu codigo postal"
+                    android:layout_marginTop="33dp"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
+                    android:hint="C.P*"
+                    android:textSize="22sp"
                     android:layout_below="@+id/textViewCodigoPostal"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"/>
+                    android:layout_alignRight="@+id/buttonCodigoPostal"
+                    android:layout_alignEnd="@+id/buttonCodigoPostal"
+                    android:maxLength="10"/>
 
                 <Button
                     android:layout_width="wrap_content"
@@ -891,11 +963,13 @@
                     android:text="Siguiente"
                     android:id="@+id/buttonCodigoPostal"
                     android:layout_marginTop="37dp"
-                    android:background="@android:color/holo_red_dark"
+                    android:background="#ff000000"
                     android:textColor="@android:color/white"
                     android:layout_below="@+id/editTextCodigoPostal"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_alignParentEnd="true"
+                    android:textSize="17sp"
+                    android:textStyle="bold"/>
 
             </RelativeLayout>
 
@@ -903,6 +977,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/relativelayoutEstado">
+
 
                 <TextView
                     android:text="Estado"
@@ -913,7 +988,8 @@
                     android:textSize="40sp"
                     android:textColor="@android:color/white"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -921,13 +997,16 @@
                     android:inputType="textPersonName"
                     android:ems="10"
                     android:id="@+id/editTextEstado"
-                    android:layout_marginTop="23dp"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@android:color/white"
-                    android:hint="Ingresa tu estado"
+                    android:layout_marginTop="37dp"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
+                    android:hint="Estado*"
+                    android:textSize="22sp"
+                    android:textIsSelectable="false"
                     android:layout_below="@+id/textViewEstado"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"/>
+                    android:layout_alignRight="@+id/buttonEstado"
+                    android:layout_alignEnd="@+id/buttonEstado"
+                    android:maxLength="20"/>
 
                 <Button
                     android:layout_width="wrap_content"
@@ -935,11 +1014,64 @@
                     android:text="Siguiente"
                     android:id="@+id/buttonEstado"
                     android:layout_marginTop="35dp"
-                    android:background="@android:color/holo_red_dark"
+                    android:background="#ff000000"
                     android:textColor="@android:color/white"
                     android:layout_below="@+id/editTextEstado"
                     android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:textStyle="bold"
+                    android:textSize="17sp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativelayoutNumerodeTicket"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Registra tu Ticket"
+                    android:id="@+id/textViewTicket"
+                    android:textSize="35sp"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:layout_marginTop="28dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editTextTicket"
+                    android:hint="Número de Ticket*"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
+                    android:textSize="22sp"
+                    android:maxLength="30"
+                    android:layout_marginTop="27dp"
+                    android:layout_below="@+id/textViewTicket"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Siguiente"
+                    android:id="@+id/buttonTicket"
+                    android:textColor="@android:color/white"
+                    android:background="#ff000000"
+                    android:layout_marginTop="36dp"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:layout_below="@+id/editTextTicket"
+                    android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"/>
+
 
             </RelativeLayout>
 
@@ -956,4 +1088,5 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"/>
+
 </RelativeLayout>

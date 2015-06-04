@@ -30,11 +30,12 @@
                     android:layout_height="wrap_content"
                     android:text="Supervisor"
                     android:id="@+id/textViewSuper"
-                    android:textSize="30sp"
-                    android:layout_marginTop="56dp"
+                    android:textSize="40sp"
+                    android:layout_marginTop="41dp"
                     android:textColor="@android:color/white"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -42,22 +43,25 @@
                     android:text="Ubicacion"
                     android:id="@+id/textViewUbi"
                     android:layout_marginTop="78dp"
-                    android:textSize="30sp"
+                    android:textSize="40sp"
                     android:textColor="@android:color/white"
                     android:layout_below="@+id/textViewSuper"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Siguiente"
                     android:id="@+id/btnPortada"
-                    android:layout_marginTop="115dp"
-                    android:layout_toRightOf="@+id/textViewUbi"
-                    android:layout_toEndOf="@+id/textViewUbi"
-                    android:layout_below="@+id/textViewUbi"
-                    android:background="@android:color/holo_red_dark"
-                    android:textColor="@android:color/white"/>
+                    android:layout_marginTop="68dp"
+                    android:background="#ff000000"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:layout_below="@+id/textViewSuperUbicacion"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"/>
 
                 <Button
                     style="?android:attr/buttonStyleSmall"
@@ -65,20 +69,20 @@
                     android:layout_height="wrap_content"
                     android:text="Settings"
                     android:id="@+id/buttonSettings"
-                    android:layout_marginLeft="45dp"
-                    android:layout_marginStart="45dp"
-                    android:layout_alignParentBottom="true"
+                    android:textColor="@android:color/white"
+                    android:background="#ff000000"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:layout_below="@+id/btnPortada"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_marginBottom="45dp"
-                    android:textColor="@android:color/white"
-                    android:background="@android:color/holo_red_dark"/>
+                    android:layout_marginTop="60dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textviewSuperNombre"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
                     android:layout_below="@+id/textViewSuper"
                     android:layout_centerHorizontal="true"
                     android:textColor="@android:color/white"/>
@@ -87,11 +91,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewSuperUbicacion"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
+                    android:textColor="@android:color/white"
                     android:layout_below="@+id/textViewUbi"
-                    android:layout_alignLeft="@+id/textviewSuperNombre"
-                    android:layout_alignStart="@+id/textviewSuperNombre"
-                    android:textColor="@android:color/white"/>
+                    android:layout_centerHorizontal="true"/>
 
             </RelativeLayout>
 
@@ -106,11 +109,10 @@
                     android:text="Supervisor"
                     android:id="@+id/textViewSupervisor"
                     android:textSize="30sp"
+                    android:textColor="@android:color/white"
                     android:layout_alignParentTop="true"
-                    android:layout_alignRight="@+id/textView"
-                    android:layout_alignEnd="@+id/textView"
-                    android:layout_marginTop="39dp"
-                    android:textColor="@android:color/white"/>
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -119,22 +121,25 @@
                     android:ems="10"
                     android:id="@+id/editTextNombreSupervisor"
                     android:hint="Ingresa tu nombre"
+                    android:maxLength="30"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
+                    android:autoText="false"
                     android:layout_below="@+id/textViewSupervisor"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:maxLength="30"
-                    android:textColor="@android:color/white"/>
+                    android:layout_alignParentStart="true"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ubicacion"
                     android:id="@+id/textView"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="22dp"
                     android:textSize="30sp"
+                    android:textColor="@android:color/white"
                     android:layout_below="@+id/editTextNombreSupervisor"
                     android:layout_centerHorizontal="true"
-                    android:textColor="@android:color/white"/>
+                    android:textStyle="bold"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -143,22 +148,25 @@
                     android:ems="10"
                     android:id="@+id/editTextUbicacion"
                     android:hint="Ingresa tu ubicacion"
+                    android:maxLength="30"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
                     android:layout_below="@+id/textView"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:maxLength="30"
-                    android:textColor="@android:color/white"/>
+                    android:layout_alignParentStart="true"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Guardar"
                     android:id="@+id/buttonGuardar"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="42dp"
-                    android:background="@android:color/holo_red_dark"
-                    android:textColor="@android:color/white"/>
+                    android:background="#ff000000"
+                    android:textColor="@android:color/white"
+                    android:layout_marginTop="23dp"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:layout_below="@+id/textViewunoDe"
+                    android:layout_centerHorizontal="true"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -167,14 +175,15 @@
                     android:id="@+id/textViewInventario"
                     android:textSize="30sp"
                     android:textColor="@android:color/white"
-                    android:layout_centerVertical="true"
+                    android:textStyle="bold"
+                    android:layout_below="@+id/editTextUbicacion"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="S:"
+                    android:text="CH:"
                     android:id="@+id/textView2"
                     android:layout_marginTop="21dp"
                     android:textSize="25sp"
@@ -183,7 +192,8 @@
                     android:layout_marginStart="22dp"
                     android:layout_below="@+id/textViewInventario"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"/>
+                    android:layout_alignParentStart="true"
+                    android:textStyle="bold"/>
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -191,12 +201,14 @@
                     android:inputType="number"
                     android:ems="10"
                     android:id="@+id/editTextSmall"
-                    android:layout_alignBottom="@+id/textView2"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
+                    android:layout_alignTop="@+id/textView2"
                     android:layout_toRightOf="@+id/textView2"
-                    android:layout_toStartOf="@+id/textView"
-                    android:layout_toLeftOf="@+id/textView"
-                    android:textColor="@android:color/white"
-                    android:text="0"/>
+                    android:layout_toStartOf="@+id/textViewM"
+                    android:maxLength="2"
+                    android:hint="NN"
+                    android:layout_toLeftOf="@+id/textViewM"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -205,7 +217,8 @@
                     android:id="@+id/textViewM"
                     android:textSize="25sp"
                     android:textColor="@android:color/white"
-                    android:layout_alignBottom="@+id/editTextSmall"
+                    android:textStyle="bold"
+                    android:layout_alignTop="@+id/editTextSmall"
                     android:layout_alignLeft="@+id/buttonGuardar"
                     android:layout_alignStart="@+id/buttonGuardar"/>
 
@@ -215,23 +228,26 @@
                     android:inputType="number"
                     android:ems="10"
                     android:id="@+id/editTextMediuem"
-                    android:layout_alignBottom="@+id/textViewM"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
+                    android:layout_alignTop="@+id/textViewM"
                     android:layout_toRightOf="@+id/textViewM"
-                    android:layout_alignRight="@+id/buttonGuardar"
-                    android:layout_alignEnd="@+id/buttonGuardar"
-                    android:textColor="@android:color/white"
-                    android:text="0"/>
+                    android:layout_toStartOf="@+id/textViewL"
+                    android:maxLength="2"
+                    android:hint="NN"
+                    android:layout_toLeftOf="@+id/textViewL"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="L:"
+                    android:text="G:"
                     android:id="@+id/textViewL"
                     android:textSize="25sp"
                     android:textColor="@android:color/white"
-                    android:layout_alignBottom="@+id/editTextMediuem"
-                    android:layout_toRightOf="@+id/textView"
-                    android:layout_toEndOf="@+id/textView"/>
+                    android:textStyle="bold"
+                    android:layout_alignTop="@+id/editTextMediuem"
+                    android:layout_alignRight="@+id/textView"
+                    android:layout_alignEnd="@+id/textView"/>
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -239,11 +255,14 @@
                     android:inputType="number"
                     android:ems="10"
                     android:id="@+id/editTextLarge"
-                    android:layout_alignBottom="@+id/textViewL"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
+                    android:layout_alignTop="@+id/textViewL"
                     android:layout_toRightOf="@+id/textViewL"
-                    android:layout_toEndOf="@+id/textViewL"
-                    android:textColor="@android:color/white"
-                    android:text="0"/>
+                    android:maxLength="2"
+                    android:hint="NN"
+                    android:layout_alignRight="@+id/textView8"
+                    android:layout_alignEnd="@+id/textView8"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -264,13 +283,14 @@
                     android:ems="10"
                     android:id="@+id/editTextPorcentaje"
                     android:maxLength="1"
-                    android:text="2"
                     android:textSize="20sp"
-                    android:layout_alignBottom="@+id/textViewunoDe"
-                    android:layout_toRightOf="@+id/textViewInventario"
-                    android:layout_toStartOf="@+id/textViewGana"
-                    android:textColor="@android:color/white"
-                    android:layout_toLeftOf="@+id/textViewGana"/>
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
+                    android:hint="N"
+                    android:layout_above="@+id/buttonGuardar"
+                    android:layout_toRightOf="@+id/textViewunoDe"
+                    android:layout_toLeftOf="@+id/textViewGana"
+                    android:layout_toStartOf="@+id/textViewGana"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -279,9 +299,29 @@
                     android:id="@+id/textViewGana"
                     android:textColor="@android:color/white"
                     android:textSize="25sp"
-                    android:layout_alignBottom="@+id/editTextPorcentaje"
+                    android:layout_above="@+id/buttonGuardar"
                     android:layout_alignRight="@+id/textViewSupervisor"
                     android:layout_alignEnd="@+id/textViewSupervisor"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView7"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_alignTop="@+id/editTextPorcentaje"
+                    android:layout_toRightOf="@+id/textViewGana"
+                    android:layout_toEndOf="@+id/textViewGana"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView8"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_alignBottom="@+id/textViewL"
+                    android:layout_toRightOf="@+id/textView7"
+                    android:layout_toEndOf="@+id/textView7"/>
 
 
             </RelativeLayout>
