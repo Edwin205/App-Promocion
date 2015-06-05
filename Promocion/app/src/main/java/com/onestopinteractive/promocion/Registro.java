@@ -1,14 +1,9 @@
 package com.onestopinteractive.promocion;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -25,7 +20,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
     ViewFlipper viewFlipper;
     Button btnNombre,btnEmail,btnTelefono,btnFechaNaci,btnOtro,btnFinalizar
             ,btnOtroVip,btnFinalizarVIp,btnSuerte,btnS,btnM,btnL,btnSI
-            ,btnNO,btnSigPersonalizada,btnCalle,btnExterior,btnInterior,btnColonia,btnCiudad,btnCodigoPostal,btnEstado,btnTicket;
+            ,btnNO,btnSigPersonalizada,btnCalle,btnExterior,btnInterior,btnColonia,btnCiudad,btnCodigoPostal,btnEstado,btnTicket,btnSifin,btnNOfin;
 
     EditText etNombre,etEmail,etTelefono,etDia,etMes,etAno,etFrase,etCalle,etExterior,etInterior,etColonia ,etCiudad,etCodigoPostal,etEstado,etTicket;
     String nombreSupervisor;
@@ -69,6 +64,8 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         btnCodigoPostal = (Button) findViewById(R.id.buttonCodigoPostal);
         btnEstado = (Button) findViewById(R.id.buttonEstado);
         btnTicket =(Button) findViewById(R.id.buttonTicket);
+        btnNOfin = (Button) findViewById(R.id.buttonNOSeguro);
+        btnSifin = (Button) findViewById(R.id.buttonSiSeg);
 
         //El viewFlipper
         viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
@@ -118,6 +115,8 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         btnCodigoPostal.setOnClickListener(this);
         btnEstado.setOnClickListener(this);
         btnTicket.setOnClickListener(this);
+        btnNOfin.setOnClickListener(this);
+        btnSifin.setOnClickListener(this);
 
         personalizada = "";
 
@@ -214,6 +213,14 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 break;
 
             case R.id.buttonFinalizar:
+                viewFlipper.setDisplayedChild(18);
+
+                break;
+            case R.id.buttonNOSeguro:
+                viewFlipper.setDisplayedChild(3);
+                break;
+
+            case R.id.buttonSiSeg:
                 Intent intent = new Intent(Registro.this,Portada.class);
                 startActivity(intent);
                 break;
@@ -223,8 +230,8 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 break;
 
             case R.id.buttonVipFinalizar:
-                Intent intent2 = new Intent(Registro.this,Portada.class);
-                startActivity(intent2);
+                viewFlipper.setDisplayedChild(18);
+
                 break;
 
             case R.id.buttonSmall:
@@ -234,16 +241,18 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 if(cantidadSmall == 1) {
                     Toast.makeText(Registro.this, "Es la ultima playera chica", Toast.LENGTH_SHORT).show();
                     viewFlipper.setDisplayedChild(8);
+                    cantidadSmall -= 1;
                 }
 
                 else if(cantidadSmall<=0)
                     Toast.makeText(Registro.this,"Ya no quedan mas playeras chica",Toast.LENGTH_SHORT).show();
 
                 else {
-                    Toast.makeText(Registro.this,"Quedan"+cantidadSmall+" "+"playeras chicas",Toast.LENGTH_SHORT).show();
                     viewFlipper.setDisplayedChild(8);
+                    Toast.makeText(Registro.this,"Quedan"+cantidadSmall+" "+"playeras chicas",Toast.LENGTH_SHORT).show();
+                    cantidadSmall -= 1;
                 }
-                cantidadSmall -= 1;
+
                 break;
 
             case R.id.buttonMedium:
@@ -252,16 +261,19 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 if(cantidadMedium == 1) {
                     Toast.makeText(Registro.this, "Es la ultima playera medianas", Toast.LENGTH_SHORT).show();
                     viewFlipper.setDisplayedChild(8);
+                    cantidadMedium -= 1;
                 }
 
                 else if(cantidadMedium<=0)
                     Toast.makeText(Registro.this,"Ya no quedan mas playeras medianas",Toast.LENGTH_SHORT).show();
 
                 else {
-                    Toast.makeText(Registro.this,"Quedan"+cantidadMedium+" "+"playeras medianas",Toast.LENGTH_SHORT).show();
+
                     viewFlipper.setDisplayedChild(8);
+                    cantidadMedium -= 1;
+                    Toast.makeText(Registro.this,"Quedan"+cantidadMedium+" "+"playeras medianas",Toast.LENGTH_SHORT).show();
                 }
-                cantidadMedium -= 1;
+
                 break;
 
 
@@ -271,22 +283,21 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 if(cantidadLarge == 1) {
                     Toast.makeText(Registro.this, "Es la ultima playera grandes", Toast.LENGTH_SHORT).show();
                     viewFlipper.setDisplayedChild(8);
+                    cantidadLarge -= 1;
                 }
 
                 else if(cantidadLarge<=0)
                     Toast.makeText(Registro.this,"Ya no quedan mas playeras grandes",Toast.LENGTH_SHORT).show();
 
                 else {
-                    Toast.makeText(Registro.this,"Quedan"+cantidadLarge+" "+"playeras grandes",Toast.LENGTH_SHORT).show();
+
                     viewFlipper.setDisplayedChild(8);
+                    cantidadLarge -= 1;
+                    Toast.makeText(Registro.this,"Quedan"+cantidadLarge+" "+"playeras grandes",Toast.LENGTH_SHORT).show();
                 }
-                cantidadLarge -= 1;
+
                 break;
 
-            case R.id.buttonSI:
-                viewFlipper.setDisplayedChild(9);
-                personalizada = "Si";
-                break;
 
             case R.id.buttonNO:
                 viewFlipper.setDisplayedChild(3);
