@@ -1,6 +1,10 @@
 package com.onestopinteractive.promocion;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,15 +15,32 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+;
+
+
 public class Portada extends ActionBarActivity implements View.OnClickListener {
 
     Button siguiente;
     ViewFlipper viewFlipper;
     Button buttonSettings;
     Button buttonGuardar;
+    Button buttonSync ;
     EditText superUbicacion,superNombre,tallaS,tallaM,tallaL,porcentajeGanador;
     TextView nombreSuper,ubicacionSuper;
     String cantidadS,cantidadM,cantidadL,porcentaje;
+    String nombre,email;
+    int cant;
+
+
 
 
 
@@ -30,17 +51,19 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
         setContentView(R.layout.portada);
 
 
+
+
+
+
         viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipperPortada);
         buttonGuardar = (Button) findViewById(R.id.buttonGuardar);
         buttonSettings = (Button) findViewById(R.id.buttonSettings);
+        buttonSync = (Button) findViewById(R.id.buttonSync);
         buttonSettings.setOnClickListener(this);
         buttonGuardar.setOnClickListener(this);
+        buttonSync.setOnClickListener(this);
 
         siguiente = (Button) findViewById(R.id.btnPortada);
-
-
-
-
 
             siguiente.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -97,7 +120,23 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
     public void onClick(View v) {
 
         switch (v.getId()) {
+
+            case R.id.buttonSync:
+                consulta();
+                Thread thread = new Thread(new Runnable(){
+                    @Override
+                    public void run() {
+                        try {
+                            request();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                thread.start();
+                break;
             case R.id.buttonSettings:
+                borrarUltimoRegistro();
                 viewFlipper.setDisplayedChild(1);
                 break;
 
@@ -160,5 +199,79 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
 
         }
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    private StringBuffer request() {
+        // TODO Auto-generated method stub
+
+        StringBuffer chaine = new StringBuffer("");
+        try{
+
+            String urlParameters  = "full_name="+nombre+"&email="+email+"&phone=6645298250&bday=20&bmonth=01&byear=1997";
+            byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
+            int    postDataLength = postData.length;
+            URL url = new URL(" http://promococacola.azteca.click/api/register.php");
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+            connection.setRequestProperty("User-Agent", "");
+            connection.setRequestMethod("POST");
+            connection.setDoInput(true);
+            connection.connect();
+
+
+            try( DataOutputStream wr = new DataOutputStream( connection.getOutputStream())) {
+                wr.write( postData );
+            }
+
+            InputStream inputStream = connection.getInputStream();
+
+            BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream));
+            String line = "";
+            while ((line = rd.readLine()) != null) {
+                chaine.append(line);
+            }
+
+        } catch (IOException e) {
+            // writing exception to log
+            e.printStackTrace();
+        }
+        System.out.println(chaine);
+        return chaine;
+
+    }
+
+    public  void consulta()
+    {
+
+        DataBase admin = new DataBase(this);
+        SQLiteDatabase bd = admin.getWritableDatabase();
+        Cursor fila = bd.rawQuery("SELECT nombre,email FROM Registro where _ID=(SELECT MAX(_ID) FROM Registro)",null);
+        if(fila.moveToFirst())
+        {
+            nombre = fila.getString(0);
+            email = fila.getString(1);
+        }
+        System.out.println(nombre);
+
+        bd.close();
+
+    }
+
+    public  void borrarUltimoRegistro()
+    {
+
+        DataBase admin = new DataBase(this);
+        SQLiteDatabase bd = admin.getWritableDatabase();
+        Cursor fila = bd.rawQuery("SELECT _ID FROM Registro where _ID=(SELECT MAX(_ID) FROM Registro)", null);
+        if(fila.moveToFirst()) {
+            cant = bd.delete("Registro", "_ID=" + fila.getString(0), null);
+        }
+        if (cant ==1 )
+        {
+            Toast.makeText(this,"Se borraron los datos correctamente",Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 }

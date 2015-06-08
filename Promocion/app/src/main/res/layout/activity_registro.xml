@@ -105,6 +105,13 @@
                     android:layout_toLeftOf="@+id/buttonNombre"
                     android:layout_toStartOf="@+id/buttonNombre"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewSQLprueba"
+                    android:layout_alignTop="@+id/textViewUbicacionSPrueba"
+                    android:layout_centerHorizontal="true"/>
+
             </RelativeLayout>
 
 
@@ -252,6 +259,11 @@
                     android:layout_below="@+id/buttonOtro"
                     android:layout_alignLeft="@+id/buttonOtro"
                     android:layout_alignStart="@+id/buttonOtro"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewPruebaFin"/>
 
 
             </RelativeLayout>
@@ -496,6 +508,11 @@
                     android:layout_alignLeft="@+id/buttonVipOtro"
                     android:layout_alignStart="@+id/buttonVipOtro"
                     android:layout_marginTop="33dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textPrueba"/>
 
 
             </RelativeLayout>

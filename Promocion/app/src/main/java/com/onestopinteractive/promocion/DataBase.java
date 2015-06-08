@@ -20,7 +20,7 @@ public class DataBase  extends SQLiteOpenHelper {
 
     public DataBase(Context ctx){
 
-        super(ctx,"Mibase",null,1);
+        super(ctx, "Mibase", null, 1);
 
     }
 
@@ -93,41 +93,4 @@ public class DataBase  extends SQLiteOpenHelper {
         this.close();
     }
 
-    public String leer()
-    {
-        String result = "";
-        String columnas[] = {_ID,"nombreSupervisor","ubicacionSupervisor","nombre","email","telefono","fechaNacimiento","numeroDeTicket",
-                "premio","personalizada","personalizacion","calle","noExterior","noInterior","colonia","ciudad","codigoPostal","estado","timeStamp"};
-        Cursor c = this.getReadableDatabase().query("Registro",columnas,null,null,null,null,null);
-        c.moveToLast();
-        int id,nombre,email,telefono,nombreSupervisor,ubicacionSupervisor,fechaNacimiento,numeroTicket,timeStamp,premio,personalizada,personalizacion,calle,noExterior,noInterior,colonia,ciudad,codigoPostal,estado;
-        id = c.getColumnIndex(_ID);
-        nombreSupervisor = c.getColumnIndex("nombreSupervisor");
-        ubicacionSupervisor = c.getColumnIndex("ubicacionSupervisor");
-        nombre = c.getColumnIndex("nombre");
-        email = c.getColumnIndex("email");
-        telefono = c.getColumnIndex("telefono");
-        fechaNacimiento = c.getColumnIndex("fechaNacimiento");
-        numeroTicket = c.getColumnIndex("numeroDeTicket");
-        premio = c.getColumnIndex("premio");
-        personalizada = c.getColumnIndex("personalizada");
-        personalizacion = c.getColumnIndex("personalizacion");
-        calle = c.getColumnIndex("calle");
-        noExterior = c.getColumnIndex("noExterior");
-        noInterior = c.getColumnIndex("noInterior");
-        colonia = c.getColumnIndex("colonia");
-        ciudad = c.getColumnIndex("ciudad");
-        codigoPostal = c.getColumnIndex("codigoPostal");
-        estado = c.getColumnIndex("estado");
-        timeStamp = c.getColumnIndex("timeStamp");
-
-
-        result = c.getString(id)+" "+c.getString(nombreSupervisor)+" "+c.getString(ubicacionSupervisor)+" "+c.getString(nombre)+" "+c.getString(email)+" "+c.getString(telefono)
-        +" "+c.getString(fechaNacimiento)+" "+c.getString(numeroTicket)+" "+c.getString(premio)+" "+c.getString(personalizada)+" "+c.getString(personalizacion)+" "+c.getString(calle)+" "+c.getString(noExterior)+" "+c.getString(noInterior)+" "+c.getString(colonia)
-                +" "+c.getString(ciudad)+" "+c.getString(codigoPostal)+" "+c.getString(estado)+" "+c.getString(timeStamp);
-
-        return result;
-
-
-    }
 }

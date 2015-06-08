@@ -2,6 +2,9 @@ package com.onestopinteractive.promocion;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,15 +30,18 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
     String ubicacionSupervisor,premio,personalizada;
 
     Supervisor supervisor;
-    TextView nombreSuper,ubicacionSuper;
+    TextView nombreSuper,ubicacionSuper,prueba,pruebaFin;
     Random ganadorAleatorio;
     int ganador;
    int cantidadSmall,cantidadMedium,cantidadLarge,porcentaje;
-
+    DataBase baseDatos;
+    TextView sqlprueba;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        baseDatos = new DataBase(this);
+        sqlprueba = (TextView) findViewById(R.id.textViewSQLprueba);
 
 
 
@@ -137,6 +143,8 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 EditText cNombre= (EditText) findViewById(R.id.editTextNombrePersona);
                 String comNombre = cNombre.getText().toString();
                 int length = comNombre.length();
+
+
 
                 if(length>=4)
                     viewFlipper.setDisplayedChild(1);
@@ -435,6 +443,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         String nombreSupervisor = supervisor.getNombreSupervisor();
         String ubicacionSupervisor = supervisor.getUbicacionSupervisor();
 
+
         //Todos los editText utilizados
         etNombre = (EditText) findViewById(R.id.editTextNombrePersona);
         etEmail = (EditText) findViewById(R.id.editTextEmail);
@@ -466,15 +475,15 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         String estado = etEstado.getText().toString();
         String ticket = etTicket.getText().toString();
 
-        //prueba = (TextView) findViewById(R.id.textPrueba);
-        //prubaFin = (TextView) findViewById(R.id.textViewPruebaFin);
-        DataBase baseDatos = new DataBase(this);
+        prueba = (TextView) findViewById(R.id.textPrueba);
+        pruebaFin= (TextView) findViewById(R.id.textViewPruebaFin);
         baseDatos.abrir();
         baseDatos.insertarReg(nombreSupervisor, ubicacionSupervisor, nombre, email,
                 telefono, fechaNacimiento, ticket, premio, personalizada, frase, calle, noExterior, noInterior, colonia, ciudad, codigoPostal, estado);
-        //prueba.setText(baseDatos.leer());
-       // prubaFin.setText(baseDatos.leer());
         baseDatos.cerrar();
+
+
+
 
         etNombre.setText("");
         etEmail.setText("");
@@ -494,6 +503,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
         Toast.makeText(Registro.this,"Se guardo el registro",Toast.LENGTH_SHORT).show();
     }
+
 
 
 }

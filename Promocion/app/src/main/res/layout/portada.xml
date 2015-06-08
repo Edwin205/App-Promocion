@@ -96,6 +96,19 @@
                     android:layout_below="@+id/textViewUbi"
                     android:layout_centerHorizontal="true"/>
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sync"
+                    android:id="@+id/buttonSync"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/textViewUbi"
+                    android:layout_toStartOf="@+id/textViewUbi"
+                    android:background="#ff000000"
+                    android:textSize="17dp"
+                    android:textColor="#fff"
+                    android:textStyle="bold"/>
+
             </RelativeLayout>
 
             <RelativeLayout
