@@ -63,21 +63,6 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"/>
 
-                <Button
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Settings"
-                    android:id="@+id/buttonSettings"
-                    android:textColor="@android:color/white"
-                    android:background="#ff000000"
-                    android:textStyle="bold"
-                    android:textSize="17sp"
-                    android:layout_below="@+id/btnPortada"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="60dp"/>
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -96,18 +81,30 @@
                     android:layout_below="@+id/textViewUbi"
                     android:layout_centerHorizontal="true"/>
 
-                <Button
+                <ImageButton
+                    android:src="@drawable/sync"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sync"
                     android:id="@+id/buttonSync"
                     android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@+id/textViewSuper"
+                    android:background="#000"
+                    android:layout_toLeftOf="@+id/textViewSuper"/>
+
+                <ImageButton
+                    android:src="@drawable/settings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buttonSettings"
+                    android:background="#000"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
                     android:layout_toLeftOf="@+id/textViewUbi"
-                    android:layout_toStartOf="@+id/textViewUbi"
-                    android:background="#ff000000"
-                    android:textSize="17dp"
-                    android:textColor="#fff"
-                    android:textStyle="bold"/>
+                    android:layout_toStartOf="@+id/textViewUbi"/>
+
 
             </RelativeLayout>
 

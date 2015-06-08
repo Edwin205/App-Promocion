@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -31,9 +32,9 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
     Button siguiente;
     ViewFlipper viewFlipper;
-    Button buttonSettings;
+    ImageButton buttonSettings;
     Button buttonGuardar;
-    Button buttonSync ;
+    ImageButton buttonSync ;
     EditText superUbicacion,superNombre,tallaS,tallaM,tallaL,porcentajeGanador;
     TextView nombreSuper,ubicacionSuper;
     String cantidadS,cantidadM,cantidadL,porcentaje;
@@ -57,8 +58,8 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
         viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipperPortada);
         buttonGuardar = (Button) findViewById(R.id.buttonGuardar);
-        buttonSettings = (Button) findViewById(R.id.buttonSettings);
-        buttonSync = (Button) findViewById(R.id.buttonSync);
+        buttonSettings = (ImageButton) findViewById(R.id.buttonSettings);
+        buttonSync = (ImageButton) findViewById(R.id.buttonSync);
         buttonSettings.setOnClickListener(this);
         buttonGuardar.setOnClickListener(this);
         buttonSync.setOnClickListener(this);

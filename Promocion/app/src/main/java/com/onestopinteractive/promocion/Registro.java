@@ -33,9 +33,12 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
     TextView nombreSuper,ubicacionSuper,prueba,pruebaFin;
     Random ganadorAleatorio;
     int ganador;
-   int cantidadSmall,cantidadMedium,cantidadLarge,porcentaje;
+    int cantidadSmall,cantidadMedium,cantidadLarge,porcentaje;
     DataBase baseDatos;
     TextView sqlprueba;
+    int diaI,mesI,anoI;
+    String diaS,mesS,anoS;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,15 +146,10 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 EditText cNombre= (EditText) findViewById(R.id.editTextNombrePersona);
                 String comNombre = cNombre.getText().toString();
                 int length = comNombre.length();
-
-
-
                 if(length>=4)
                     viewFlipper.setDisplayedChild(1);
-
                 else
                     Toast.makeText(Registro.this, "Ingresa tu nombre completo", Toast.LENGTH_SHORT).show();
-
                 break;
 
             case R.id.buttonEmail:
@@ -195,24 +193,54 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
 
             case R.id.buttonFechaNaci:
-                viewFlipper.setDisplayedChild(17);
-                break;
+                EditText dia = (EditText) findViewById(R.id.editTextDia);
+                EditText mes = (EditText) findViewById(R.id.editTextMes);
+                EditText ano = (EditText) findViewById(R.id.editTextAno);
+                diaS = dia.getText().toString();
+                mesS = mes.getText().toString();
+                anoS = ano.getText().toString();
+                int diaL= diaS.length();
+                int mesL = mesS.length();
+                int anoL = anoS.length();
 
-            case R.id.buttonSuerte:
+                if(diaS.equals(""))
+                    Toast.makeText(Registro.this,"Coloca un dia.",Toast.LENGTH_SHORT).show();
 
-                ganadorAleatorio = new Random();
-                ganador = 1+ganadorAleatorio.nextInt(porcentaje);
+                else if(mesS.equals(""))
+                    Toast.makeText(Registro.this,"Coloca un mes.",Toast.LENGTH_SHORT).show();
 
-                if(ganador == porcentaje) {
-                    viewFlipper.setDisplayedChild(7);
-                    premio = "Gano playera";
+                else if(anoS.equals(""))
+                    Toast.makeText(Registro.this, "Coloca un año.", Toast.LENGTH_SHORT).show();
 
+                else if(diaL<2)
+                    Toast.makeText(Registro.this,"Ingresa un dia valido.",Toast.LENGTH_SHORT).show();
+
+                else if(mesL<2)
+                    Toast.makeText(Registro.this,"Ingresa un mes valido.",Toast.LENGTH_SHORT).show();
+
+                else if(anoL<4)
+                    Toast.makeText(Registro.this, "Ingresa un año valido.", Toast.LENGTH_SHORT).show();
+
+                else
+                {
+                    validacionFecha();
                 }
-                else {
-                    viewFlipper.setDisplayedChild(6);
-                    premio = "Experiencia VIP";
-                    alta();
-                }
+                    break;
+                    case R.id.buttonSuerte:
+
+                        ganadorAleatorio = new Random();
+                        ganador = 1 + ganadorAleatorio.nextInt(porcentaje);
+
+                        if (ganador == porcentaje) {
+                            viewFlipper.setDisplayedChild(7);
+                            premio = "Gano playera";
+
+                        } else {
+                            viewFlipper.setDisplayedChild(6);
+                            premio = "Experiencia VIP";
+                            alta();
+                        }
+
 
                 break;
 
@@ -504,6 +532,23 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         Toast.makeText(Registro.this,"Se guardo el registro",Toast.LENGTH_SHORT).show();
     }
 
+    public  void validacionFecha() {
+        diaI = Integer.parseInt(diaS);
+        mesI = Integer.parseInt(mesS);
+        anoI = Integer.parseInt(anoS);
 
+
+
+        if (diaI > 0 && diaI < 32 && mesI > 0 && mesI<13 && anoI >1900 && anoI<2016) {
+            viewFlipper.setDisplayedChild(17);
+        }
+
+        else
+            Toast.makeText(Registro.this, "Ingresa una fecha valida", Toast.LENGTH_SHORT).show();
+
+
+        
+
+    }
 
 }
