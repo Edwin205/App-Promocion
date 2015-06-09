@@ -334,6 +334,10 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
                 break;
 
+            case R.id.buttonSI:
+                viewFlipper.setDisplayedChild(9);
+                break;
+
 
             case R.id.buttonNO:
                 viewFlipper.setDisplayedChild(3);
@@ -547,7 +551,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
             Toast.makeText(Registro.this, "Ingresa una fecha valida", Toast.LENGTH_SHORT).show();
 
 
-        
+
 
     }
 

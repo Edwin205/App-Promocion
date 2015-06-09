@@ -43,9 +43,6 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,7 +125,11 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                     @Override
                     public void run() {
                         try {
-                            request();
+                            String x = request().toString();
+                            System.out.println("El valor que retorna es: " + x);
+                            if(x.equals("OK")) {
+                                borrarUltimoRegistro();
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -137,7 +138,6 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                 thread.start();
                 break;
             case R.id.buttonSettings:
-                borrarUltimoRegistro();
                 viewFlipper.setDisplayedChild(1);
                 break;
 
@@ -238,6 +238,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
             e.printStackTrace();
         }
         System.out.println(chaine);
+
         return chaine;
 
     }
@@ -268,11 +269,6 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
         if(fila.moveToFirst()) {
             cant = bd.delete("Registro", "_ID=" + fila.getString(0), null);
         }
-        if (cant ==1 )
-        {
-            Toast.makeText(this,"Se borraron los datos correctamente",Toast.LENGTH_SHORT).show();
-        }
-
-
+        Toast.makeText(Portada.this,"Se borraron los datos correctamente",Toast.LENGTH_SHORT).show();
     }
 }
