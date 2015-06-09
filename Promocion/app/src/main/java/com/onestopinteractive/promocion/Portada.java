@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.TextPaint;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,34 +73,32 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                     String nombreSuperv = nombreSuper.getText().toString();
                     boolean darError = true;
 
-                   if(nombreSuperv != "" && ubicacionSuperv != "")
-                       darError = false;
+                    if (nombreSuperv != "" && ubicacionSuperv != "")
+                        darError = false;
 
                     else
-                   Toast.makeText(Portada.this,"Ingresa tus datos antes de continuar.",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Portada.this, "Ingresa tus datos antes de continuar.", Toast.LENGTH_SHORT).show();
 
-                    if(darError == false) {
+                    if (darError == false) {
 
                         tallaS = (EditText) findViewById(R.id.editTextSmall);
                         tallaM = (EditText) findViewById(R.id.editTextMediuem);
                         tallaL = (EditText) findViewById(R.id.editTextLarge);
                         porcentajeGanador = (EditText) findViewById(R.id.editTextPorcentaje);
 
-                         cantidadS = tallaS.getText().toString();
-                         cantidadM = tallaM.getText().toString();
-                         cantidadL = tallaL.getText().toString();
-                         porcentaje = porcentajeGanador.getText().toString();
+                        cantidadS = tallaS.getText().toString();
+                        cantidadM = tallaM.getText().toString();
+                        cantidadL = tallaL.getText().toString();
+                        porcentaje = porcentajeGanador.getText().toString();
 
 
-
-
-                        Intent intent = new Intent(Portada.this,Registro.class);
-                        intent.putExtra("cantidadS",cantidadS);
-                        intent.putExtra("cantidadM",cantidadM);
-                        intent.putExtra("cantidadL",cantidadL);
-                        intent.putExtra("porcentaje",porcentaje);
-                        intent.putExtra("nombreSupervisor",nombreSuperv);
-                        intent.putExtra("ubicacionSupervisor",ubicacionSuperv);
+                        Intent intent = new Intent(Portada.this, Registro.class);
+                        intent.putExtra("cantidadS", cantidadS);
+                        intent.putExtra("cantidadM", cantidadM);
+                        intent.putExtra("cantidadL", cantidadL);
+                        intent.putExtra("porcentaje", porcentaje);
+                        intent.putExtra("nombreSupervisor", nombreSuperv);
+                        intent.putExtra("ubicacionSupervisor", ubicacionSuperv);
                         startActivity(intent);
                     }
 
@@ -112,7 +111,54 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
 
 
+    Thread thread;
 
+    private void enviarRegistro(){
+        thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try {
+                    if(consulta()) {
+                        String x = request().toString();
+
+                        if (x.equals("OK")) {
+                            runOnUiThread(new Runnable()
+                            {
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(), "Espera un momento sincronizando registros.", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            borrarUltimoRegistro();
+                            run();
+                        } else {
+                            //Error en el servidor
+                            runOnUiThread(new Runnable()
+                            {
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(), "No hay conexion a internet vuelve a intentar.", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }else{
+                        // Cuando no hay nada en la BD
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(getApplicationContext(), "Ya no hay registros que sincronizar.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+
+    }
+
+    private void mostrarToast(String msg){
+        Toast.makeText(Portada.this,msg, Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     public void onClick(View v) {
@@ -120,22 +166,9 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
         switch (v.getId()) {
 
             case R.id.buttonSync:
-                consulta();
-                Thread thread = new Thread(new Runnable(){
-                    @Override
-                    public void run() {
-                        try {
-                            String x = request().toString();
-                            System.out.println("El valor que retorna es: " + x);
-                            if(x.equals("OK")) {
-                                borrarUltimoRegistro();
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-                thread.start();
+                enviarRegistro();
+
+
                 break;
             case R.id.buttonSettings:
                 viewFlipper.setDisplayedChild(1);
@@ -243,21 +276,25 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
     }
 
-    public  void consulta()
-    {
-
+    public boolean consulta() {
+        boolean hayDatos = false;
+        nombre = "";
+        email = "";
         DataBase admin = new DataBase(this);
         SQLiteDatabase bd = admin.getWritableDatabase();
         Cursor fila = bd.rawQuery("SELECT nombre,email FROM Registro where _ID=(SELECT MAX(_ID) FROM Registro)",null);
-        if(fila.moveToFirst())
-        {
+        if(fila.moveToFirst()) {
+            hayDatos = true;
             nombre = fila.getString(0);
             email = fila.getString(1);
+        }else{
+            hayDatos = false;
         }
         System.out.println(nombre);
 
-        bd.close();
 
+        bd.close();
+        return hayDatos;
     }
 
     public  void borrarUltimoRegistro()
@@ -269,6 +306,5 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
         if(fila.moveToFirst()) {
             cant = bd.delete("Registro", "_ID=" + fila.getString(0), null);
         }
-        Toast.makeText(Portada.this,"Se borraron los datos correctamente",Toast.LENGTH_SHORT).show();
     }
 }

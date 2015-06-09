@@ -295,7 +295,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
 
                 if(cantidadMedium == 1) {
-                    Toast.makeText(Registro.this, "Es la ultima playera medianas", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Es la ultima playera mediana", Toast.LENGTH_SHORT).show();
                     viewFlipper.setDisplayedChild(8);
                     cantidadMedium -= 1;
                 }
@@ -317,7 +317,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
 
                 if(cantidadLarge == 1) {
-                    Toast.makeText(Registro.this, "Es la ultima playera grandes", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Es la ultima playera grande", Toast.LENGTH_SHORT).show();
                     viewFlipper.setDisplayedChild(8);
                     cantidadLarge -= 1;
                 }
