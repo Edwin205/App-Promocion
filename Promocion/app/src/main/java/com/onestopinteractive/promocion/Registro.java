@@ -21,23 +21,24 @@ import java.util.Random;
 public class Registro extends ActionBarActivity implements View.OnClickListener {
 
     ViewFlipper viewFlipper;
-    Button btnNombre,btnEmail,btnTelefono,btnFechaNaci,btnOtro,btnFinalizar
-            ,btnOtroVip,btnFinalizarVIp,btnSuerte,btnS,btnM,btnL,btnSI
-            ,btnNO,btnSigPersonalizada,btnCalle,btnExterior,btnInterior,btnColonia,btnCiudad,btnCodigoPostal,btnEstado,btnTicket,btnSifin,btnNOfin;
+    Button btnNombre,btnApellidos,btnEmail,btnTelefono,btnFechaNaci,btnOtro,btnFinalizar
+            ,btnOtroVip,btnFinalizarVIp,btnSuerte,btnS,btnL,btnSI
+            ,btnNO,btnSigPersonalizada,btnDelegacion,btnCalle,btnExterior,btnInterior,btnColonia,btnCiudad,btnCodigoPostal,btnEstado,btnTicket,btnSifin,btnNOfin;
 
-    EditText etNombre,etEmail,etTelefono,etDia,etMes,etAno,etFrase,etCalle,etExterior,etInterior,etColonia ,etCiudad,etCodigoPostal,etEstado,etTicket;
+    EditText etNombre,etApellidos,etEmail,etTelefono,etDia,etMes,etAno,etFrase,etCalle,etExterior,etInterior,etColonia ,etCiudad,etCodigoPostal,etEstado,etDelegacion,etTicket;
     String nombreSupervisor;
-    String ubicacionSupervisor,premio,personalizada;
+    String ubicacionSupervisor,premio;
 
     Supervisor supervisor;
     TextView nombreSuper,ubicacionSuper,prueba,pruebaFin;
     Random ganadorAleatorio;
     int ganador;
-    int cantidadSmall,cantidadMedium,cantidadLarge,porcentaje;
+    int cantidadSmall,cantidadLarge,porcentaje;
     DataBase baseDatos;
     TextView sqlprueba;
     int diaI,mesI,anoI;
     String diaS,mesS,anoS;
+    String medida;
 
 
     @Override
@@ -45,6 +46,8 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         baseDatos = new DataBase(this);
         sqlprueba = (TextView) findViewById(R.id.textViewSQLprueba);
+
+        medida = "";
 
 
 
@@ -60,7 +63,6 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         btnFinalizarVIp = (Button) findViewById(R.id.buttonVipFinalizar);
         btnSuerte = (Button) findViewById(R.id.buttonSuerte);
         btnS = (Button) findViewById(R.id.buttonSmall);
-        btnM = (Button) findViewById(R.id.buttonMedium);
         btnL = (Button) findViewById(R.id.buttonLarge);
         btnSI = (Button) findViewById(R.id.buttonSI);
         btnNO = (Button) findViewById(R.id.buttonNO);
@@ -75,6 +77,8 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         btnTicket =(Button) findViewById(R.id.buttonTicket);
         btnNOfin = (Button) findViewById(R.id.buttonNOSeguro);
         btnSifin = (Button) findViewById(R.id.buttonSiSeg);
+        btnApellidos = (Button) findViewById(R.id.buttonApellidos);
+        btnDelegacion = (Button) findViewById(R.id.buttonDelegacion);
 
         //El viewFlipper
         viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
@@ -82,7 +86,6 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
         Intent intent = getIntent();
         cantidadSmall = Integer.parseInt(intent.getStringExtra("cantidadS"));
-        cantidadMedium = Integer.parseInt(intent.getStringExtra("cantidadM"));
         cantidadLarge = Integer.parseInt(intent.getStringExtra("cantidadL"));
         nombreSupervisor = intent.getStringExtra("nombreSupervisor");
         ubicacionSupervisor = intent.getStringExtra("ubicacionSupervisor");
@@ -111,7 +114,6 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         btnFinalizarVIp.setOnClickListener(this);
         btnSuerte.setOnClickListener(this);
         btnS.setOnClickListener(this);
-        btnM.setOnClickListener(this);
         btnL.setOnClickListener(this);
         btnSI.setOnClickListener(this);
         btnNO.setOnClickListener(this);
@@ -126,8 +128,10 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         btnTicket.setOnClickListener(this);
         btnNOfin.setOnClickListener(this);
         btnSifin.setOnClickListener(this);
+        btnApellidos.setOnClickListener(this);
+        btnDelegacion.setOnClickListener(this);
 
-        personalizada = "";
+
 
 
 
@@ -147,9 +151,21 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 String comNombre = cNombre.getText().toString();
                 int length = comNombre.length();
                 if(length>=4)
+                    viewFlipper.setDisplayedChild(19);
+                else
+                    Toast.makeText(Registro.this, "Ingresa tu nombre completo.", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.buttonApellidos:
+
+                EditText cApellidos= (EditText) findViewById(R.id.editTextApellidosPersona);
+                String comApellidos = cApellidos.getText().toString();
+                int lengtha = comApellidos.length();
+                if(lengtha>=4)
                     viewFlipper.setDisplayedChild(1);
                 else
-                    Toast.makeText(Registro.this, "Ingresa tu nombre completo", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Ingresa tu apellido completo.", Toast.LENGTH_SHORT).show();
+
                 break;
 
             case R.id.buttonEmail:
@@ -163,7 +179,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 {
                     valor = comEmial.charAt(i);
                     if(valor == '@' && i == 0){
-                        Toast.makeText(Registro.this, "Escribe un correo valido", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Registro.this, "Escribe un correo valido.", Toast.LENGTH_SHORT).show();
                         break;
                     }
                     if(valor == '@')
@@ -172,7 +188,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                         break;
                     }
                     else if(i == longitud-1){
-                        Toast.makeText(Registro.this, "Escribe un correo valido", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Registro.this, "Escribe un correo valido.", Toast.LENGTH_SHORT).show();
                         break;
                     }
                 }
@@ -188,7 +204,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                     viewFlipper.setDisplayedChild(4);
 
                 else
-                    Toast.makeText(Registro.this, "Ingresa un numero de telefono valido", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Ingresa un numero de telefono valido.", Toast.LENGTH_SHORT).show();
                 break;
 
 
@@ -233,11 +249,11 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
                         if (ganador == porcentaje) {
                             viewFlipper.setDisplayedChild(7);
-                            premio = "Gano playera";
+                            premio = "playera";
 
                         } else {
                             viewFlipper.setDisplayedChild(6);
-                            premio = "Experiencia VIP";
+                            premio = "vip";
                             alta();
                         }
 
@@ -272,64 +288,43 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
             case R.id.buttonSmall:
 
-
-
+                medida = "S/M";
                 if(cantidadSmall == 1) {
-                    Toast.makeText(Registro.this, "Es la ultima playera chica", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Es la ultima playera M/S.", Toast.LENGTH_SHORT).show();
                     viewFlipper.setDisplayedChild(8);
                     cantidadSmall -= 1;
                 }
 
                 else if(cantidadSmall<=0)
-                    Toast.makeText(Registro.this,"Ya no quedan mas playeras chica",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this,"Ya no quedan mas playeras M/S.",Toast.LENGTH_SHORT).show();
 
                 else {
                     viewFlipper.setDisplayedChild(8);
-                    Toast.makeText(Registro.this,"Quedan"+cantidadSmall+" "+"playeras chicas",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this,"Quedan"+cantidadSmall+" "+"playeras S/M.",Toast.LENGTH_SHORT).show();
                     cantidadSmall -= 1;
-                }
-
-                break;
-
-            case R.id.buttonMedium:
-
-
-                if(cantidadMedium == 1) {
-                    Toast.makeText(Registro.this, "Es la ultima playera mediana", Toast.LENGTH_SHORT).show();
-                    viewFlipper.setDisplayedChild(8);
-                    cantidadMedium -= 1;
-                }
-
-                else if(cantidadMedium<=0)
-                    Toast.makeText(Registro.this,"Ya no quedan mas playeras medianas",Toast.LENGTH_SHORT).show();
-
-                else {
-
-                    viewFlipper.setDisplayedChild(8);
-                    cantidadMedium -= 1;
-                    Toast.makeText(Registro.this,"Quedan"+cantidadMedium+" "+"playeras medianas",Toast.LENGTH_SHORT).show();
                 }
 
                 break;
 
 
             case R.id.buttonLarge:
+                medida="XL/L";
 
 
                 if(cantidadLarge == 1) {
-                    Toast.makeText(Registro.this, "Es la ultima playera grande", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Es la ultima playera XL/L.", Toast.LENGTH_SHORT).show();
                     viewFlipper.setDisplayedChild(8);
                     cantidadLarge -= 1;
                 }
 
                 else if(cantidadLarge<=0)
-                    Toast.makeText(Registro.this,"Ya no quedan mas playeras grandes",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this,"Ya no quedan mas playeras XL/L.",Toast.LENGTH_SHORT).show();
 
                 else {
 
                     viewFlipper.setDisplayedChild(8);
                     cantidadLarge -= 1;
-                    Toast.makeText(Registro.this,"Quedan"+cantidadLarge+" "+"playeras grandes",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this,"Quedan"+cantidadLarge+" "+"playeras XL/L.",Toast.LENGTH_SHORT).show();
                 }
 
                 break;
@@ -341,7 +336,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
             case R.id.buttonNO:
                 viewFlipper.setDisplayedChild(3);
-                personalizada = "No";
+
                 alta();
                 break;
 
@@ -355,8 +350,8 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                     viewFlipper.setDisplayedChild(10);
 
                 else
-                    Toast.makeText(Registro.this, "Ingresa tu nombre completo", Toast.LENGTH_SHORT).show();
-                
+                    Toast.makeText(Registro.this, "Ingresa tu nombre completo.", Toast.LENGTH_SHORT).show();
+
                 break;
 
             case R.id.buttonCalle:
@@ -368,7 +363,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                     viewFlipper.setDisplayedChild(11);
 
                 else
-                    Toast.makeText(Registro.this, "Ingresa una calle correcta", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Ingresa una calle correcta.", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.buttonExterior:
@@ -380,7 +375,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                     viewFlipper.setDisplayedChild(12);
 
                 else
-                    Toast.makeText(Registro.this, "Ingresa un numero correcto", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Ingresa un numero correcto.", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.buttonInterior:
@@ -392,7 +387,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                     viewFlipper.setDisplayedChild(13);
 
                 else
-                    Toast.makeText(Registro.this, "Ingresa un numero correcto", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Ingresa un numero correcto.", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.buttonColonia:
@@ -404,7 +399,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                     viewFlipper.setDisplayedChild(14);
 
                 else
-                    Toast.makeText(Registro.this, "Ingresa una colonia correcta", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Ingresa una colonia correcta.", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.buttonCiudad:
@@ -416,7 +411,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                     viewFlipper.setDisplayedChild(15);
 
                 else
-                    Toast.makeText(Registro.this, "Ingresa una ciudad correcta", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Ingresa una ciudad correcta.", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.buttonCodigoPostal:
@@ -428,7 +423,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                     viewFlipper.setDisplayedChild(16);
 
                 else
-                    Toast.makeText(Registro.this, "Ingresa un codigo postal correcto", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Ingresa un codigo postal correcto.", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.buttonEstado:
@@ -437,16 +432,27 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 EditText cEstado= (EditText) findViewById(R.id.editTextEstado);
                 String comEstado = cEstado.getText().toString();
                 int lenghtEst = comEstado.length();
-
                 if(lenghtEst>=4){
+                    viewFlipper.setDisplayedChild(20);
+                }
+                else
+                    Toast.makeText(Registro.this, "Ingresa un estado correcto.", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.buttonDelegacion:
+                EditText cDelegacion= (EditText) findViewById(R.id.editTextEstado);
+                String comDelegacion = cDelegacion.getText().toString();
+                int lenghtDel = comDelegacion.length();
+
+                if(lenghtDel>=4){
                     InputMethodManager inputM = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputM.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
                     alta();
                     viewFlipper.setDisplayedChild(3);
-                    Toast.makeText(Registro.this, "Se completo el registro", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Se completo el registro.", Toast.LENGTH_SHORT).show();
                 }
                 else
-                    Toast.makeText(Registro.this, "Ingresa un estado correcto", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Ingresa un Municipio o delegacion correcta.", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.buttonTicket:
@@ -464,7 +470,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 }
 
                 else
-                    Toast.makeText(Registro.this, "Ingresa un numero de ticket correcto", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Ingresa un numero de ticket correcto.", Toast.LENGTH_SHORT).show();
 
                 break;
         }
@@ -478,6 +484,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
         //Todos los editText utilizados
         etNombre = (EditText) findViewById(R.id.editTextNombrePersona);
+        etApellidos = (EditText) findViewById(R.id.editTextApellidosPersona);
         etEmail = (EditText) findViewById(R.id.editTextEmail);
         etTelefono = (EditText) findViewById(R.id.editTextTelefono);
         etDia = (EditText) findViewById(R.id.editTextDia);
@@ -491,12 +498,16 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         etCiudad = (EditText) findViewById(R.id.editTextCiudad);
         etCodigoPostal = (EditText) findViewById(R.id.editTextCodigoPostal);
         etEstado = (EditText) findViewById(R.id.editTextEstado);
+        etDelegacion = (EditText) findViewById(R.id.editTextDelegacion);
         etTicket =(EditText) findViewById(R.id.editTextTicket);
 
         String nombre = etNombre.getText().toString();
+        String apellidos =  etApellidos.getText().toString();
         String email = etEmail.getText().toString();
         String telefono =etTelefono.getText().toString();
-        String fechaNacimiento = etDia.getText().toString()+"/"+etMes.getText().toString()+"/"+etAno.getText().toString();
+        String dia = etDia.getText().toString();
+        String mes = etMes.getText().toString();
+        String ano = etAno.getText().toString();
         String frase = etFrase.getText().toString();
         String calle = etCalle.getText().toString();
         String noExterior  = etExterior.getText().toString();
@@ -505,13 +516,14 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         String ciudad = etCiudad.getText().toString();
         String codigoPostal = etCodigoPostal.getText().toString();
         String estado = etEstado.getText().toString();
+        String delegacion = etDelegacion.getText().toString();
         String ticket = etTicket.getText().toString();
 
         prueba = (TextView) findViewById(R.id.textPrueba);
         pruebaFin= (TextView) findViewById(R.id.textViewPruebaFin);
         baseDatos.abrir();
-        baseDatos.insertarReg(nombreSupervisor, ubicacionSupervisor, nombre, email,
-                telefono, fechaNacimiento, ticket, premio, personalizada, frase, calle, noExterior, noInterior, colonia, ciudad, codigoPostal, estado);
+        baseDatos.insertarReg(nombreSupervisor, ubicacionSupervisor, nombre, apellidos, email,
+                telefono, dia, mes, ano, ticket, premio,medida,frase, calle, noExterior, noInterior, colonia, ciudad, codigoPostal, estado, delegacion);
         baseDatos.cerrar();
 
 
@@ -532,8 +544,10 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         etCodigoPostal.setText("");
         etEstado.setText("");
         etTicket.setText("");
+        etApellidos.setText("");
+        etDelegacion.setText("");
 
-        Toast.makeText(Registro.this,"Se guardo el registro",Toast.LENGTH_SHORT).show();
+        Toast.makeText(Registro.this,"Se guardo el registro.",Toast.LENGTH_SHORT).show();
     }
 
     public  void validacionFecha() {
@@ -541,14 +555,16 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         mesI = Integer.parseInt(mesS);
         anoI = Integer.parseInt(anoS);
 
+        if(anoI>2000)
+            Toast.makeText(Registro.this, "Solo mayores de 16 años pueden participar.", Toast.LENGTH_SHORT).show();
 
 
-        if (diaI > 0 && diaI < 32 && mesI > 0 && mesI<13 && anoI >1900 && anoI<2016) {
+        else if (diaI > 0 && diaI < 32 && mesI > 0 && mesI<13 && anoI >1900 && anoI<2016) {
             viewFlipper.setDisplayedChild(17);
         }
 
         else
-            Toast.makeText(Registro.this, "Ingresa una fecha valida", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Registro.this, "Ingresa una fecha valida.", Toast.LENGTH_SHORT).show();
 
 
 

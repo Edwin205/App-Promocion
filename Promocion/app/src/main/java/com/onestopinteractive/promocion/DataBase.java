@@ -5,8 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.format.Time;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -30,8 +32,8 @@ public class DataBase  extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String Query = "create table Registro(" + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "nombreSupervisor TEXT, ubicacionSupervisor TEXT, nombre TEXT, email TEXT, telefono TEXT," +
-                "fechaNacimiento TEXT,numeroDeTicket TEXT,premio TEXT,personalizada TEXT,personalizacion TEXT,calle TEXT,noExterior TEXT,noInterior TEXT,colonia TEXT,ciudad TEXT,codigoPostal TEXT,estado TEXT,timeStamp TEXT)";
+                + "nombreSupervisor TEXT, ubicacionSupervisor TEXT, nombre TEXT,apellidos TEXT, email TEXT, telefono TEXT," +
+                "dia TEXT,mes TEXT,ano TEXT,numeroDeTicket TEXT,premio TEXT,medida TEXT,personalizacion TEXT,calle TEXT,noExterior TEXT,noInterior TEXT,colonia TEXT,ciudad TEXT,codigoPostal TEXT,estado TEXT,delegacion TEXT,timeStamp TEXT)";
 
         db.execSQL(Query);
     }
@@ -41,14 +43,14 @@ public class DataBase  extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int versionAnte, int versionNue) {
         db.execSQL("drop table if exists Registro");
         db.execSQL("create table Registro(" + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "nombreSupervisor TEXT, ubicacionSupervisor TEXT, nombre TEXT, email TEXT, telefono TEXT," +
-                "fechaNacimiento TEXT,numeroDeTicket TEXT,premio TEXT,personalizada TEXT,personalizacion TEXT,calle TEXT,noExterior TEXT,noInterior TEXT,colonia TEXT,ciudad TEXT,codigoPostal TEXT,estado TEXT,timeStamp TEXT)");
+                + "nombreSupervisor TEXT, ubicacionSupervisor TEXT, nombre TEXT,apellidos TEXT,email TEXT, telefono TEXT," +
+                "dia TEXT,mes TEXT,ano TEXT,numeroDeTicket TEXT,premio TEXT,medida TEXT,personalizacion TEXT,calle TEXT,noExterior TEXT,noInterior TEXT,colonia TEXT,ciudad TEXT,codigoPostal TEXT,estado TEXT,delegacion TEXT,timeStamp TEXT)");
 
     }
 
     public void insertarReg(String nombreSupervisor,String ubicacionSupervisor,
-                            String nombre,String email,
-                            String telefono,String fechaNacimiento,String numeroTicket,String premio,String personalizada,String personalizacion,String calle,String noExterior,String noInterior,String colonia,String ciudad,String codigoPostal
+                            String nombre,String apellidos,String email,
+                            String telefono,String dia,String mes,String ano,String numeroTicket,String premio,String medida,String personalizacion,String calle,String noExterior,String noInterior,String colonia,String ciudad,String delegacion,String codigoPostal
                           ,String estado)
     {
         ContentValues valores = new ContentValues();
@@ -56,12 +58,15 @@ public class DataBase  extends SQLiteOpenHelper {
         valores.put("nombreSupervisor",nombreSupervisor);
         valores.put("ubicacionSupervisor",ubicacionSupervisor);
         valores.put("nombre",nombre);
+        valores.put("apellidos",apellidos);
         valores.put("email",email);
         valores.put("telefono", telefono);
-        valores.put("fechaNacimiento",fechaNacimiento);
+        valores.put("dia",dia);
+        valores.put("mes",mes);
+        valores.put("ano",ano);
         valores.put("numeroDeTicket",numeroTicket);
         valores.put("premio",premio);
-        valores.put("personalizada",personalizada);
+        valores.put("medida",medida);
         valores.put("personalizacion",personalizacion);
         valores.put("calle",calle);
         valores.put("noExterior",noExterior);
@@ -70,6 +75,7 @@ public class DataBase  extends SQLiteOpenHelper {
         valores.put("ciudad",ciudad);
         valores.put("codigoPostal",codigoPostal);
         valores.put("estado",estado);
+        valores.put("delegacion",delegacion);
         valores.put("timeStamp",getDateTime());
         this.getWritableDatabase().insert("Registro", null, valores);
 
@@ -77,10 +83,13 @@ public class DataBase  extends SQLiteOpenHelper {
     }
 
     private String getDateTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-        Date date = new Date();
-        return dateFormat.format(date);
+        Date time = new Date();
+
+        long unixTime = time.getTime() / 1000;
+
+        String Date = Long.toString(unixTime);
+
+        return  Date;
     }
 
     public  void abrir()

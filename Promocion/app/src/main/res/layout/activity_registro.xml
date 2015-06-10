@@ -138,7 +138,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Correo"
+                    android:text="Correo "
                     android:id="@+id/textViewEmail"
                     android:layout_marginTop="24dp"
                     android:textSize="40sp"
@@ -154,7 +154,7 @@
                     android:ems="10"
                     android:id="@+id/editTextEmail"
                     android:layout_marginTop="28dp"
-                    android:hint="Correo Electronico*"
+                    android:hint="Correo electrónico*"
                     android:textColor="#fff"
                     android:textColorHint="#fff"
                     android:layout_below="@+id/textViewEmail"
@@ -188,7 +188,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Telèfono"
+                    android:text="Teléfono"
                     android:id="@+id/textViewTelefono"
                     android:layout_marginTop="24dp"
                     android:textSize="40sp"
@@ -236,7 +236,7 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Otro"
+                    android:text="Nuevo participante"
                     android:id="@+id/buttonOtro"
                     android:layout_marginTop="70dp"
                     android:background="#ff000000"
@@ -249,16 +249,15 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Finalizar"
+                    android:text="Salir"
                     android:id="@+id/buttonFinalizar"
                     android:background="#ff000000"
                     android:textStyle="bold"
                     android:textColor="#fff"
                     android:textSize="17sp"
-                    android:layout_marginTop="42dp"
+                    android:layout_marginTop="75dp"
                     android:layout_below="@+id/buttonOtro"
-                    android:layout_alignLeft="@+id/buttonOtro"
-                    android:layout_alignStart="@+id/buttonOtro"/>
+                    android:layout_centerHorizontal="true"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -427,7 +426,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="¡Prueba tu Suerte!"
+                    android:text="¡Prueba tu suerte!"
                     android:id="@+id/textViewSuerte"
                     android:layout_marginTop="24dp"
                     android:textSize="35sp"
@@ -437,18 +436,20 @@
                     android:textStyle="bold"/>
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="¡Presiona y Suerte!"
+                    android:text="Presiona aqui"
                     android:id="@+id/buttonSuerte"
                     android:textSize="40sp"
                     android:textColor="@android:color/white"
                     android:background="#ff000000"
-                    android:layout_marginTop="137dp"
+                    android:textStyle="bold"
                     android:layout_below="@+id/textViewSuerte"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:textStyle="bold"/>
+                    android:layout_marginTop="149dp"
+                    android:layout_alignLeft="@+id/textViewSuerte"
+                    android:layout_alignStart="@+id/textViewSuerte"
+                    android:layout_alignRight="@+id/textViewSuerte"
+                    android:layout_alignEnd="@+id/textViewSuerte"/>
 
 
             </RelativeLayout>
@@ -461,53 +462,41 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Participaste"
+                    android:text="¡Ya estás participando para la experiencia futbolera!"
                     android:id="@+id/textViewVip"
                     android:layout_marginTop="31dp"
-                    android:textSize="40sp"
+                    android:textSize="30sp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="VIP"
-                    android:id="@+id/textViewVIP"
-                    android:textSize="40sp"
-                    android:layout_below="@+id/textViewVip"
-                    android:layout_centerHorizontal="true"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold"/>
-
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Otro"
+                    android:text="Nuevo participante"
                     android:id="@+id/buttonVipOtro"
-                    android:layout_below="@+id/textViewVIP"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="54dp"
                     android:textStyle="bold"
                     android:textColor="#fff"
                     android:background="#ff000000"
-                    android:textSize="17sp"/>
+                    android:textSize="17sp"
+                    android:layout_below="@+id/textViewVip"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Finalizar"
+                    android:text="Salir"
                     android:id="@+id/buttonVipFinalizar"
 
                     android:textSize="17sp"
                     android:textStyle="bold"
                     android:textColor="#fff"
                     android:background="#ff000000"
+                    android:layout_marginTop="76dp"
                     android:layout_below="@+id/buttonVipOtro"
-                    android:layout_alignLeft="@+id/buttonVipOtro"
-                    android:layout_alignStart="@+id/buttonVipOtro"
-                    android:layout_marginTop="33dp"/>
+                    android:layout_centerHorizontal="true"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -539,7 +528,7 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="CH"
+                    android:text="M/S"
                     android:id="@+id/buttonSmall"
                     android:layout_below="@+id/felicidades"
                     android:layout_alignParentLeft="true"
@@ -552,25 +541,14 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="M"
-                    android:id="@+id/buttonMedium"
-                    android:layout_alignTop="@+id/buttonSmall"
-                    android:layout_centerHorizontal="true"
-                    android:textSize="20sp"
-                    android:textColor="@android:color/white"
-                    android:background="#ff000000"/>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="G"
+                    android:text="XL/L"
                     android:id="@+id/buttonLarge"
-                    android:layout_alignTop="@+id/buttonMedium"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:textSize="20sp"
                     android:textColor="@android:color/white"
-                    android:background="#ff000000"/>
+                    android:background="#ff000000"
+                    android:layout_alignTop="@+id/buttonSmall"/>
 
             </RelativeLayout>
 
@@ -608,11 +586,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="¿Personalizada?"
+                    android:text="¿Quieres personalizarla? "
                     android:id="@+id/textView6"
                     android:layout_marginTop="25dp"
                     android:textColor="#fff"
-                    android:textSize="37sp"
+                    android:textSize="27sp"
                     android:layout_centerHorizontal="true"
                     android:textStyle="bold"/>
 
@@ -627,7 +605,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Personaliza tu camiseta"
+                    android:text="Personaliza tu playera"
                     android:id="@+id/textView5"
                     android:layout_marginTop="23dp"
                     android:textSize="30sp"
@@ -644,7 +622,7 @@
                     android:ems="10"
                     android:id="@+id/editTextPersonalizacion"
                     android:layout_marginTop="39dp"
-                    android:hint="Nombre o Apodo*"
+                    android:hint="Nombre*"
                     android:textColor="#fff"
                     android:textSize="22sp"
                     android:layout_below="@+id/textView5"
@@ -1113,13 +1091,120 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="¿Seguro que deceas finalizar?"
+                    android:text="Presiona si para salir de tu cuenta de supervisor"
                     android:id="@+id/textView69"
                     android:layout_marginTop="25dp"
                     android:textColor="#fff"
                     android:textSize="30sp"
                     android:layout_centerHorizontal="true"
                     android:textStyle="bold"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutApellidos">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Siguiente"
+                    android:id="@+id/buttonApellidos"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/black"
+                    android:layout_marginTop="34dp"
+                    android:layout_below="@+id/editTextApellidosPersona"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+
+                    />
+
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Apellido"
+                    android:id="@+id/textViewApellidos"
+                    android:layout_marginTop="23dp"
+                    android:textSize="40sp"
+                    android:textColor="@android:color/white"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@string/abc_action_bar_home_description"
+                    android:typeface="sans"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/editTextApellidosPersona"
+                    android:layout_marginTop="28dp"
+                    android:hint="Apellido*"
+                    android:maxLength="30"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
+                    android:layout_below="@+id/textViewApellidos"
+                    android:layout_alignRight="@+id/buttonApellidos"
+                    android:layout_alignEnd="@+id/buttonApellidos"
+                    android:textSize="22dp"
+                    />
+
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutDelegacion">
+                <TextView
+                    android:text="Delegación/ Municipio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="17dp"
+                    android:id="@+id/textViewDelegacion"
+                    android:textSize="25sp"
+                    android:textColor="@android:color/white"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/editTextDelegacion"
+                    android:layout_marginTop="37dp"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
+                    android:hint="Delegación/ Municipio*"
+                    android:textSize="22sp"
+                    android:textIsSelectable="false"
+                    android:layout_below="@+id/textViewDelegacion"
+                    android:layout_alignRight="@+id/buttonDelegacion"
+                    android:layout_alignEnd="@+id/buttonDelegacion"
+                    android:maxLength="20"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Siguiente"
+                    android:id="@+id/buttonDelegacion"
+                    android:layout_marginTop="35dp"
+                    android:background="#ff000000"
+                    android:textColor="@android:color/white"
+                    android:layout_below="@+id/editTextDelegacion"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:textStyle="bold"
+                    android:textSize="17sp"/>
             </RelativeLayout>
 
 
@@ -1135,5 +1220,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"/>
+
+
 
 </RelativeLayout>

@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.TextPaint;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,10 +35,12 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
     ImageButton buttonSettings;
     Button buttonGuardar;
     ImageButton buttonSync ;
-    EditText superUbicacion,superNombre,tallaS,tallaM,tallaL,porcentajeGanador;
+    EditText superUbicacion,superNombre,tallaS,tallaL,porcentajeGanador;
     TextView nombreSuper,ubicacionSuper;
-    String cantidadS,cantidadM,cantidadL,porcentaje;
-    String nombre,email;
+    String cantidadS,cantidadL,porcentaje;
+    String ubicacion,supervisor,nombre,apellidos,email,telefono,dia,mes,ano,
+            ticket,premio,medida,personalizacion,calle,nExterior,nInterior,
+    colonia,ciudad,estado,delegacion,postal,timestamp;
     int cant;
 
 
@@ -82,19 +83,16 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                     if (darError == false) {
 
                         tallaS = (EditText) findViewById(R.id.editTextSmall);
-                        tallaM = (EditText) findViewById(R.id.editTextMediuem);
                         tallaL = (EditText) findViewById(R.id.editTextLarge);
                         porcentajeGanador = (EditText) findViewById(R.id.editTextPorcentaje);
 
                         cantidadS = tallaS.getText().toString();
-                        cantidadM = tallaM.getText().toString();
                         cantidadL = tallaL.getText().toString();
                         porcentaje = porcentajeGanador.getText().toString();
 
 
                         Intent intent = new Intent(Portada.this, Registro.class);
                         intent.putExtra("cantidadS", cantidadS);
-                        intent.putExtra("cantidadM", cantidadM);
                         intent.putExtra("cantidadL", cantidadL);
                         intent.putExtra("porcentaje", porcentaje);
                         intent.putExtra("nombreSupervisor", nombreSuperv);
@@ -114,20 +112,14 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
     Thread thread;
 
     private void enviarRegistro(){
+        Toast.makeText(getApplicationContext(), "Espera mientras se sincroniza.", Toast.LENGTH_SHORT).show();
         thread = new Thread(new Runnable(){
             @Override
             public void run() {
                 try {
                     if(consulta()) {
                         String x = request().toString();
-
                         if (x.equals("OK")) {
-                            runOnUiThread(new Runnable()
-                            {
-                                public void run() {
-                                    Toast.makeText(getApplicationContext(), "Espera un momento sincronizando registros.", Toast.LENGTH_SHORT).show();
-                                }
-                            });
                             borrarUltimoRegistro();
                             run();
                         } else {
@@ -135,7 +127,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                             runOnUiThread(new Runnable()
                             {
                                 public void run() {
-                                    Toast.makeText(getApplicationContext(), "No hay conexion a internet vuelve a intentar.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "Error al sincronizar los registros vuelva a intentar.", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
@@ -143,7 +135,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                         // Cuando no hay nada en la BD
                         runOnUiThread(new Runnable() {
                             public void run() {
-                                Toast.makeText(getApplicationContext(), "Ya no hay registros que sincronizar.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Todos los registros se han sincronizado correctamente.", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -156,9 +148,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
     }
 
-    private void mostrarToast(String msg){
-        Toast.makeText(Portada.this,msg, Toast.LENGTH_SHORT).show();
-    }
+
 
     @Override
     public void onClick(View v) {
@@ -186,8 +176,6 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
                 EditText validacionSm = (EditText) findViewById(R.id.editTextSmall);
                 String validacionS = validacionSm.getText().toString();
-                EditText validacionMe = (EditText) findViewById(R.id.editTextMediuem);
-                String validacionM = validacionMe.getText().toString();
                 EditText validacionGr = (EditText) findViewById(R.id.editTextLarge);
                 String validacionL = validacionGr.getText().toString();
                 EditText validacionPo = (EditText) findViewById(R.id.editTextPorcentaje);
@@ -200,10 +188,6 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                     botonOff = false;
                 }
 
-                else if (validacionM.equals("")){
-                    Toast.makeText(Portada.this, "Ha dejado campos vacios.", Toast.LENGTH_SHORT).show();
-                    botonOff = false;
-                }
 
                 else if(validacionL.equals("")){
                     Toast.makeText(Portada.this, "Ha dejado campos vacios.", Toast.LENGTH_SHORT).show();
@@ -243,7 +227,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
         StringBuffer chaine = new StringBuffer("");
         try{
 
-            String urlParameters  = "full_name="+nombre+"&email="+email+"&phone=6645298250&bday=20&bmonth=01&byear=1997";
+            String urlParameters  = "location="+ubicacion+"&supervisor="+supervisor+"&full_name="+nombre+"&surname="+apellidos+"&email="+email+"&phone="+telefono+"&bday="+dia+"&bmonth="+mes+"&byear="+ano+"&ticket="+ticket+"&prize="+premio+"&prize_size="+medida+"&prize_text="+personalizacion+"&prize_calle="+calle+"&prize_nexterior="+nExterior+"&prize_ninterior="+nInterior+"&prize_colonia="+colonia+"&prize_ciudad="+ciudad+"&prize_estado="+estado+"&prize_delegacion="+delegacion+"&prize_postal="+postal+"&created_at="+timestamp;
             byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
             int    postDataLength = postData.length;
             URL url = new URL(" http://promococacola.azteca.click/api/register.php");
@@ -279,18 +263,62 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
     public boolean consulta() {
         boolean hayDatos = false;
         nombre = "";
+        apellidos = "";
         email = "";
+        supervisor = "";
+        ubicacion = "";
+        telefono = "";
+        dia = "";
+        mes = "";
+        ano = "";
+        ticket = "";
+        premio = "";
+        medida ="";
+        personalizacion = "";
+        calle = "";
+        nExterior = "";
+        nInterior= "";
+        colonia = "";
+        ciudad = "";
+        postal= "";
+        estado= "";
+        delegacion = "";
+        timestamp= "";
+
         DataBase admin = new DataBase(this);
         SQLiteDatabase bd = admin.getWritableDatabase();
-        Cursor fila = bd.rawQuery("SELECT nombre,email FROM Registro where _ID=(SELECT MAX(_ID) FROM Registro)",null);
+        Cursor fila = bd.rawQuery("SELECT nombreSupervisor,ubicacionSupervisor,nombre,apellidos,email,telefono,dia,mes,ano,numeroDeTicket,premio,medida,personalizacion,calle,noExterior,noInterior,colonia,ciudad,codigoPostal,estado,delegacion,timeStamp FROM Registro where _ID=(SELECT MAX(_ID) FROM Registro)",null);
         if(fila.moveToFirst()) {
             hayDatos = true;
-            nombre = fila.getString(0);
-            email = fila.getString(1);
+            supervisor = fila.getString(0);
+            ubicacion = fila.getString(1);
+            nombre = fila.getString(2);
+            apellidos = fila.getString(3);
+            email = fila.getString(4);
+            telefono = fila.getString(5);
+            dia = fila.getString(6);
+            mes = fila.getString(7);
+            ano = fila.getString(8);
+            ticket = fila.getString(9);
+            premio = fila.getString(10);
+            medida = fila.getString(11);
+            personalizacion = fila.getString(12);
+            calle = fila.getString(13);
+            nExterior = fila.getString(14);
+            nInterior = fila.getString(15);
+            colonia = fila.getString(16);
+            ciudad = fila.getString(17);
+            postal = fila.getString(18);
+            estado = fila.getString(19);
+            delegacion = fila.getString(20);
+            timestamp = fila.getString(21);
+
+
         }else{
             hayDatos = false;
         }
-        System.out.println(nombre);
+        System.out.println(supervisor+ubicacion+nombre+apellidos+email+telefono+dia+mes+ano+ticket+premio+medida+personalizacion+calle+nExterior+nInterior+colonia+ciudad+postal+estado+delegacion+timestamp);
+
 
 
         bd.close();
