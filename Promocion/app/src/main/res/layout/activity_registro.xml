@@ -67,7 +67,7 @@
                     android:ems="10"
                     android:id="@+id/editTextNombrePersona"
                     android:layout_marginTop="28dp"
-                    android:hint="Nombre Completo*"
+                    android:hint="Nombre*"
                     android:maxLength="30"
                     android:textColor="#fff"
                     android:textColorHint="#fff"
@@ -438,7 +438,7 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Presiona aqui"
+                    android:text="Presiona aquí"
                     android:id="@+id/buttonSuerte"
                     android:textSize="40sp"
                     android:textColor="@android:color/white"

@@ -227,7 +227,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
         StringBuffer chaine = new StringBuffer("");
         try{
 
-            String urlParameters  = "location="+ubicacion+"&supervisor="+supervisor+"&full_name="+nombre+"&surname="+apellidos+"&email="+email+"&phone="+telefono+"&bday="+dia+"&bmonth="+mes+"&byear="+ano+"&ticket="+ticket+"&prize="+premio+"&prize_size="+medida+"&prize_text="+personalizacion+"&prize_calle="+calle+"&prize_nexterior="+nExterior+"&prize_ninterior="+nInterior+"&prize_colonia="+colonia+"&prize_ciudad="+ciudad+"&prize_estado="+estado+"&prize_delegacion="+delegacion+"&prize_postal="+postal+"&created_at="+timestamp;
+            String urlParameters  = "location="+ubicacion+"&supervisor="+supervisor+"&full_name="+nombre+"&surname="+apellidos+"&email="+email+"&phone="+telefono+"&bday="+dia+"&bmonth="+mes+"&byear="+ano+"&ticket="+ticket+"&prize="+premio+"&prize_size="+medida+"&prize_text="+personalizacion+"&prize_calle="+calle+"&prize_nexterior="+nExterior+"&prize_ninterior="+nInterior+"&prize_colonia="+colonia+"&prize_ciudad="+ciudad+"&prize_postal="+postal+"&prize_estado="+estado+"&prize_delegacion="+delegacion+"&created_at="+timestamp;
             byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
             int    postDataLength = postData.length;
             URL url = new URL(" http://promococacola.azteca.click/api/register.php");
@@ -317,7 +317,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
         }else{
             hayDatos = false;
         }
-        System.out.println(supervisor+ubicacion+nombre+apellidos+email+telefono+dia+mes+ano+ticket+premio+medida+personalizacion+calle+nExterior+nInterior+colonia+ciudad+postal+estado+delegacion+timestamp);
+        System.out.println(supervisor+" "+ubicacion+" "+nombre+" "+apellidos+" "+email+" "+telefono+" "+dia+" "+mes+" "+ano+" "+ticket+" "+premio+" "+medida+" "+personalizacion+" "+calle+" "+nExterior+" "+nInterior+" "+colonia+" "+ciudad+" "+postal+" "+estado+" "+delegacion+" "+timestamp);
 
 
 

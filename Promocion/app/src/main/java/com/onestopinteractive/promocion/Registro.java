@@ -555,7 +555,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         mesI = Integer.parseInt(mesS);
         anoI = Integer.parseInt(anoS);
 
-        if(anoI>2000)
+        if(anoI>=2000)
             Toast.makeText(Registro.this, "Solo mayores de 16 años pueden participar.", Toast.LENGTH_SHORT).show();
 
 
