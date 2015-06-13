@@ -911,7 +911,7 @@
 
 
                 <TextView
-                    android:text="CodigoPostal"
+                    android:text="Código Postal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="17dp"
