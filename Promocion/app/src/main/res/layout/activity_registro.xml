@@ -23,6 +23,80 @@
 
 
             <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutCondiciones">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBoxTerminos"
+                    android:layout_marginTop="95dp"
+                    android:checked="false"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginStart="26dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:onClick="terminosClicked"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Siguiente"
+                    android:id="@+id/buttonCondiciones"
+                    android:layout_marginTop="155dp"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:background="#000"
+                    android:layout_below="@+id/checkBoxTerminos"
+                    android:layout_centerHorizontal="true"/>
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBoxPoliticas"
+                    android:layout_marginTop="37dp"
+                    android:checked="false"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:layout_below="@+id/checkBoxTerminos"
+                    android:layout_alignLeft="@+id/checkBoxTerminos"
+                    android:layout_alignStart="@+id/checkBoxTerminos"
+                    android:onClick="politicasClicked"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Acepto términos y condiciones"
+                    android:id="@+id/buttonTerminos"
+                    android:background="#e41d2a"
+                    android:textColor="#fff"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="59dp"
+                    android:layout_alignBottom="@+id/checkBoxPoliticas"
+                    android:layout_centerHorizontal="true"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Acepto políticas de privacidad"
+                    android:id="@+id/buttonPoliticas"
+                    android:background="#e41d2a"
+                    android:textColor="#fff"
+                    android:textSize="12sp"
+                    android:layout_below="@+id/checkBoxTerminos"
+                    android:layout_alignLeft="@+id/buttonTerminos"
+                    android:layout_alignStart="@+id/buttonTerminos"
+                    android:layout_marginTop="29dp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/relativelayoutNombre"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -154,7 +228,7 @@
                     android:ems="10"
                     android:id="@+id/editTextEmail"
                     android:layout_marginTop="28dp"
-                    android:hint="Correo electrónico*"
+                    android:hint="Correo electrónico"
                     android:textColor="#fff"
                     android:textColorHint="#fff"
                     android:layout_below="@+id/textViewEmail"
@@ -204,7 +278,7 @@
                     android:ems="10"
                     android:id="@+id/editTextTelefono"
                     android:layout_marginTop="27dp"
-                    android:hint="Telèfono*"
+                    android:hint="Teléfono*"
                     android:textColor="#fff"
                     android:textColorHint="#fff"
                     android:layout_below="@+id/textViewTelefono"
@@ -244,19 +318,6 @@
                     android:textStyle="bold"
                     android:textColor="#fff"
                     android:layout_below="@+id/textViewGracias"
-                    android:layout_centerHorizontal="true"/>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Salir"
-                    android:id="@+id/buttonFinalizar"
-                    android:background="#ff000000"
-                    android:textStyle="bold"
-                    android:textColor="#fff"
-                    android:textSize="17sp"
-                    android:layout_marginTop="75dp"
-                    android:layout_below="@+id/buttonOtro"
                     android:layout_centerHorizontal="true"/>
 
                 <TextView
@@ -423,33 +484,20 @@
                 android:layout_height="match_parent"
                 android:id="@+id/relativelayoutSuerte">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="¡Prueba tu suerte!"
-                    android:id="@+id/textViewSuerte"
-                    android:layout_marginTop="24dp"
-                    android:textSize="35sp"
-                    android:textColor="@android:color/white"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:textStyle="bold"/>
-
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Presiona aquí"
+                    android:text="Continuar"
                     android:id="@+id/buttonSuerte"
                     android:textSize="40sp"
                     android:textColor="@android:color/white"
                     android:background="#ff000000"
                     android:textStyle="bold"
-                    android:layout_below="@+id/textViewSuerte"
-                    android:layout_marginTop="149dp"
-                    android:layout_alignLeft="@+id/textViewSuerte"
-                    android:layout_alignStart="@+id/textViewSuerte"
-                    android:layout_alignRight="@+id/textViewSuerte"
-                    android:layout_alignEnd="@+id/textViewSuerte"/>
+                    android:layout_marginTop="176dp"
+                    android:padding="25dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
 
 
             </RelativeLayout>
@@ -462,7 +510,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="¡Ya estás participando para la experiencia futbolera!"
+                    android:text="Ya estás participando para ganar una de las experiencias VIP con Fut Azteca"
                     android:id="@+id/textViewVip"
                     android:layout_marginTop="31dp"
                     android:textSize="30sp"
@@ -483,20 +531,6 @@
                     android:background="#ff000000"
                     android:textSize="17sp"
                     android:layout_below="@+id/textViewVip"/>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Salir"
-                    android:id="@+id/buttonVipFinalizar"
-
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:textColor="#fff"
-                    android:background="#ff000000"
-                    android:layout_marginTop="76dp"
-                    android:layout_below="@+id/buttonVipOtro"
-                    android:layout_centerHorizontal="true"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -780,7 +814,7 @@
                     android:layout_marginTop="33dp"
                     android:textColor="#fff"
                     android:textColorHint="#fff"
-                    android:hint="No. Interior*"
+                    android:hint="No. Interior"
                     android:textSize="22sp"
                     android:layout_below="@+id/textViewInterior"
                     android:layout_centerHorizontal="true"
@@ -1035,7 +1069,7 @@
                     android:textColorHint="#fff"
                     android:textSize="22sp"
                     android:maxLength="30"
-                    android:layout_marginTop="27dp"
+                    android:layout_marginTop="30dp"
                     android:layout_below="@+id/textViewTicket"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"/>
@@ -1060,13 +1094,19 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:id="@+id/relativelayoutCancelar">
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:id="@+id/relativelayoutSeguro">
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="SI"
-                    android:id="@+id/buttonSiSeg"
+                    android:id="@+id/buttonSiCancelar"
                     android:background="#ff000000"
                     android:textColor="@android:color/white"
                     android:layout_alignParentLeft="true"
@@ -1079,19 +1119,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="NO"
-                    android:id="@+id/buttonNOSeguro"
-                    android:layout_alignBottom="@+id/buttonSiSeg"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
+                    android:id="@+id/buttonNoCancelar"
                     android:background="#ff000000"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
-                    android:textSize="17sp"/>
+                    android:textSize="17sp"
+                    android:layout_alignTop="@+id/buttonSiCancelar"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Presiona si para salir de tu cuenta de supervisor"
+                    android:text="¿Esta seguro que desea cancelar este registro? "
                     android:id="@+id/textView69"
                     android:layout_marginTop="25dp"
                     android:textColor="#fff"
@@ -1127,10 +1167,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Apellido"
+                    android:text="Apellido paterno"
                     android:id="@+id/textViewApellidos"
                     android:layout_marginTop="23dp"
-                    android:textSize="40sp"
+                    android:textSize="35sp"
                     android:textColor="@android:color/white"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
@@ -1145,7 +1185,7 @@
                     android:ems="10"
                     android:id="@+id/editTextApellidosPersona"
                     android:layout_marginTop="28dp"
-                    android:hint="Apellido*"
+                    android:hint="Apellido paterno*"
                     android:maxLength="30"
                     android:textColor="#fff"
                     android:textColorHint="#fff"
@@ -1181,16 +1221,16 @@
                     android:inputType="textPersonName"
                     android:ems="10"
                     android:id="@+id/editTextDelegacion"
-                    android:layout_marginTop="37dp"
+                    android:layout_marginTop="52dp"
                     android:textColor="#fff"
                     android:textColorHint="#fff"
                     android:hint="Delegación/ Municipio*"
                     android:textSize="22sp"
                     android:textIsSelectable="false"
+                    android:maxLength="20"
                     android:layout_below="@+id/textViewDelegacion"
-                    android:layout_alignRight="@+id/buttonDelegacion"
-                    android:layout_alignEnd="@+id/buttonDelegacion"
-                    android:maxLength="20"/>
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
 
                 <Button
                     android:layout_width="wrap_content"
@@ -1207,6 +1247,349 @@
                     android:textSize="17sp"/>
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/relativelayoutApellidoMaterno"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Siguiente"
+                    android:id="@+id/buttonApellidoMaterno"
+                    android:background="#ff000000"
+                    android:textColor="@android:color/white"
+                    android:layout_marginTop="36dp"
+                    android:layout_below="@+id/editTextApellidoMaterno"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:textStyle="bold"
+                    android:textSize="17sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Apellido materno"
+                    android:id="@+id/textViewApellidoMaterno"
+                    android:layout_marginTop="24dp"
+                    android:textSize="30sp"
+                    android:textColor="@android:color/white"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/editTextApellidoMaterno"
+                    android:layout_marginTop="39dp"
+                    android:hint="Apellido materno"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
+
+                    android:textSize="22sp"
+                    android:maxLength="20"
+                    android:layout_below="@+id/textViewApellidoMaterno"
+                    android:layout_alignRight="@+id/buttonApellidoMaterno"
+                    android:layout_alignEnd="@+id/buttonApellidoMaterno"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativelayoutTelefonoSecundario"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Siguiente"
+                    android:id="@+id/buttonTelefonoSecundario"
+                    android:background="#ff000000"
+                    android:textColor="@android:color/white"
+                    android:layout_marginTop="36dp"
+                    android:layout_below="@+id/editTextTelefonoSecundario"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:textStyle="bold"
+                    android:textSize="17sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Teléfono secundario"
+                    android:id="@+id/textViewTelefonoSecundario"
+                    android:layout_marginTop="24dp"
+                    android:textSize="30sp"
+                    android:textColor="@android:color/white"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editTextTelefonoSecundario"
+                    android:layout_marginTop="39dp"
+                    android:hint="Teléfono secundario"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
+                    android:textSize="22sp"
+                    android:maxLength="20"
+                    android:layout_below="@+id/textViewTelefonoSecundario"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutPoliticas">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Atras"
+                    android:id="@+id/buttonAtrasPoliticas"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:background="#000"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/buttonAtrasPoliticas"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_above="@+id/textViewPoliticas">
+
+
+                    <ScrollView
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="THE COCA-COLA EXPORT CORPORATION SUCURSAL EN MÉXICO., con domicilio en Rubén Darío 115, C.P. 11580, Col. Bosque de Chapultepec en la Ciudad de México, Distrito Federal, es responsable de recabar sus datos personales, del uso que se le dé a los mismos y de su protección.  En términos de lo previsto en la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (en lo sucesivo denominada como la “Ley”) y el Reglamento de la Ley Federal De Protección de Datos Personales en Posesión de los Particulares, le pedimos que lea cuidadosamente los términos y condiciones contenidos en el presente Aviso de Privacidad, pues de no oponerse expresamente al tratamiento de sus datos personales en los Términos y Condiciones del presente se presume la aceptación los mismos.  El presente Aviso tiene por objeto la protección de sus datos personales, mediante su tratamiento legítimo, controlado e informado, a efecto de garantizar su privacidad y su derecho a la autodeterminación informativa.  Su información personal será solicitada a través del responsable de la promoción “Comparte su pasión” para poder hacerlo partícipe de dicha promoción, informarlo y en su caso contactarlo en caso de resultar ganador, así como dar seguimiento a sus preguntas, quejas, o comentarios.  Además de los fines ya señalados, la información que recabamos podrá ser utilizada para tener un estimado estadístico de la participación en promociones. Los datos a solicitar consisten en nombre, edad, domicilio completo, incluyendo código postal, números telefónicos (de su domicilio, oficina y celular así como correo(s) electrónico(s). Su información será podrá ser recabada mediante sitio WEB ingresando a la página www.compartesupasion.com, vía call center llamando al teléfono 01 800 303 4444 o a través de los shopper hunters, para cumplir con las finalidades del presente aviso de Privacidad.  THE COCA-COLA EXPORT CORPORATION SUCURSAL EN MÉXICO será el responsable de los datos personales que nos haya proporcionado y se compromete a tomar las medidas necesarias y suficientes para garantizar que los términos del presente Aviso de Privacidad sean respetados en todo momento por Coca-Cola ® y/o por aquellos encargados designados por Coca-Cola ® para recabar su información. Los encargados designados por Coca-Cola ® asumirán las mismas obligaciones que corresponden a Coca-Cola ® como responsable.  Nos comprometemos a no transferir su información personal a terceros, salvo las excepciones previstas en el artículo 37 de la Ley Federal de Protección de Datos Personales en Posesión de los Particulares, así como a realizar esta transferencia en los términos que fija esa ley.  El tratamiento de sus datos personales será por un lapso de 5 años, pudiendo oponerse al manejo de los mismos en cualquier momento que lo considere oportuno.  De conformidad con el artículo 22 de La Ley, usted tiene derecho de acceder a sus datos personales que poseemos y a los detalles del tratamiento de los mismos, así como a rectificarlos en caso de ser inexactos o incompletos; cancelarlos cuando considere que no se requieren para alguna de las finalidades señalados en el presente Aviso de Privacidad, o bien, oponerse al tratamiento de los mismos para fines específicos.  Para Poder hacer ejercicio de dichos derechos usted podrá acudir a las oficinas de “Coca-Cola ®” ubicadas en: Rubén Darío 115, C.P. 11580, Col. Bosque de Chapultepec en la Ciudad de México, Distrito Federal y llenar el formato de solicitud ya sea para el acceso, rectificación, cancelación u oposición de sus datos personales que “Coca-Cola ®” pone a su disposición, y/o a través de escrito libre presentado en las oficinas de “Coca-Cola ®” el cual deberá contener la siguiente información:  1. El nombre y domicilio del titular o cualquier otro medio para recibir la respuesta. 2. En caso de ser presentada a través de un representante, los documentos que acrediten la identidad o la personalidad de su representante. 3. La descripción clara y precisa de los datos personales respecto de los cuales el titular busca ejercer alguno de los derechos. 4. En su caso, otros elementos o documentos que faciliten la localización de los datos personales. Si usted considera que su derecho de protección de datos personales ha sido lesionado por alguna conducta de nuestros empleados o de nuestras actuaciones o respuestas o presume que en el tratamiento de sus datos personales existe alguna violación a las disposiciones previstas en la “Ley” y/o en el “Reglamento”, podrá interponer la queja o denuncia correspondiente ante el Instituto Federal de Acceso a la Información.  THE COCA-COLA EXPORT CORPORATION SUCURSAL EN MÉXICO se reserva el derecho de efectuar en cualquier momento modificaciones o actualizaciones al presente aviso de privacidad, para la atención de novedades legislativas, políticas internas o nuevos requerimientos para la prestación u ofrecimiento de nuestros servicios o productos, modificaciones que podrá consultar a través de la página de Internet: www.compartesupasion.com  AVISO DE PRIVACIDAD DE TV AZTECA, S.A.B. DE C.V. y TELEVISIÓN AZTECA, S.A. DE C.V.  TV Azteca, S.A.B. de C.V., Televisión Azteca, S.A. de C.V. y sus filiales, subsidiarias y partes relacionadas (en lo sucesivo TV Azteca)), con domicilio en Periférico Sur número 4121, Colonia Fuentes del Pedregal, Delegación Tlalpan, Ciudad de México, Distrito Federal, Código Postal 14141. en cumplimiento a la Ley Federal de Protección de Datos en Posesión de los Particulares, hace de su conocimiento que los datos personales y/o datos sensibles que usted libre y voluntariamente llegara a proporcionar a través de este medio, estarán sujetos a las disposiciones del Aviso de Privacidad Completo de TV Azteca mismo que puede ser consultado en el sitio de Internet: www.azteca.com, y en el cual se explica el tratamiento de su información y los derechos que le otorga la legislación aplicable.  Relevo de responsabilidad Los participantes al momento de su participación en la presente promoción acuerdan, relevar de responsabilidad a THE COCA-COLA EXPORT CORPORATION SUCURSAL EN MÉXICO., a TV Azteca, S.A.B. de C.V., Televisión Azteca, S.A. de C.V., y a cada una de sus respectivas matrices, afiliadas, partes relacionadas, subsidiarias, oficiales, directores, accionistas agentes, empleados y todos aquellos asociados con el desarrollo y ejecución de este concurso, de cualquier responsabilidad en relación a, o de cualquier manera relacionado con, este concurso y/o la aceptación, o el uso/mal uso de los premios, incluyendo responsabilidad por daños personales y/o muerte, daños o pérdidas económicas. Los auspiciadores no se hacen responsables por la calidad o utilidad de los premios y entregarán los mismos con las garantías usuales del proveedor."
+                        android:id="@+id/textView12"
+                        android:textColor="#fff"/>
+                    </ScrollView>
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewPoliticas"
+                    android:layout_marginBottom="55dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutTerminos">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="atras"
+                    android:id="@+id/buttonAtrasTermi"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:background="#000"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:textSize="17sp"/>
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/relativeLayout"
+                    android:layout_below="@+id/buttonAtrasTermi"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_above="@+id/textView100">
+
+                    <ScrollView
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/textView10"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:textColor="#fff"
+                            android:text="Nombre de la Promoción: “COMPARTE SU PASIÓN” La participación de los consumidores en esta promoción implica la aceptación de la mecánica, términos y condiciones establecidos, los cuáles se pueden consultar en la siguiente dirección electrónica: www.compartesupasion.com  1.	Aceptación y condiciones de las bases: La participación en la promoción “Comparte su pasión” implicará la aceptación de las bases generales y particulares que apliquen por parte del consumidor participante. En caso de que TV Azteca, S.A.B. de C.V, Televisión Azteca, S.A.B. de C.V y/o THE COCA-COLA EXPORT CORPORATION SUCURSAL EN MÉXICO lo requiriera, los ganadores autorizarán expresamente y de manera gratuita a que se utilice su nombre, imagen, fotografía y/o voz en cualquier medio de comunicación conocido ó por conocerse de la manera que más convenga a los intereses de TV Azteca, S.A.B. de C.V., Televisión Azteca, S.A.B. de C.V. y/o THE COCA-COLA EXPORT CORPORATION SUCURSAL EN MÉXICO dentro de la República Mexicana renunciando al pago de cualquier cantidad, honorario, regalía, etc.  TV Azteca, S.A.B. de C.V, Televisión Azteca, S.A.B. de C.V. y/o THE COCA-COLA EXPORT CORPORATION SUCURSAL EN MÉXICO, estarán libres de responsabilidad en los siguientes casos: registros de participación que no cumplan con la totalidad de los requisitos establecidos en las bases, incluyendo la autorización expresa del uso de su imagen, voz, etc., fallas en los equipos de computación, programas de cómputo (software), equipos de comunicación, de suministro de energía, de líneas telefónicas, de la red de Internet, ni por desperfectos técnicos o cualquier otro fuera de su control razonable. La prueba de participación electrónica (folio de registro) en la promoción no será prueba de recibo por parte de los organizadores.  Las participaciones del concurso serán nulas e inválidas en caso que las mismas no hubieran sido obtenidas de conformidad con la Reglas Oficiales del concurso descritas en las siguientes bases o por los canales legítimamente autorizados como lo son, el micrositio, el teléfono y los registradores en punto de venta, descritos en el numeral 7.  Cualquier violación a las bases, a los procedimientos o sistemas establecidos, alteración, falsificación, manipulación o engaño a los promotores para pretender ser ganador, será anulada y el participante será descalificado del concurso. Lo anterior, sin prejuicio de las acciones legales procedentes. Al participar en este concurso, los participantes aceptan acogerse a la estricta aplicación de estas reglas en todos sus términos y las decisiones de los auspiciadores.  2.	Legales de la promoción: • Vigencia: El período de participación inicia de las 00:00 hrs del 29 de junio de 2015 al 8 de agosto de 2015 a las 23:59 hrs. (Hora Zona Centro de la República Mexicana). • Los participantes de los juegos y concursos deberán hacerlo de manera responsable y con el principal propósito de entretenimiento, diversión y esparcimiento. •	PERMISO SEGOB: DG/1387/15. •	COCA-COLA, COCA-COLA ZERO, COCA-COLA LIGHT, COCA-COLA LIFE, SPRITE, FANTA Y FRESCA son marcas registradas de The Coca-Cola Company. D.R. © The Coca-Cola Company. SIDRAL MUNDET es una marca registrada de Promotora de Marcas Nacionales, S. de R.L. de C.V. D.R. © Promotora de Marcas Nacionales, S. de R.L. de C.V. 2015. •	LIFT es una marca registrada de The Coca-Cola Company. D.R. © The Coca-Cola Company. 2015. JOYA, ESCUIS, CRISTAL y VICTORIA son marcas registradas de The Coca-Cola Company. D.R. © The Coca-Cola Company. 2015. 3.	Cobertura geográfica: Nivel Nacional Territorio de los Estados Unidos Mexicanos.  4.	Responsable de la Promoción: TV Azteca S.A.B. de C.V. y Televisión Azteca S.A.B. de C.V. Dirección: Periférico Sur 4121 Col. Fuentes Del Pedregal. México DF. C.P. 14141.Tel.: (55) 1720 1313. En su carácter de comisionista mercantil de THE COCA-COLA EXPORT CORPORATION SUCURSAL EN MÉXICO.  5.	Requisitos para participar: •	Son elegibles para participar en esta promoción todas las personas mayores a 18 años, o mayores de 16 años con consentimiento expreso de sus padres o tutores, residentes legales en el territorio de los Estados Unidos Mexicanos que cuenten con alguna identificación oficial vigente, (credencial con fotografía emitida por el Instituto Federal Electoral (IFE), Pasaporte, cartilla del servicio militar liberada, y/o cédula profesional) y que cumplan con la totalidad de los requisitos de la promoción. •	Dar lectura y aceptar las presentes bases y condiciones. •	Proporcionar durante el registro datos verídicos y completos de identificación y localización. •	Participan todos los tickets de compra de los productos Coca-Cola® participantes emitidos en territorio de los Estados Unidos Mexicanos, por las tiendas y puntos de venta participantes Walmart ®, Bodega Aurrerá ® Superama ®, Comercial Mexicana ® Chedrahui ®, Soriana ®, Casa Ley ®, y HEB ® durante la vigencia de la promoción. •	Sólo participan los tickets de compras realizadas dentro de la vigencia de la promoción. •	Es requisito indispensable que los participantes de esta promoción conserven el ticket original de compra registrado del producto de la familia Coca-Cola ®, ya que les será requerido en caso de resultar ganadores para poder hacerse acreedores o reclamar cualquiera de los regalos y/o premios, en caso de no ser presentado se invalidará la participación y consecuentemente, no se les podrá otorgar el premio o regalo al que hubieran tenido derecho de adjudicación. 6.	Establecimientos participantes: Todas las tiendas de autoservicios a nivel Nacional, que emitan el debido comprobante de compra impreso o electrónico, no participan notas de venta.  7.	Medio de registro y consulta de las bases de la promoción: a.	Vía sitio WEB ingresando al micrositio : www.compartesupasion.com b.	Vía registradores ubicados en tiendas de autoservicio participantes. c.	Vía call center llamando al número de teléfono gratuito: 01800 303 4444 8.	Productos participantes: Los productos enlistados a continuación participan en todas sus presentaciones  •	Coca-Cola •	Coca-Cola Light •	Coca-Cola Zero •	Coca-Cola Life •	Coca-Cola Caffeine Free •	Sprite •	Fanta •	Fresca •	Manzana Lift •	Sidral Mundet •	Tradicionales Mundet •	Joya •	Esquis •	Cristal •	Victoria 9.	Premios y regalos •	Habrá Playeras Coca Cola ® Edición Especial, limitado a 16,600 playeras. •	16 Experiencias Azteca VIP, para una sola persona que consisten en asistir junto a los comentaristas de Azteca Deportes a la transmisión de un partido del Torneo de Apertura 2015, con acceso al estadio y zona de invitados con alimentos y bebidas. 10.	Garantías de los premios e incentivos. TV Azteca, S.A.B. de C.V. y Televisión Azteca, S.A.B. de C.V en su carácter de comisionista mercantil de THE COCA-COLA EXPORT CORPORATION SUCURSAL EN MÉXICO se compromete a realizar la entrega de los premios y regalos establecidos en las presentes bases. En caso de reclamaciones relacionadas con la calidad, funcionamiento y características de los productos y/o servicios ofrecidos, cada ganador deberá dirigirse al proveedor, fabricante o prestador de servicio de cada premio o regalo, según corresponda.  Asimismo, cada participante ganador de premio o regalo se compromete a sacar en paz y a salvo de cualquier reclamación al respecto, a THE COCA-COLA EXPORT CORPORATION SUCURSAL EN MÉXICO., TV Azteca, S.A.B. de C.V y/o Televisión Azteca, S.A.B. de C.V., de cualquier reclamación relacionada con el funcionamiento o aplicación de los premios, mismas que no serán responsables por el comportamiento del ganador, antes, durante y después de la obtención y/o goce de su premio y/o regalo.  11.	Mecánica de participación: Dentro de la vigencia de la promoción, los consumidores podrán registrarse en la promoción con ticket de compra de la siguiente manera:  •	Comprar mínimo $40.00 (Cuarenta Pesos, M.N., 00/100) en productos de la Familia Coca-Cola. •	La participación es por ticket de compra, independientemente del máximo de ésta, por lo que no se podrá participar dos o más veces con el mismo ticket. •	Registra tu ticket de compra con los shopper hunters (registradores) que habrá en las tiendas de autoservicio participantes, que de no encontrarse algún registrador también podrán registrarse en www.compartesupasion.com o marcando al teléfono gratuito 01 800 303 4444, el cual estará disponible de lunes a domingo, con un horario de 10:00 a 18:00 horas, incluyendo días festivos. 12.	Selección de Ganadores y canje de premios y regalos. •	Al momento de registrase por cualquiera de las vías autorizadas para esta promoción, podrías llevarte una playera Coca-Cola Edición Especial, el otorgamiento de estas playeras se realizará mediante un sistema electrónico que otorgará las playeras aleatoriamente. •	En el caso de las playeras, es necesario conservar el ticket de compra, ya que se les realizará una llamada telefónica para validar la información. •	Si el registro del ticket de compra se realiza en punto de venta mediante nuestros shopper hunters y ganan una playera, esta se entregará de manera instantánea sin personalizar. •	En caso de que el registro se realice vía micrositio o por teléfono, a los ganadores se les enviará por mensajería la playera personalizada con el nombre de preferencia al domicilio previamente indicado, en un periodo de 40 días hábiles. •	Los participantes que ya fueron acreedores de algunas de las playeras, así como los que no fueron acreedores de éstas, siguen participando por Experiencias Azteca VIP. •	Los ganadores de las Experiencias Azteca VIP, serán seleccionados de acuerdo al siguiente cuadro y mediante la siguiente mecánica; en presencia de un Supervisor de la Secretaría de Gobernación, se obtendrán de manera aleatoria y con un sistema electrónico a un participante previamente registrado de la base de datos generada durante la promoción, se le marcará al teléfono registrado y se le realizara una pregunta sobre los productos de la familia Coca-Cola, que de contestarla correctamente ganará una de las Experiencias Azteca VIP descritas en el numeral 9 de las presentes bases, en caso de que el participante conteste incorrectamente o no conteste al teléfono, se buscará a otro participante, esta mecánica se repetirá hasta obtener a todos los ganadores correspondientes. SELECCIÓN	No DE GANADORES	TRANSMISIÓN POR TELEVISIÓN Lunes, 06 de Julio de 2015	3	Martes, 07 de Julio de 2015 Lunes, 13 de Julio de 2015	3	Martes, 14 de Julio de 2015 Lunes, 20 de Julio de 2015	3	Martes, 21 de Julio de 2015 Lunes, 27 de Julio de 2015	3	Martes, 28 de Julio de 2015 Lunes, 03 de Agosto de 2015	2	Martes, 04 de Agosto de 2015 Lunes, 10 de Agosto de 2015	2	Martes, 11 de Agosto de 2015 Los ganadores se darán a conocer en el programa de Azteca, Deporte Caliente conforme a las fechas citadas y en el sitio WEB de la promoción www.compartesupasion.com al finalizar la promoción.  13.	Lugar para seleccionar a los participantes La selección de participantes se hará ante la presencia de un supervisor de la Secretaría de Gobernación, en las oficinas de Azteca ubicadas en Periférico Sur #4121, Col. Fuentes del Pedregal, Tlalpan, México D.F. C.P. 14250., de acuerdo a las fechas indicadas en el numeral 12 de las presentes bases.  14.	Restricciones. •	No podrán participar empleados y familiares de empleados de THE COCA-COLA EXPORT CORPORATION SUCURSAL EN MÉXICO., TV Azteca, S.A.B. de C.V., Televisión Azteca, S.A.B. de C.V. y sus respectivas agencias, afiliadas, matrices, subsidiarias y detallistas involucrados en el desarrollo de esta promoción. •	No se podrán enviar playeras personalizadas con palabras altisonantes. •	El consumidor podrá registrar tantos tickets de compra Coca-Cola ® como desee durante la vigencia de participación, siempre y cuando correspondan a compras diferentes y cumplan con los requisitos de las presentes bases. •	En caso de imposibilidad de realizar el canje del premio o regalo por cualquier motivo, no aplica compensación o remuneración alguna. •	Por ningún motivo los premios o regalos podrán ser canjeables por su valor en efectivo. •	Los premios y regalos si pueden ser transferibles mas no acumulables, en el entendido de que los participantes no puede ganar el mismo premio o regalo dos o más veces. •	Ninguna parte del sitio WEB, material promocional impreso o transmitido vía radio o televisión o cualquier otro medio podrá ser replicado por estar reservado en sus derechos de autor. 15.	Definiciones. Shopper Hunter.- Es el personal que se encargará de facilitar los registros al público en general y que se ubicará en algunos puntos de venta a lo largo del territorio nacional.  Vigencia De Participación.- Es el periodo que tiene el público en general para participar en la presente promoción, éste inicia de las 00:00 hrs del 29 de junio de 2015 al 8 de agosto de 2015 a las 23:59 hrs. (Hora Zona Centro de la República Mexicana).  Micrositio.- Es un espacio virtual en Internet donde se operará la promoción, este será www.compartesupasion.com.  Los conceptos definidos anteriormente, podrán ser utilizados en singular o plural de manera indistinta, manteniendo en cualquiera de los casos el mismo significado.  16.	Avisos de privacidad. THE COCA-COLA EXPORT CORPORATION SUCURSAL EN MÉXICO., con domicilio en Rubén Darío 115, C.P. 11580, Col. Bosque de Chapultepec en la Ciudad de México, Distrito Federal, es responsable de recabar sus datos personales, del uso que se le dé a los mismos y de su protección.  En términos de lo previsto en la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (en lo sucesivo denominada como la “Ley”) y el Reglamento de la Ley Federal De Protección de Datos Personales en Posesión de los Particulares, le pedimos que lea cuidadosamente los términos y condiciones contenidos en el presente Aviso de Privacidad, pues de no oponerse expresamente al tratamiento de sus datos personales en los Términos y Condiciones del presente se presume la aceptación los mismos.  El presente Aviso tiene por objeto la protección de sus datos personales, mediante su tratamiento legítimo, controlado e informado, a efecto de garantizar su privacidad y su derecho a la autodeterminación informativa.  Su información personal será solicitada a través del responsable de la promoción “Comparte su pasión” para poder hacerlo partícipe de dicha promoción, informarlo y en su caso contactarlo en caso de resultar ganador, así como dar seguimiento a sus preguntas, quejas, o comentarios.  Además de los fines ya señalados, la información que recabamos podrá ser utilizada para tener un estimado estadístico de la participación en promociones. Los datos a solicitar consisten en nombre, edad, domicilio completo, incluyendo código postal, números telefónicos (de su domicilio, oficina y celular así como correo(s) electrónico(s). Su información será podrá ser recabada mediante sitio WEB ingresando a la www.compartesupasion.com, vía call center llamando al teléfono 01 800 303 4444 o a través de los shopper hunters, para cumplir con las finalidades del presente aviso de Privacidad.  THE COCA-COLA EXPORT CORPORATION SUCURSAL EN MÉXICO será el responsable de los datos personales que nos haya proporcionado y se compromete a tomar las medidas necesarias y suficientes para garantizar que los términos del presente Aviso de Privacidad sean respetados en todo momento por Coca-Cola ® y/o por aquellos encargados designados por Coca-Cola ® para recabar su información. Los encargados designados por Coca-Cola ® asumirán las mismas obligaciones que corresponden a Coca-Cola ® como responsable.  Nos comprometemos a no transferir su información personal a terceros, salvo las excepciones previstas en el artículo 37 de la Ley Federal de Protección de Datos Personales en Posesión de los Particulares, así como a realizar esta transferencia en los términos que fija esa ley.  El tratamiento de sus datos personales será por un lapso de 5 años, pudiendo oponerse al manejo de los mismos en cualquier momento que lo considere oportuno.  De conformidad con el artículo 22 de La Ley, usted tiene derecho de acceder a sus datos personales que poseemos y a los detalles del tratamiento de los mismos, así como a rectificarlos en caso de ser inexactos o incompletos; cancelarlos cuando considere que no se requieren para alguna de las finalidades señalados en el presente Aviso de Privacidad, o bien, oponerse al tratamiento de los mismos para fines específicos.  Para Poder hacer ejercicio de dichos derechos usted podrá acudir a las oficinas de “Coca-Cola ®” ubicadas en: Rubén Darío 115, C.P. 11580, Col. Bosque de Chapultepec en la Ciudad de México, Distrito Federal y llenar el formato de solicitud ya sea para el acceso, rectificación, cancelación u oposición de sus datos personales que “Coca-Cola ®” pone a su disposición, y/o a través de escrito libre presentado en las oficinas de “Coca-Cola ®” el cual deberá contener la siguiente información:  1. El nombre y domicilio del titular o cualquier otro medio para recibir la respuesta. 2. En caso de ser presentada a través de un representante, los documentos que acrediten la identidad o la personalidad de su representante. 3. La descripción clara y precisa de los datos personales respecto de los cuales el titular busca ejercer alguno de los derechos. 4. En su caso, otros elementos o documentos que faciliten la localización de los datos personales. Si usted considera que su derecho de protección de datos personales ha sido lesionado por alguna conducta de nuestros empleados o de nuestras actuaciones o respuestas o presume que en el tratamiento de sus datos personales existe alguna violación a las disposiciones previstas en la “Ley” y/o en el “Reglamento”, podrá interponer la queja o denuncia correspondiente ante el Instituto Federal de Acceso a la Información.  THE COCA-COLA EXPORT CORPORATION SUCURSAL EN MÉXICO se reserva el derecho de efectuar en cualquier momento modificaciones o actualizaciones al presente aviso de privacidad, para la atención de novedades legislativas, políticas internas o nuevos requerimientos para la prestación u ofrecimiento de nuestros servicios o productos, modificaciones que podrá consultar a través de la página de Internet: www.compartesupasion.com  AVISO DE PRIVACIDAD DE TV AZTECA, S.A.B. DE C.V. y TELEVISIÓN AZTECA, S.A. DE C.V.  TV Azteca, S.A.B. de C.V., Televisión Azteca, S.A. de C.V. y sus filiales, subsidiarias y partes relacionadas (en lo sucesivo TV Azteca), con domicilio en Periférico Sur número 4121, Colonia Fuentes del Pedregal, Delegación Tlalpan, Ciudad de México, Distrito Federal, Código Postal 14141. en cumplimiento a la Ley Federal de Protección de Datos en Posesión de los Particulares, hace de su conocimiento que los datos personales y/o datos sensibles que usted libre y voluntariamente llegara a proporcionar a través de este medio, estarán sujetos a las disposiciones del Aviso de Privacidad Completo de TV Azteca mismo que puede ser consultado en el sitio de Internet: www.azteca.com, y en el cual se explica el tratamiento de su información y los derechos que le otorga la legislación aplicable.  17.	Relevo de responsabilidad LLos participantes al momento de su participación en la presente promoción acuerdan, relevar de responsabilidad a THE COCA-COLA EXPORT CORPORATION SUCURSAL EN MÉXICO., a TV Azteca, S.A.B. de C.V., Televisión Azteca, S.A. de C.V., y a cada una de sus respectivas matrices, afiliadas, partes relacionadas, subsidiarias, oficiales, directores, accionistas agentes, empleados y todos aquellos asociados con el desarrollo y ejecución de este concurso, de cualquier responsabilidad en relación a, o de cualquier manera relacionado con, este concurso y/o la aceptación, o el uso/mal uso de los premios, incluyendo responsabilidad por daños personales y/o muerte, daños o pérdidas económicas. Los auspiciadores no se hacen responsables por la calidad o utilidad de los premios y entregarán los mismos con las garantías usuales del proveedor."/>
+                    </ScrollView>
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView100"
+                    android:layout_marginBottom="68dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignRight="@+id/buttonAtrasTermi"
+                    android:layout_alignEnd="@+id/buttonAtrasTermi"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutOptions">
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bodega Aurrerá "
+                    android:id="@+id/buttonBAurrera"
+                    android:background="#e41d2a"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:textAllCaps="false"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="31dp"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Casa Ley "
+                    android:id="@+id/buttonCasaLey"
+                    android:background="#e41d2a"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_marginTop="3dp"
+                    android:layout_below="@+id/buttonBAurrera"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textAllCaps="false"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Chedrahui "
+                    android:id="@+id/buttonChedrahui"
+                    android:background="#e41d2a"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_marginTop="3dp"
+                    android:layout_below="@+id/buttonCasaLey"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textAllCaps="false"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Comercial Mexicana "
+                    android:id="@+id/buttonCMexicana"
+                    android:background="#e41d2a"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_marginTop="3dp"
+                    android:layout_below="@+id/buttonChedrahui"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textAllCaps="false"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="HEB "
+                    android:id="@+id/buttonHeb"
+                    android:background="#e41d2a"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_marginTop="3dp"
+                    android:layout_below="@+id/buttonCMexicana"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textAllCaps="false"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Soriana "
+                    android:id="@+id/buttonSoriana"
+                    android:background="#e41d2a"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_marginTop="3dp"
+                    android:layout_below="@+id/buttonHeb"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textAllCaps="false"/>
+
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Superama "
+                    android:id="@+id/buttonSuperama"
+                    android:background="#e41d2a"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_marginTop="3dp"
+                    android:layout_below="@+id/buttonSoriana"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textAllCaps="false"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Walmart"
+                    android:id="@+id/buttonWalmart"
+                    android:background="#e41d2a"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_marginTop="3dp"
+                    android:layout_below="@+id/buttonSuperama"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textAllCaps="false"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Selecciona la tienda de tu compra"
+                    android:id="@+id/textView11"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="#ffff"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+
+            </RelativeLayout>
+
 
         </ViewFlipper>
 
@@ -1219,8 +1602,23 @@
         android:src="@drawable/logo"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true"
+        android:visibility="visible"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancelar registro"
+        android:id="@+id/buttonCancelar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="298dp"
+        android:background="#000"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:visibility="invisible"/>
 
 
 </RelativeLayout>

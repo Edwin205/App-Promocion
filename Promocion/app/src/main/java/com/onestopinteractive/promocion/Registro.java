@@ -2,14 +2,12 @@ package com.onestopinteractive.promocion;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,24 +19,37 @@ import java.util.Random;
 public class Registro extends ActionBarActivity implements View.OnClickListener {
 
     ViewFlipper viewFlipper;
-    Button btnNombre,btnApellidos,btnEmail,btnTelefono,btnFechaNaci,btnOtro,btnFinalizar
-            ,btnOtroVip,btnFinalizarVIp,btnSuerte,btnS,btnL,btnSI
-            ,btnNO,btnSigPersonalizada,btnDelegacion,btnCalle,btnExterior,btnInterior,btnColonia,btnCiudad,btnCodigoPostal,btnEstado,btnTicket,btnSifin,btnNOfin;
+    Button btnNombre, btnApellido,btnApellidoMaterno,btnEmail,btnTelefono,btnTelefonoSecund,btnFechaNaci,btnOtro
+            ,btnOtroVip,btnSuerte,btnS,btnL,btnSI
+            ,btnNO,btnCancelar,btnSiCancelar,btnNocancelar,btnSigPersonalizada,btnDelegacion,btnCalle,btnExterior,btnInterior,btnColonia,btnCiudad,btnCodigoPostal,btnEstado,btnTicket;
 
-    EditText etNombre,etApellidos,etEmail,etTelefono,etDia,etMes,etAno,etFrase,etCalle,etExterior,etInterior,etColonia ,etCiudad,etCodigoPostal,etEstado,etDelegacion,etTicket;
-    String nombreSupervisor;
+    EditText etNombre,etApellidos,etApellidoMaterno,etEmail,etTelefono,etTelefonoSecundario,etDia,etMes,etAno,etFrase,etCalle,etExterior,etInterior,etColonia ,etCiudad,etCodigoPostal,etEstado,etDelegacion,etTicket;
+    String nombreSupervisor,refernciaTienda;
     String ubicacionSupervisor,premio;
 
     Supervisor supervisor;
     TextView nombreSuper,ubicacionSuper,prueba,pruebaFin;
     Random ganadorAleatorio;
     int ganador;
-    int cantidadSmall,cantidadLarge,porcentaje;
+     public int cantidadSmall,cantidadLarge,porcentaje;
     DataBase baseDatos;
     TextView sqlprueba;
     int diaI,mesI,anoI;
     String diaS,mesS,anoS;
     String medida;
+    Intent intent;
+    Button atrasPoliticas,atrasCondiciones,btnCondiciones,btnPoliticas,btnTerminos;
+    boolean checked;
+    boolean politicas;
+    int preview=0;
+    Button btnBodegaAhorrera,btnCasaLey,btnChedrahui,btnComercialMexicana,btnHEB,btnSoriana,btnSuperama,btnWalmart;
+    String tiendaCompra;
+
+
+
+
+
+
 
 
     @Override
@@ -47,20 +58,27 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         baseDatos = new DataBase(this);
         sqlprueba = (TextView) findViewById(R.id.textViewSQLprueba);
 
-        medida = "";
+
+        medida = "L/XL";
+
+
+
+        Intent registros = new Intent();
+
 
 
 
         //Todos los botones que se utlizan
         setContentView(R.layout.activity_registro);
+
+
+
         btnNombre = (Button) findViewById(R.id.buttonNombre);
         btnEmail = (Button) findViewById(R.id.buttonEmail);
         btnTelefono = (Button) findViewById(R.id.buttonTelefono);
         btnOtro = (Button) findViewById(R.id.buttonOtro);
-        btnFinalizar= (Button) findViewById(R.id.buttonFinalizar);
         btnFechaNaci = (Button) findViewById(R.id.buttonFechaNaci);
         btnOtroVip = (Button) findViewById(R.id.buttonVipOtro);
-        btnFinalizarVIp = (Button) findViewById(R.id.buttonVipFinalizar);
         btnSuerte = (Button) findViewById(R.id.buttonSuerte);
         btnS = (Button) findViewById(R.id.buttonSmall);
         btnL = (Button) findViewById(R.id.buttonLarge);
@@ -75,27 +93,49 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         btnCodigoPostal = (Button) findViewById(R.id.buttonCodigoPostal);
         btnEstado = (Button) findViewById(R.id.buttonEstado);
         btnTicket =(Button) findViewById(R.id.buttonTicket);
-        btnNOfin = (Button) findViewById(R.id.buttonNOSeguro);
-        btnSifin = (Button) findViewById(R.id.buttonSiSeg);
-        btnApellidos = (Button) findViewById(R.id.buttonApellidos);
+        btnApellido = (Button) findViewById(R.id.buttonApellidos);
         btnDelegacion = (Button) findViewById(R.id.buttonDelegacion);
+        btnApellidoMaterno = (Button) findViewById(R.id.buttonApellidoMaterno);
+        btnTelefonoSecund = (Button) findViewById(R.id.buttonTelefonoSecundario);
+        btnCancelar = (Button) findViewById(R.id.buttonCancelar);
+        btnSiCancelar = (Button) findViewById(R.id.buttonSiCancelar);
+        btnNocancelar = (Button) findViewById(R.id.buttonNoCancelar);
+        atrasCondiciones = (Button) findViewById(R.id.buttonAtrasTermi);
+        atrasPoliticas = (Button) findViewById(R.id.buttonAtrasPoliticas);
+        btnCondiciones = (Button) findViewById(R.id.buttonCondiciones);
+        btnPoliticas = (Button) findViewById(R.id.buttonPoliticas);
+        btnTerminos = (Button) findViewById(R.id.buttonTerminos);
+        btnBodegaAhorrera = (Button) findViewById(R.id.buttonBAurrera);
+        btnCasaLey = (Button) findViewById(R.id.buttonCasaLey);
+        btnChedrahui = (Button) findViewById(R.id.buttonChedrahui);
+        btnComercialMexicana = (Button) findViewById(R.id.buttonCMexicana);
+        btnHEB = (Button) findViewById(R.id.buttonHeb);
+        btnSoriana = (Button) findViewById(R.id.buttonSoriana);
+        btnSuperama = (Button) findViewById(R.id.buttonSuperama);
+        btnWalmart = (Button) findViewById(R.id.buttonWalmart);
+
+
 
         //El viewFlipper
         viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
 
 
-        Intent intent = getIntent();
+        intent = getIntent();
         cantidadSmall = Integer.parseInt(intent.getStringExtra("cantidadS"));
         cantidadLarge = Integer.parseInt(intent.getStringExtra("cantidadL"));
         nombreSupervisor = intent.getStringExtra("nombreSupervisor");
+        refernciaTienda = intent.getStringExtra("tiendaReferencia");
         ubicacionSupervisor = intent.getStringExtra("ubicacionSupervisor");
         porcentaje = Integer.parseInt(intent.getStringExtra("porcentaje"));
+
+
 
 
         //Datos del supervisor
         supervisor = new Supervisor();
         supervisor.setNombreSupervisor(nombreSupervisor);
         supervisor.setUbicacionSupervisor(ubicacionSupervisor);
+        supervisor.setTiendaSuper(refernciaTienda);
 
         //TextView's
         nombreSuper = (TextView) findViewById(R.id.textViewNombreSprueba);
@@ -107,11 +147,9 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         btnNombre.setOnClickListener(this);
         btnEmail.setOnClickListener(this);
         btnOtro.setOnClickListener(this);
-        btnFinalizar.setOnClickListener(this);
         btnTelefono.setOnClickListener(this);
         btnFechaNaci.setOnClickListener(this);
         btnOtroVip.setOnClickListener(this);
-        btnFinalizarVIp.setOnClickListener(this);
         btnSuerte.setOnClickListener(this);
         btnS.setOnClickListener(this);
         btnL.setOnClickListener(this);
@@ -126,89 +164,261 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         btnCodigoPostal.setOnClickListener(this);
         btnEstado.setOnClickListener(this);
         btnTicket.setOnClickListener(this);
-        btnNOfin.setOnClickListener(this);
-        btnSifin.setOnClickListener(this);
-        btnApellidos.setOnClickListener(this);
+        btnApellido.setOnClickListener(this);
         btnDelegacion.setOnClickListener(this);
+        btnApellidoMaterno.setOnClickListener(this);
+        btnTelefonoSecund.setOnClickListener(this);
+        btnNocancelar.setOnClickListener(this);
+        btnSiCancelar.setOnClickListener(this);
+        btnCancelar.setOnClickListener(this);
+        atrasCondiciones.setOnClickListener(this);
+        atrasPoliticas.setOnClickListener(this);
+        btnCondiciones.setOnClickListener(this);
+        btnPoliticas.setOnClickListener(this);
+        btnTerminos.setOnClickListener(this);
+        btnBodegaAhorrera.setOnClickListener(this);
+        btnCasaLey.setOnClickListener(this);
+        btnChedrahui.setOnClickListener(this);
+        btnComercialMexicana.setOnClickListener(this);
+        btnHEB.setOnClickListener(this);
+        btnSoriana.setOnClickListener(this);
+        btnSuperama.setOnClickListener(this);
+        btnWalmart.setOnClickListener(this);
 
 
 
+        hideButtonS();
+        hideButtonL();
+        checked = false;
+        politicas = false;
+
+    }
 
 
+    private void hideButtonS(){
+        if(cantidadSmall == 0)
+            btnS.setVisibility(View.INVISIBLE);
+    }
+
+    private void hideButtonL(){
+        if(cantidadLarge == 0)
+            btnL.setVisibility(View.INVISIBLE);
+    }
+
+    public void terminosClicked(View v) {
+        CheckBox checkBox = (CheckBox)v;
+        if(checkBox.isChecked()){
+            checked = true;
+        }
+        else
+        {
+            checked = false;
+        }
+    }
 
 
+    public void politicasClicked(View v) {
+        CheckBox checkBox = (CheckBox)v;
+        if(checkBox.isChecked()){
+            politicas = true;
+        }
+        else
+        {
+            politicas = false;
+        }
+    }
 
+
+    public void cambiar()
+    {
+
+        preview=6;
+        viewFlipper.setDisplayedChild(6);
+        btnCancelar.setVisibility(View.INVISIBLE);
     }
 
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.buttonBAurrera:
+                tiendaCompra = "Bodega Aurrerá";
+                cambiar();
+                break;
+
+            case R.id.buttonCasaLey:
+                tiendaCompra="Casa ley";
+                cambiar();
+                break;
+
+            case R.id.buttonChedrahui:
+                tiendaCompra="Chedrahui";
+                cambiar();
+                break;
+
+            case R.id.buttonCMexicana:
+                tiendaCompra="Comercial Mexicana ";
+                cambiar();
+                break;
+
+            case R.id.buttonHeb:
+
+                tiendaCompra="HEB";
+                cambiar();
+                break;
+
+            case R.id.buttonSoriana:
+
+
+                tiendaCompra="Soriana";
+                cambiar();
+                break;
+
+            case R.id.buttonSuperama:
+
+                tiendaCompra="Superama";
+                cambiar();
+                break;
+
+            case R.id.buttonWalmart:
+
+                tiendaCompra="Walmart";
+               cambiar();
+                break;
+
+            case R.id.buttonCondiciones:
+                if(checked ==true&& politicas ==true) {
+                    viewFlipper.setDisplayedChild(1);
+                    preview = 1;
+                    btnCancelar.setVisibility(View.VISIBLE);
+                }
+
+                else
+                {
+                    checked = false;
+                    politicas= false;
+                    Toast.makeText(this,"No haz aceptado",Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+            case R.id.buttonAtrasTermi:
+
+                viewFlipper.setDisplayedChild(0);
+                break;
+
+            case R.id.buttonAtrasPoliticas:
+
+                viewFlipper.setDisplayedChild(0);
+                break;
+
+            case  R.id.buttonTerminos:
+                btnCancelar.setVisibility(View.INVISIBLE);
+                viewFlipper.setDisplayedChild(26);
+                break;
+
+            case R.id.buttonPoliticas:
+                btnCancelar.setVisibility(View.INVISIBLE);
+                viewFlipper.setDisplayedChild(25);
+                break;
+
+
+            case R.id.buttonCancelar:
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                        InputMethodManager.HIDE_NOT_ALWAYS);
+                viewFlipper.setDisplayedChild(20);
+                btnCancelar.setVisibility(View.INVISIBLE);
+                break;
+
+            case R.id.buttonSiCancelar:
+                finish();
+                btnCancelar.setVisibility(View.VISIBLE);
+                break;
+
+            case R.id.buttonNoCancelar:
+                viewFlipper.setDisplayedChild(preview);
+                btnCancelar.setVisibility(View.VISIBLE);
+                break;
 
 
             case R.id.buttonNombre:
+                preview=21;
                 EditText cNombre= (EditText) findViewById(R.id.editTextNombrePersona);
                 String comNombre = cNombre.getText().toString();
                 int length = comNombre.length();
-                if(length>=4)
-                    viewFlipper.setDisplayedChild(19);
+                if(length>=2)
+                    viewFlipper.setDisplayedChild(21);
                 else
                     Toast.makeText(Registro.this, "Ingresa tu nombre completo.", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.buttonApellidos:
+                preview=23;
 
                 EditText cApellidos= (EditText) findViewById(R.id.editTextApellidosPersona);
                 String comApellidos = cApellidos.getText().toString();
                 int lengtha = comApellidos.length();
                 if(lengtha>=4)
-                    viewFlipper.setDisplayedChild(1);
+                    viewFlipper.setDisplayedChild(23);
                 else
                     Toast.makeText(Registro.this, "Ingresa tu apellido completo.", Toast.LENGTH_SHORT).show();
+                break;
 
+            case R.id.buttonApellidoMaterno:
+                preview=2;
+                viewFlipper.setDisplayedChild(2);
                 break;
 
             case R.id.buttonEmail:
-
+                preview=3;
                 EditText cEmail = (EditText) findViewById(R.id.editTextEmail);
                 String comEmial = cEmail.getText().toString();
                 int longitud = comEmial.length();
                 char valor;
 
-                for(char i = 0; i < longitud; i++)
+                if(comEmial.equals(""))
                 {
+                    viewFlipper.setDisplayedChild(3);
+                }
+                    else{
+                for (char i = 0; i < longitud; i++) {
                     valor = comEmial.charAt(i);
-                    if(valor == '@' && i == 0){
-                        Toast.makeText(Registro.this, "Escribe un correo valido.", Toast.LENGTH_SHORT).show();
+                    if (valor == '@' && i == 0) {
+                        Toast.makeText(Registro.this, "Escribe un correo valido", Toast.LENGTH_SHORT).show();
                         break;
                     }
-                    if(valor == '@')
-                    {
-                        viewFlipper.setDisplayedChild(2);
+                    if (valor == '@') {
+                        viewFlipper.setDisplayedChild(3);
                         break;
-                    }
-                    else if(i == longitud-1){
-                        Toast.makeText(Registro.this, "Escribe un correo valido.", Toast.LENGTH_SHORT).show();
+                    } else if (i == longitud - 1) {
+                        Toast.makeText(Registro.this, "Escribe un correo valido", Toast.LENGTH_SHORT).show();
                         break;
                     }
                 }
-
+            }
                 break;
 
             case R.id.buttonTelefono:
+                preview=24;
                 EditText cTelefono= (EditText) findViewById(R.id.editTextTelefono);
                 String comTelefono = cTelefono.getText().toString();
                 int lengthTelefono = comTelefono.length();
 
                 if(lengthTelefono>=5)
-                    viewFlipper.setDisplayedChild(4);
+                    viewFlipper.setDisplayedChild(24);
 
                 else
                     Toast.makeText(Registro.this, "Ingresa un numero de telefono valido.", Toast.LENGTH_SHORT).show();
                 break;
 
+            case R.id.buttonTelefonoSecundario:
+                preview=5;
+                viewFlipper.setDisplayedChild(5);
+                break;
+
 
             case R.id.buttonFechaNaci:
+                preview=18;
                 EditText dia = (EditText) findViewById(R.id.editTextDia);
                 EditText mes = (EditText) findViewById(R.id.editTextMes);
                 EditText ano = (EditText) findViewById(R.id.editTextAno);
@@ -248,63 +458,60 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                         ganador = 1 + ganadorAleatorio.nextInt(porcentaje);
 
                         if (ganador == porcentaje) {
-                            viewFlipper.setDisplayedChild(7);
+
                             premio = "playera";
+                            if(cantidadLarge == 0 && cantidadSmall ==0)
+                            {
+                                preview=10;
+                                viewFlipper.setDisplayedChild(10);
+                                btnCancelar.setVisibility(View.VISIBLE);
+                            }
+                            else {
+                                preview=8;
+                                viewFlipper.setDisplayedChild(8);
+                                btnCancelar.setVisibility(View.INVISIBLE);
+                            }
+
 
                         } else {
-                            viewFlipper.setDisplayedChild(6);
+                            preview=7;
+                            viewFlipper.setDisplayedChild(7);
                             premio = "vip";
                             alta();
+                            btnCancelar.setVisibility(View.INVISIBLE);
                         }
-
-
                 break;
 
-            case R.id.buttonOtro:
-                viewFlipper.setDisplayedChild(0);
-                break;
 
-            case R.id.buttonFinalizar:
-                viewFlipper.setDisplayedChild(18);
-
-                break;
-            case R.id.buttonNOSeguro:
-                viewFlipper.setDisplayedChild(3);
-                break;
-
-            case R.id.buttonSiSeg:
-                Intent intent = new Intent(Registro.this,Portada.class);
-                startActivity(intent);
-                break;
 
             case R.id.buttonVipOtro:
-                viewFlipper.setDisplayedChild(0);
+                finish();
+                btnCancelar.setVisibility(View.VISIBLE);
                 break;
 
-            case R.id.buttonVipFinalizar:
-                viewFlipper.setDisplayedChild(18);
 
-                break;
+                case R.id.buttonSmall:
 
-            case R.id.buttonSmall:
+                    medida = "S/M";
 
-                medida = "S/M";
-                if(cantidadSmall == 1) {
-                    Toast.makeText(Registro.this, "Es la ultima playera M/S.", Toast.LENGTH_SHORT).show();
-                    viewFlipper.setDisplayedChild(8);
-                    cantidadSmall -= 1;
-                }
+                    if (cantidadSmall == 1) {
+                        Toast.makeText(Registro.this, "Es la ultima playera M/S.", Toast.LENGTH_SHORT).show();
+                        preview=9;
+                        viewFlipper.setDisplayedChild(9);
+                        cantidadSmall -= 1;
 
-                else if(cantidadSmall<=0)
-                    Toast.makeText(Registro.this,"Ya no quedan mas playeras M/S.",Toast.LENGTH_SHORT).show();
+                    } else if (cantidadSmall <= 0)
+                        Toast.makeText(Registro.this, "Ya no quedan mas playeras M/S.", Toast.LENGTH_SHORT).show();
 
-                else {
-                    viewFlipper.setDisplayedChild(8);
-                    Toast.makeText(Registro.this,"Quedan"+cantidadSmall+" "+"playeras S/M.",Toast.LENGTH_SHORT).show();
-                    cantidadSmall -= 1;
-                }
+                    else {
+                        preview=9;
+                        viewFlipper.setDisplayedChild(9);
+                        Toast.makeText(Registro.this, "Quedan" +" "+ cantidadSmall + " " + "playeras S/M.", Toast.LENGTH_SHORT).show();
+                        cantidadSmall -= 1;
 
-                break;
+                    }
+
+                    break;
 
 
             case R.id.buttonLarge:
@@ -313,41 +520,53 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
                 if(cantidadLarge == 1) {
                     Toast.makeText(Registro.this, "Es la ultima playera XL/L.", Toast.LENGTH_SHORT).show();
-                    viewFlipper.setDisplayedChild(8);
+                    preview=9;
+                    viewFlipper.setDisplayedChild(9);
                     cantidadLarge -= 1;
+
                 }
 
                 else if(cantidadLarge<=0)
                     Toast.makeText(Registro.this,"Ya no quedan mas playeras XL/L.",Toast.LENGTH_SHORT).show();
 
                 else {
-
-                    viewFlipper.setDisplayedChild(8);
+                    preview=9;
+                    viewFlipper.setDisplayedChild(9);
                     cantidadLarge -= 1;
-                    Toast.makeText(Registro.this,"Quedan"+cantidadLarge+" "+"playeras XL/L.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this,"Quedan"+" "+cantidadLarge+" "+"playeras XL/L.",Toast.LENGTH_SHORT).show();
+
                 }
 
                 break;
 
             case R.id.buttonSI:
-                viewFlipper.setDisplayedChild(9);
+                hideButtonS();
+                hideButtonL();
+                preview=10;
+                viewFlipper.setDisplayedChild(10);
+                btnCancelar.setVisibility(View.VISIBLE);
                 break;
 
 
             case R.id.buttonNO:
-                viewFlipper.setDisplayedChild(3);
-
+                hideButtonS();
+                hideButtonL();
                 alta();
+                finish();
+                btnCancelar.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.buttonSigPersonalizacion:
+
 
                 EditText cPersonaliza= (EditText) findViewById(R.id.editTextPersonalizacion);
                 String comPersonaliza = cPersonaliza.getText().toString();
                 int lengthPer = comPersonaliza.length();
 
-                if(lengthPer>=4)
-                    viewFlipper.setDisplayedChild(10);
+                if(lengthPer>=4) {
+                    preview = 11;
+                    viewFlipper.setDisplayedChild(11);
+                }
 
                 else
                     Toast.makeText(Registro.this, "Ingresa tu nombre completo.", Toast.LENGTH_SHORT).show();
@@ -359,9 +578,10 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 String comCalle = cCalle.getText().toString();
                 int lenghtCall = comCalle.length();
 
-                if(lenghtCall>=4)
-                    viewFlipper.setDisplayedChild(11);
-
+                if(lenghtCall>=4) {
+                    preview=12;
+                    viewFlipper.setDisplayedChild(12);
+                }
                 else
                     Toast.makeText(Registro.this, "Ingresa una calle correcta.", Toast.LENGTH_SHORT).show();
                 break;
@@ -371,8 +591,10 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 String comExterior = cExterior.getText().toString();
                 int lenghtExt = comExterior.length();
 
-                if(lenghtExt>=1)
-                    viewFlipper.setDisplayedChild(12);
+                if(lenghtExt>=1) {
+                    preview=13;
+                    viewFlipper.setDisplayedChild(13);
+                }
 
                 else
                     Toast.makeText(Registro.this, "Ingresa un numero correcto.", Toast.LENGTH_SHORT).show();
@@ -381,13 +603,10 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
             case R.id.buttonInterior:
                 EditText cInterior= (EditText) findViewById(R.id.editTextInterior);
                 String comInterior = cInterior.getText().toString();
-                int lenghtInt = comInterior.length();
-
-                if(lenghtInt>=1)
-                    viewFlipper.setDisplayedChild(13);
-
-                else
+                    preview=14;
+                    viewFlipper.setDisplayedChild(14);
                     Toast.makeText(Registro.this, "Ingresa un numero correcto.", Toast.LENGTH_SHORT).show();
+
                 break;
 
             case R.id.buttonColonia:
@@ -395,8 +614,10 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 String comColonia = cColonia.getText().toString();
                 int lenghtCol = comColonia.length();
 
-                if(lenghtCol>=5)
-                    viewFlipper.setDisplayedChild(14);
+                if(lenghtCol>=5) {
+                    preview=15;
+                    viewFlipper.setDisplayedChild(15);
+                }
 
                 else
                     Toast.makeText(Registro.this, "Ingresa una colonia correcta.", Toast.LENGTH_SHORT).show();
@@ -407,8 +628,10 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 String comCiudad = cCiudad.getText().toString();
                 int lenghtCiu = comCiudad.length();
 
-                if(lenghtCiu>=4)
-                    viewFlipper.setDisplayedChild(15);
+                if(lenghtCiu>=4) {
+                    preview=16;
+                    viewFlipper.setDisplayedChild(16);
+                }
 
                 else
                     Toast.makeText(Registro.this, "Ingresa una ciudad correcta.", Toast.LENGTH_SHORT).show();
@@ -419,8 +642,10 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 String comCodigoPos = cCodigoPos.getText().toString();
                 int lenghtCodPos = comCodigoPos.length();
 
-                if(lenghtCodPos>=3)
-                    viewFlipper.setDisplayedChild(16);
+                if(lenghtCodPos>=3) {
+                    preview=17;
+                    viewFlipper.setDisplayedChild(17);
+                }
 
                 else
                     Toast.makeText(Registro.this, "Ingresa un codigo postal correcto.", Toast.LENGTH_SHORT).show();
@@ -432,8 +657,9 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 EditText cEstado= (EditText) findViewById(R.id.editTextEstado);
                 String comEstado = cEstado.getText().toString();
                 int lenghtEst = comEstado.length();
-                if(lenghtEst>=4){
-                    viewFlipper.setDisplayedChild(20);
+                if(lenghtEst>=2){
+                    preview=22;
+                    viewFlipper.setDisplayedChild(22);
                 }
                 else
                     Toast.makeText(Registro.this, "Ingresa un estado correcto.", Toast.LENGTH_SHORT).show();
@@ -446,10 +672,9 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
                 if(lenghtDel>=4){
                     InputMethodManager inputM = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inputM.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+                    inputM.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     alta();
-                    viewFlipper.setDisplayedChild(3);
-                    Toast.makeText(Registro.this, "Se completo el registro.", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
                 else
                     Toast.makeText(Registro.this, "Ingresa un Municipio o delegacion correcta.", Toast.LENGTH_SHORT).show();
@@ -463,10 +688,13 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
                 if(lenghtTicket>=6)
                 {
-                    InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                    InputMethodManager inputManagerT = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManagerT.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                             InputMethodManager.HIDE_NOT_ALWAYS);
-                    viewFlipper.setDisplayedChild(5);
+                    preview=27;
+                    viewFlipper.setDisplayedChild(27);
+                    btnCancelar.setVisibility(View.INVISIBLE);
+
                 }
 
                 else
@@ -480,13 +708,16 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
         String nombreSupervisor = supervisor.getNombreSupervisor();
         String ubicacionSupervisor = supervisor.getUbicacionSupervisor();
+        String referenciaTiendita = supervisor.getTiendaSuper();
 
 
         //Todos los editText utilizados
         etNombre = (EditText) findViewById(R.id.editTextNombrePersona);
         etApellidos = (EditText) findViewById(R.id.editTextApellidosPersona);
+        etApellidoMaterno = (EditText) findViewById(R.id.editTextApellidoMaterno);
         etEmail = (EditText) findViewById(R.id.editTextEmail);
         etTelefono = (EditText) findViewById(R.id.editTextTelefono);
+        etTelefonoSecundario = (EditText) findViewById(R.id.editTextTelefonoSecundario);
         etDia = (EditText) findViewById(R.id.editTextDia);
         etMes = (EditText)findViewById(R.id.editTextMes);
         etAno = (EditText) findViewById(R.id.editTextAno);
@@ -503,8 +734,10 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
         String nombre = etNombre.getText().toString();
         String apellidos =  etApellidos.getText().toString();
+        String apellidoMaterno = etApellidoMaterno.getText().toString();
         String email = etEmail.getText().toString();
         String telefono =etTelefono.getText().toString();
+        String telefonoSecundario = etTelefonoSecundario.getText().toString();
         String dia = etDia.getText().toString();
         String mes = etMes.getText().toString();
         String ano = etAno.getText().toString();
@@ -522,11 +755,9 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         prueba = (TextView) findViewById(R.id.textPrueba);
         pruebaFin= (TextView) findViewById(R.id.textViewPruebaFin);
         baseDatos.abrir();
-        baseDatos.insertarReg(nombreSupervisor, ubicacionSupervisor, nombre, apellidos, email,
-                telefono, dia, mes, ano, ticket, premio,medida,frase, calle, noExterior, noInterior, colonia, ciudad, codigoPostal, estado, delegacion);
+        baseDatos.insertarReg(nombreSupervisor, ubicacionSupervisor, nombre, apellidos, apellidoMaterno, email,
+                telefono, telefonoSecundario, dia, mes, ano, ticket, premio, medida, frase, calle, noExterior, noInterior, colonia, ciudad, codigoPostal, estado, delegacion,referenciaTiendita,tiendaCompra);
         baseDatos.cerrar();
-
-
 
 
         etNombre.setText("");
@@ -546,6 +777,12 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         etTicket.setText("");
         etApellidos.setText("");
         etDelegacion.setText("");
+        etTelefonoSecundario.setText("");
+        etApellidoMaterno.setText("");
+
+
+
+
 
         Toast.makeText(Registro.this,"Se guardo el registro.",Toast.LENGTH_SHORT).show();
     }
@@ -560,7 +797,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
 
         else if (diaI > 0 && diaI < 32 && mesI > 0 && mesI<13 && anoI >1900 && anoI<2016) {
-            viewFlipper.setDisplayedChild(17);
+            viewFlipper.setDisplayedChild(18);
         }
 
         else

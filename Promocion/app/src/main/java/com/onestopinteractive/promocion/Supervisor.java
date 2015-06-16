@@ -4,7 +4,7 @@ package com.onestopinteractive.promocion;
  * Created by edwin on 5/28/15.
  */
 public class Supervisor {
-    String nombreSupervisor, ubicacionSupervisor;
+    String nombreSupervisor, ubicacionSupervisor,tiendaSuper;
 
     public String getNombreSupervisor() {
         return nombreSupervisor;
@@ -20,5 +20,13 @@ public class Supervisor {
 
     public void setUbicacionSupervisor(String ubicacionSupervisor) {
         this.ubicacionSupervisor = ubicacionSupervisor;
+    }
+
+    public String getTiendaSuper() {
+        return tiendaSuper;
+    }
+
+    public void setTiendaSuper(String tiendaSuper) {
+        this.tiendaSuper = tiendaSuper;
     }
 }

@@ -28,19 +28,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Supervisor"
+                    android:text="Registrador"
                     android:id="@+id/textViewSuper"
                     android:textSize="40sp"
-                    android:layout_marginTop="41dp"
                     android:textColor="@android:color/white"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:layout_below="@+id/textView9"
+                    android:layout_centerHorizontal="true"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" Ubicación "
+                    android:text="Nombre Tienda"
                     android:id="@+id/textViewUbi"
                     android:layout_marginTop="78dp"
                     android:textSize="40sp"
@@ -52,16 +51,16 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Siguiente"
+                    android:text="Nuevo registro"
                     android:id="@+id/btnPortada"
-                    android:layout_marginTop="68dp"
                     android:background="#ff000000"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
                     android:textSize="17sp"
                     android:layout_below="@+id/textViewSuperUbicacion"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="28dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -82,28 +81,62 @@
                     android:layout_centerHorizontal="true"/>
 
                 <ImageButton
-                    android:src="@drawable/sync"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/buttonSync"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_toStartOf="@+id/textViewSuper"
-                    android:background="#000"
-                    android:layout_toLeftOf="@+id/textViewSuper"/>
-
-                <ImageButton
                     android:src="@drawable/settings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/buttonSettings"
                     android:background="#000"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_toLeftOf="@+id/textViewUbi"
-                    android:layout_toStartOf="@+id/textViewUbi"/>
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Versión 1.0"
+                    android:id="@+id/textView9"
+                    android:textSize="16sp"
+                    android:textColor="#fff"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Info"
+                    android:id="@+id/buttonInfo"
+                    android:background="#000"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/buttonSettings"
+                    android:layout_toEndOf="@+id/buttonSettings"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_alignTop="@+id/buttonSettings"/>
+
+                <ImageButton
+                    android:src="@drawable/sync"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buttonSync"
+                    android:background="#000"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Text"
+                    android:id="@+id/textViewReferencia"
+                    android:layout_above="@+id/buttonInfo"
+                    android:layout_toRightOf="@+id/textViewSuperUbicacion"
+                    android:layout_toEndOf="@+id/textViewSuperUbicacion"
+                    android:layout_marginBottom="58dp"
+                    android:visibility="invisible"/>
 
 
             </RelativeLayout>
@@ -111,12 +144,15 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/RelativeLayoutSettings">
+                android:id="@+id/RelativeLayoutSettings"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Supervisor"
+                    android:text="Registrador"
                     android:id="@+id/textViewSupervisor"
                     android:textSize="30sp"
                     android:textColor="@android:color/white"
@@ -142,14 +178,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ubicacion"
+                    android:text="Tienda"
                     android:id="@+id/textView"
-                    android:layout_marginTop="22dp"
                     android:textSize="30sp"
                     android:textColor="@android:color/white"
+                    android:textStyle="bold"
                     android:layout_below="@+id/editTextNombreSupervisor"
-                    android:layout_centerHorizontal="true"
-                    android:textStyle="bold"/>
+                    android:layout_centerHorizontal="true"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -162,8 +197,7 @@
                     android:textColor="#fff"
                     android:textColorHint="#fff"
                     android:layout_below="@+id/textView"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"/>
+                    android:visibility="invisible"/>
 
                 <Button
                     android:layout_width="wrap_content"
@@ -186,7 +220,8 @@
                     android:textSize="30sp"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
-                    android:layout_below="@+id/editTextUbicacion"
+                    android:layout_marginTop="39dp"
+                    android:layout_below="@+id/buttonSelecTienda"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"/>
 
@@ -195,15 +230,13 @@
                     android:layout_height="wrap_content"
                     android:text="M/S:"
                     android:id="@+id/textView2"
-                    android:layout_marginTop="21dp"
                     android:textSize="25sp"
                     android:textColor="@android:color/white"
-                    android:layout_marginLeft="22dp"
-                    android:layout_marginStart="22dp"
+                    android:textStyle="bold"
                     android:layout_below="@+id/textViewInventario"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:textStyle="bold"/>
+                    android:layout_marginTop="5dp"/>
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -255,20 +288,20 @@
                     android:layout_toRightOf="@+id/textViewL"
                     android:maxLength="2"
                     android:hint="NN"
-                    android:layout_alignRight="@+id/textView8"
-                    android:layout_alignEnd="@+id/textView8"/>
+                    android:layout_alignRight="@+id/textViewGana"
+                    android:layout_alignEnd="@+id/textViewGana"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1 de cada"
+                    android:text="Indice"
                     android:id="@+id/textViewunoDe"
-                    android:layout_below="@+id/textView2"
-                    android:layout_alignLeft="@+id/textView2"
-                    android:layout_alignStart="@+id/textView2"
                     android:layout_marginTop="29dp"
                     android:textColor="@android:color/white"
-                    android:textSize="25sp"/>
+                    android:textSize="25sp"
+                    android:layout_below="@+id/editTextSmall"
+                    android:layout_alignRight="@+id/editTextSmall"
+                    android:layout_alignEnd="@+id/editTextSmall"/>
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -276,36 +309,35 @@
                     android:inputType="number"
                     android:ems="10"
                     android:id="@+id/editTextPorcentaje"
-                    android:maxLength="1"
+                    android:maxLength="2"
                     android:textSize="20sp"
                     android:textColor="#fff"
                     android:textColorHint="#fff"
                     android:hint="N"
+                    android:text="5"
                     android:layout_above="@+id/buttonGuardar"
-                    android:layout_toRightOf="@+id/textViewunoDe"
-                    android:layout_toLeftOf="@+id/textViewGana"
-                    android:layout_toStartOf="@+id/textViewGana"/>
+                    android:layout_toRightOf="@+id/editTextSmall"
+                    android:layout_toLeftOf="@+id/textView7"
+                    android:layout_toStartOf="@+id/textView7"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="gana."
                     android:id="@+id/textViewGana"
                     android:textColor="@android:color/white"
                     android:textSize="25sp"
-                    android:layout_above="@+id/buttonGuardar"
-                    android:layout_alignRight="@+id/textViewSupervisor"
-                    android:layout_alignEnd="@+id/textViewSupervisor"/>
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_alignBottom="@+id/editTextPorcentaje"
+                    android:layout_toRightOf="@+id/textViewSupervisor"
+                    android:layout_toEndOf="@+id/textViewSupervisor"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView7"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginStart="16dp"
                     android:layout_alignTop="@+id/editTextPorcentaje"
-                    android:layout_toRightOf="@+id/textViewGana"
-                    android:layout_toEndOf="@+id/textViewGana"/>
+                    android:layout_centerHorizontal="true"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -317,10 +349,302 @@
                     android:layout_toRightOf="@+id/textView7"
                     android:layout_toEndOf="@+id/textView7"/>
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="cerrar sesión"
+                    android:id="@+id/buttonCerrarSesion"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:background="#000"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewEleccionTienda"
+                    android:layout_alignBaseline="@+id/editTextUbicacion"
+                    android:layout_alignBottom="@+id/editTextUbicacion"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="#fff"
+                    android:textSize="16sp"
+                    android:visibility="visible"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Selecciona tienda"
+                    android:id="@+id/buttonSelecTienda"
+                    android:background="#e41d2a"
+                    android:layout_below="@+id/textView"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textColor="#fff"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editTextReferencia"
+                    android:layout_below="@+id/buttonSelecTienda"
+                    android:inputType="textPersonName"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Referencia de tienda"
+                    android:textColor="#fff"
+                    android:textColorHint="#fff"
+                    android:maxLength="25"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutSeguro">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SI"
+                    android:id="@+id/buttonSiSeg"
+                    android:background="#ff000000"
+                    android:textColor="@android:color/white"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="205dp"
+                    android:textStyle="bold"
+                    android:textSize="17sp"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NO"
+                    android:id="@+id/buttonNOSeguro"
+                    android:layout_alignBottom="@+id/buttonSiSeg"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="#ff000000"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:textSize="17sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Presiona si para salir de tu cuenta de registrador"
+                    android:id="@+id/textView69"
+                    android:layout_marginTop="25dp"
+                    android:textColor="#fff"
+                    android:textSize="30sp"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutinfo">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Registros nuevos:"
+                    android:id="@+id/textViewNuevos"
+                    android:layout_marginTop="97dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:textColor="#fff"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Registros sincronizados:"
+                    android:id="@+id/textViewSincronizados"
+                    android:layout_marginTop="27dp"
+                    android:layout_below="@+id/textViewNuevos"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:textColor="#fff"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Registros totales:"
+                    android:id="@+id/textViewTotales"
+                    android:layout_marginTop="31dp"
+                    android:layout_below="@+id/textViewSincronizados"
+                    android:layout_alignRight="@+id/textViewNuevos"
+                    android:layout_alignEnd="@+id/textViewNuevos"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:textColor="#fff"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ultima sincronización:"
+                    android:id="@+id/textViewUltima"
+                    android:layout_below="@+id/textViewTotales"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="27dp"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:textColor="#fff"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Atras"
+                    android:id="@+id/buttonAtras"
+                    android:background="#000"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
+
+                <ImageButton
+                    android:src="@drawable/sync"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buttonSyncInfo"
+                    android:background="#000"
+                    android:layout_marginTop="77dp"
+                    android:layout_below="@+id/textViewUltima"
+                    android:layout_centerHorizontal="true"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutOptions">
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bodega Aurrerá "
+                    android:id="@+id/buttonBAurrera"
+                    android:background="#e41d2a"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textAllCaps="false"
+                    />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Casa Ley "
+                    android:id="@+id/buttonCasaLey"
+                    android:background="#e41d2a"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_marginTop="3dp"
+                    android:layout_below="@+id/buttonBAurrera"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textAllCaps="false"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Chedrahui "
+                    android:id="@+id/buttonChedrahui"
+                    android:background="#e41d2a"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_marginTop="3dp"
+                    android:layout_below="@+id/buttonCasaLey"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textAllCaps="false"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Comercial Mexicana "
+                    android:id="@+id/buttonCMexicana"
+                    android:background="#e41d2a"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_marginTop="3dp"
+                    android:layout_below="@+id/buttonChedrahui"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textAllCaps="false"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="HEB "
+                    android:id="@+id/buttonHeb"
+                    android:background="#e41d2a"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_marginTop="3dp"
+                    android:layout_below="@+id/buttonCMexicana"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textAllCaps="false"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Soriana "
+                    android:id="@+id/buttonSoriana"
+                    android:background="#e41d2a"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_marginTop="3dp"
+                    android:layout_below="@+id/buttonHeb"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textAllCaps="false"/>
+
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Superama "
+                    android:id="@+id/buttonSuperama"
+                    android:background="#e41d2a"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_marginTop="3dp"
+                    android:layout_below="@+id/buttonSoriana"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textAllCaps="false"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Walmart"
+                    android:id="@+id/buttonWalmart"
+                    android:background="#e41d2a"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_marginTop="3dp"
+                    android:layout_below="@+id/buttonSuperama"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textAllCaps="false"/>
+
 
             </RelativeLayout>
 
         </ViewFlipper>
+
     </RelativeLayout>
 
     <ImageView
