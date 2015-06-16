@@ -40,7 +40,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
     ImageButton buttonSettings;
     Button buttonGuardar,btnCerrarSecion,btnSi,btnNo,btnInfo,btnAtras;
     ImageButton buttonSync,btnSyncInfo ;
-    EditText superUbicacion,superNombre,tallaS,tallaL,porcentajeGanador;
+    EditText superUbicacion,superNombre,porcentajeGanador;
     TextView nombreSuper,ubicacionSuper,etNuevo,etTotales,etSincronizados,etTimeStamp;
     String cantidadS,cantidadL,porcentaje;
     String ubicacion,supervisor,nombre,apellidos,apellidoMaterno,email,telefono,telefonoSecundario,dia,mes,ano,
@@ -57,11 +57,13 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
     TextView tvrefencia;
     String referencia;
     String tiendaCompra;
+    EditText tallaS,tallaL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.portada);
+
 
 
 
@@ -348,7 +350,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                     botonOff = false;
                }
 
-                else if ( porcentaje<1){
+                else if ( porcentaje<5){
                     Toast.makeText(Portada.this, "Ingresa una probabilidad de 5 a 10 .", Toast.LENGTH_SHORT).show();
                     botonOff = false;
                }

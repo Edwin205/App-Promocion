@@ -44,6 +44,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
     int preview=0;
     Button btnBodegaAhorrera,btnCasaLey,btnChedrahui,btnComercialMexicana,btnHEB,btnSoriana,btnSuperama,btnWalmart;
     String tiendaCompra;
+    Registro registerl;
 
 
 
@@ -57,16 +58,11 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         baseDatos = new DataBase(this);
         sqlprueba = (TextView) findViewById(R.id.textViewSQLprueba);
+        registerl = new Registro();
 
 
         medida = "L/XL";
-
-
-
         Intent registros = new Intent();
-
-
-
 
         //Todos los botones que se utlizan
         setContentView(R.layout.activity_registro);
@@ -632,6 +628,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                     preview=16;
                     viewFlipper.setDisplayedChild(16);
                 }
+
 
                 else
                     Toast.makeText(Registro.this, "Ingresa una ciudad correcta.", Toast.LENGTH_SHORT).show();
