@@ -1,12 +1,8 @@
 package com.onestopinteractive.promocion;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,16 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -43,34 +29,25 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
     ImageButton buttonSync,btnSyncInfo ;
     EditText superUbicacion,superNombre,porcentajeGanador;
     TextView nombreSuper,ubicacionSuper,etNuevo,etTotales,etSincronizados,etTimeStamp;
+
     int cantidadS,cantidadL;
     String porcentaje;
-    String ubicacion,supervisor,nombre,apellidos,apellidoMaterno,email,telefono,telefonoSecundario,dia,mes,ano,
-            ticket,premio,medida,personalizacion,calle,nExterior,nInterior,
-    colonia,ciudad,estado,delegacion,postal,timestamp;
+
     int cant;
     int totales;
     int sincronizados;
-    DataBase baseDatos;
     int nuevos;
+
     Button btnSelectienda,btnBodegaAhorrera,btnCasaLey,btnChedrahui,btnComercialMexicana,btnHEB,btnSoriana,btnSuperama,btnWalmart;
     TextView tVTiendaSelec;
     EditText etTiendaRef;
     TextView tvrefencia;
-    String referencia;
-    String tiendaCompra;
     EditText tallaS,tallaL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.portada);
-
-
-
-
-
-
 
         tVTiendaSelec = (TextView) findViewById(R.id.textViewEleccionTienda);
         btnSelectienda = (Button) findViewById(R.id.buttonSelecTienda);
@@ -183,21 +160,23 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
             case R.id.buttonSelecTienda:
 
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(btnSelectienda.getWindowToken(), 0);
                 viewFlipper.setDisplayedChild(4);
 
                 break;
 
             case R.id.buttonBAurrera:
-                btnSelectienda.setText("Bodega Aurrerá");
+                btnSelectienda.setText("Bodega Aurrera");
 
-                tVTiendaSelec.setText("Bodega Aurrerá");
+                tVTiendaSelec.setText("Bodega Aurrera");
                 viewFlipper.setDisplayedChild(1);
                 break;
 
             case R.id.buttonCasaLey:
-                btnSelectienda.setText("Casa ley");
+                btnSelectienda.setText("Casa Ley");
 
-                tVTiendaSelec.setText("Casa ley");
+                tVTiendaSelec.setText("Casa Ley");
                 viewFlipper.setDisplayedChild(1);
                 break;
 
@@ -246,7 +225,8 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                 break;
 
             case R.id.buttonInfo:
-                if(consulta())
+                Sync osiSync = new Sync(this);
+                if(osiSync.countRecords() > 0)
                 {
                     Toast.makeText(this,"Sincroniza antes de verificar",Toast.LENGTH_SHORT).show();
                 }
@@ -400,49 +380,52 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
     Thread thread;
 
     private void enviarRegistro(){
-        Toast.makeText(getApplicationContext(), "Espera mientras se sincroniza.", Toast.LENGTH_SHORT).show();
-        thread = new Thread(new Runnable(){
+        final Sync osiSync = new Sync(this);
+        int recordsCount = osiSync.countRecords();
+
+        if (recordsCount <= 0) {
+            Toast.makeText(getApplicationContext(), "Todos los registros se han sincronizado correctamente.", Toast.LENGTH_SHORT).show();
+            etTimeStamp.setText("Ultima sincronización:" + getDateTime());
+            etSincronizados.setText("Registros Sincronizados:" + sincronizados);
+            etNuevo.setText("Registros nuevos:"+0);
+            totales = sincronizados + nuevos;
+            etTotales.setText("Registros totales:"+totales);
+            return;
+        }
+
+        Toast.makeText(getApplicationContext(), "Espere mientras se sincronizan " + Integer.toString(recordsCount) + " registros.", Toast.LENGTH_SHORT).show();
+
+        thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    if(consulta()) {
-                        String x = request().toString();
-                        if (x.equals("OK")) {
-                            sincronizados+=1;
-                            borrarUltimoRegistro();
-                            run();
-                        } else {
-                            //Error en el servidor
-                            runOnUiThread(new Runnable()
-                            {
-                                public void run() {
-                                    Toast.makeText(getApplicationContext(), "Error al sincronizar los registros vuelva a intentar.", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    }else{
-                        // Cuando no hay nada en la BD
+                int recordID = osiSync.nextRecord();
+                while (recordID > 0) {
+                    if (osiSync.postRecord(recordID)) {
+                        sincronizados += 1;
+                        osiSync.deleteRecord(recordID);
+                    } else {
                         runOnUiThread(new Runnable() {
                             public void run() {
-                                Toast.makeText(getApplicationContext(), "Todos los registros se han sincronizado correctamente.", Toast.LENGTH_SHORT).show();
-                                etTimeStamp.setText("Ultima sincronización:" + getDateTime());
-                                etSincronizados.setText("Registros Sincronizados:" + sincronizados);
-                                etNuevo.setText("Registros nuevos:"+0);
-                                totales = sincronizados + nuevos;
-                                etTotales.setText("Registros totales:"+totales);
-
-
+                                Toast.makeText(getApplicationContext(), "Error al sincronizar los registros vuelva a intentar.", Toast.LENGTH_SHORT).show();
                             }
                         });
+                        break;
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    recordID = osiSync.nextRecord();
+                }
+
+                if (osiSync.countRecords() <= 0) {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "Todos los registros se han sincronizado correctamente.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
         });
         thread.start();
-
     }
+
     private String getDateTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
                 "dd-MM-yyyy HH:mm", Locale.getDefault());
@@ -450,130 +433,4 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
         return dateFormat.format(date);
     }
 
-
-
-
-
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    private StringBuffer request() {
-        // TODO Auto-generated method stub
-
-        StringBuffer chaine = new StringBuffer("");
-        try{
-
-            String urlParameters  = "location="+ubicacion+"&location_ref="+referencia+"&supervisor="+supervisor+"&full_name="+nombre+"&surname="+apellidos+"&surname_m="+apellidoMaterno+"&email="+email+"&phone="+telefono+"&phone_alt="+telefonoSecundario+"&bday="+dia+"&bmonth="+mes+"&byear="+ano+"&ticket="+ticket+"&ticket_store="+tiendaCompra+"&prize="+premio+"&prize_size="+medida+"&prize_text="+personalizacion+"&prize_calle="+calle+"&prize_nexterior="+nExterior+"&prize_ninterior="+nInterior+"&prize_colonia="+colonia+"&prize_ciudad="+ciudad+"&prize_postal="+postal+"&prize_estado="+estado+"&prize_delegacion="+delegacion+"&created_at="+timestamp;
-            byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
-            int    postDataLength = postData.length;
-            URL url = new URL(" http://promococacola.azteca.click/api/register.php");
-            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-            connection.setRequestProperty("User-Agent", "");
-            connection.setRequestMethod("POST");
-            connection.setDoInput(true);
-            connection.connect();
-
-
-            try( DataOutputStream wr = new DataOutputStream( connection.getOutputStream())) {
-                wr.write( postData );
-            }
-
-            InputStream inputStream = connection.getInputStream();
-
-            BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream));
-            String line = "";
-            while ((line = rd.readLine()) != null) {
-                chaine.append(line);
-            }
-
-        } catch (IOException e) {
-            // writing exception to log
-            e.printStackTrace();
-        }
-        System.out.println(chaine);
-
-        return chaine;
-
-    }
-
-    public boolean consulta() {
-        boolean hayDatos = false;
-        nombre = "";
-        apellidos = "";
-        apellidoMaterno = "";
-        email = "";
-        supervisor = "";
-        ubicacion = "";
-        telefono = "";
-        telefonoSecundario = "";
-        dia = "";
-        mes = "";
-        ano = "";
-        ticket = "";
-        premio = "";
-        medida ="";
-        personalizacion = "";
-        calle = "";
-        nExterior = "";
-        nInterior= "";
-        colonia = "";
-        ciudad = "";
-        postal= "";
-        estado= "";
-        delegacion = "";
-        timestamp= "";
-
-        DataBase admin = new DataBase(this);
-        SQLiteDatabase bd = admin.getWritableDatabase();
-        Cursor fila = bd.rawQuery("SELECT nombreSupervisor,ubicacionSupervisor,nombre,apellidos,apellidoMaterno,email,telefono,telefonoSecundario,dia,mes,ano,numeroDeTicket,premio,medida,personalizacion,calle,noExterior,noInterior,colonia,ciudad,codigoPostal,estado,delegacion,timeStamp,tiendaReferencia,tiendaCompra FROM Registro where _ID=(SELECT MAX(_ID) FROM Registro)",null);
-        if(fila.moveToFirst()) {
-            hayDatos = true;
-            supervisor = fila.getString(0);
-            ubicacion = fila.getString(1);
-            nombre = fila.getString(2);
-            apellidos = fila.getString(3);
-            apellidoMaterno = fila.getString(4);
-            email = fila.getString(5);
-            telefono = fila.getString(6);
-            telefonoSecundario = fila.getString(7);
-            dia = fila.getString(8);
-            mes = fila.getString(9);
-            ano = fila.getString(10);
-            ticket = fila.getString(1);
-            premio = fila.getString(12);
-            medida = fila.getString(13);
-            personalizacion = fila.getString(14);
-            calle = fila.getString(15);
-            nExterior = fila.getString(16);
-            nInterior = fila.getString(17);
-            colonia = fila.getString(18);
-            ciudad = fila.getString(19);
-            postal = fila.getString(20);
-            estado = fila.getString(21);
-            delegacion = fila.getString(22);
-            timestamp = fila.getString(23);
-            referencia = fila.getString(24);
-            tiendaCompra = fila.getString(25);
-
-
-        }else{
-            hayDatos = false;
-        }
-        System.out.println(supervisor+" "+ubicacion+" "+referencia+" "+nombre+" "+apellidos+" "+apellidoMaterno+" "+email+" "+telefono+" "+telefonoSecundario+" "+dia+" "+mes+" "+ano+" "+ticket+" "+tiendaCompra+" "+premio+" "+medida+" "+personalizacion+" "+calle+" "+nExterior+" "+nInterior+" "+colonia+" "+ciudad+" "+postal+" "+estado+" "+delegacion+" "+timestamp);
-
-
-
-        bd.close();
-        return hayDatos;
-    }
-
-
-    public  void borrarUltimoRegistro()
-    {
-
-        DataBase admin = new DataBase(this);
-        SQLiteDatabase bd = admin.getWritableDatabase();
-        Cursor fila = bd.rawQuery("SELECT _ID FROM Registro where _ID=(SELECT MAX(_ID) FROM Registro)", null);
-        if(fila.moveToFirst()) {
-            cant = bd.delete("Registro", "_ID=" + fila.getString(0), null);
-        }
-    }
 }

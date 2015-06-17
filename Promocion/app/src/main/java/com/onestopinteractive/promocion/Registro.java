@@ -3,6 +3,10 @@ package com.onestopinteractive.promocion;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import android.content.SharedPreferences;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 
@@ -65,14 +75,11 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         S=false;
         L=false;
 
-
         medida = "L/XL";
         Intent registros = new Intent();
 
         //Todos los botones que se utlizan
         setContentView(R.layout.activity_registro);
-
-
 
         btnNombre = (Button) findViewById(R.id.buttonNombre);
         btnEmail = (Button) findViewById(R.id.buttonEmail);
@@ -237,6 +244,10 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         preview=6;
         viewFlipper.setDisplayedChild(6);
         btnCancelar.setVisibility(View.INVISIBLE);
+
+        System.out.println("<<<<<<<<<<< WillPhoto");
+        dispatchTakePictureIntent();
+        System.out.println("<<<<<<<<<<< DidPhoto");
     }
 
 
@@ -360,7 +371,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 EditText cApellidos= (EditText) findViewById(R.id.editTextApellidosPersona);
                 String comApellidos = cApellidos.getText().toString();
                 int lengtha = comApellidos.length();
-                if(lengtha>=4)
+                if(lengtha>=2)
                     viewFlipper.setDisplayedChild(23);
                 else
                     Toast.makeText(Registro.this, "Ingresa tu apellido completo.", Toast.LENGTH_SHORT).show();
@@ -453,35 +464,41 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 {
                     validacionFecha();
                 }
+                break;
+            case R.id.buttonSuerte:
+                if (mCurrentPhotoURI == null) {
+                    System.out.println("<<<<<<<<<<< WillPhoto");
+                    dispatchTakePictureIntent();
+                    System.out.println("<<<<<<<<<<< DidPhoto");
                     break;
-                    case R.id.buttonSuerte:
+                }
 
-                        ganadorAleatorio = new Random();
-                        ganador =  1 + ganadorAleatorio.nextInt(porcentaje);
+                ganadorAleatorio = new Random();
+                ganador = 1 + ganadorAleatorio.nextInt(porcentaje);
 
-                        if (ganador == porcentaje) {
+                if (ganador == porcentaje) {
 
-                            premio = "playera";
-                            if(cantidadLarge == 0 && cantidadSmall ==0)
-                            {
-                                preview=10;
-                                viewFlipper.setDisplayedChild(10);
-                                btnCancelar.setVisibility(View.VISIBLE);
-                            }
-                            else {
-                                preview=8;
-                                viewFlipper.setDisplayedChild(8);
-                                btnCancelar.setVisibility(View.INVISIBLE);
-                            }
+                    premio = "playera";
+                    if(cantidadLarge == 0 && cantidadSmall ==0)
+                    {
+                        preview=10;
+                        viewFlipper.setDisplayedChild(10);
+                        btnCancelar.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        preview=8;
+                        viewFlipper.setDisplayedChild(8);
+                        btnCancelar.setVisibility(View.INVISIBLE);
+                    }
 
 
-                        } else {
-                            preview=7;
-                            viewFlipper.setDisplayedChild(7);
-                            premio = "vip";
-                            alta();
-                            btnCancelar.setVisibility(View.INVISIBLE);
-                        }
+                } else {
+                    preview=7;
+                    viewFlipper.setDisplayedChild(7);
+                    premio = "vip";
+                    premio();
+                    btnCancelar.setVisibility(View.INVISIBLE);
+                }
                 break;
 
 
@@ -570,7 +587,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
                 hideButtonS();
                 hideButtonL();
-                alta();
+                premio();
                 finish();
                 btnCancelar.setVisibility(View.VISIBLE);
                 break;
@@ -686,14 +703,14 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 break;
 
             case R.id.buttonDelegacion:
-                EditText cDelegacion= (EditText) findViewById(R.id.editTextEstado);
+                EditText cDelegacion= (EditText) findViewById(R.id.editTextDelegacion);
                 String comDelegacion = cDelegacion.getText().toString();
                 int lenghtDel = comDelegacion.length();
 
                 if(lenghtDel>=4){
                     InputMethodManager inputM = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputM.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                    alta();
+                    premio();
                     finish();
                 }
                 else
@@ -729,7 +746,6 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         String nombreSupervisor = supervisor.getNombreSupervisor();
         String ubicacionSupervisor = supervisor.getUbicacionSupervisor();
         String referenciaTiendita = supervisor.getTiendaSuper();
-
 
         //Todos los editText utilizados
         etNombre = (EditText) findViewById(R.id.editTextNombrePersona);
@@ -775,8 +791,60 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         prueba = (TextView) findViewById(R.id.textPrueba);
         pruebaFin= (TextView) findViewById(R.id.textViewPruebaFin);
         baseDatos.abrir();
-        baseDatos.insertarReg(nombreSupervisor, ubicacionSupervisor, nombre, apellidos, apellidoMaterno, email,
-                telefono, telefonoSecundario, dia, mes, ano, ticket, premio, medida, frase, calle, noExterior, noInterior, colonia, ciudad, codigoPostal, estado, delegacion,referenciaTiendita,tiendaCompra);
+        baseDatos.insertarReg(nombreSupervisor, ubicacionSupervisor, referenciaTiendita, nombre, apellidos, apellidoMaterno, email,
+                telefono, telefonoSecundario, dia, mes, ano, ticket, mCurrentPhotoPath, tiendaCompra);
+        baseDatos.cerrar();
+
+        etNombre.setText("");
+        etEmail.setText("");
+        etTelefono.setText("");
+        etDia.setText("");
+        etMes.setText("");
+        etAno.setText("");
+        etFrase.setText("");
+        etCalle.setText("");
+        etExterior.setText("");
+        etInterior.setText("");
+        etColonia.setText("");
+        etCiudad.setText("");
+        etCodigoPostal.setText("");
+        etEstado.setText("");
+        etTicket.setText("");
+        etApellidos.setText("");
+        etDelegacion.setText("");
+        etTelefonoSecundario.setText("");
+        etApellidoMaterno.setText("");
+
+        Toast.makeText(Registro.this,"Se guardo el registro.",Toast.LENGTH_SHORT).show();
+    }
+
+    public void premio(){
+        //Todos los editText utilizados
+        etFrase = (EditText) findViewById(R.id.editTextPersonalizacion);
+        etCalle = (EditText) findViewById(R.id.editTextCalle);
+        etExterior = (EditText) findViewById(R.id.editTextExterior);
+        etInterior = (EditText) findViewById(R.id.editTextInterior);
+        etColonia = (EditText) findViewById(R.id.editTextColonia);
+        etCiudad = (EditText) findViewById(R.id.editTextCiudad);
+        etCodigoPostal = (EditText) findViewById(R.id.editTextCodigoPostal);
+        etEstado = (EditText) findViewById(R.id.editTextEstado);
+        etDelegacion = (EditText) findViewById(R.id.editTextDelegacion);
+        etTicket =(EditText) findViewById(R.id.editTextTicket);
+
+        String frase = etFrase.getText().toString();
+        String calle = etCalle.getText().toString();
+        String noExterior  = etExterior.getText().toString();
+        String noInterior = etInterior.getText().toString();
+        String colonia = etColonia.getText().toString();
+        String ciudad = etCiudad.getText().toString();
+        String codigoPostal = etCodigoPostal.getText().toString();
+        String estado = etEstado.getText().toString();
+        String delegacion = etDelegacion.getText().toString();
+
+        prueba = (TextView) findViewById(R.id.textPrueba);
+        pruebaFin= (TextView) findViewById(R.id.textViewPruebaFin);
+        baseDatos.abrir();
+        baseDatos.premioReg(premio, medida, frase, calle, noExterior, noInterior, colonia, ciudad, delegacion, estado, codigoPostal);
         baseDatos.cerrar();
 
 
@@ -800,11 +868,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         etTelefonoSecundario.setText("");
         etApellidoMaterno.setText("");
 
-
-
-
-
-        Toast.makeText(Registro.this,"Se guardo el registro.",Toast.LENGTH_SHORT).show();
+        Toast.makeText(Registro.this,"Se actualizo el registro.",Toast.LENGTH_SHORT).show();
     }
 
     public  void validacionFecha() {
@@ -842,6 +906,63 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         SharedPreferences.Editor sharedEditor = sharedPref.edit();
         sharedEditor.putInt("playeraM", cantidadLarge);
         sharedEditor.commit();
+    }
+
+    Uri mCurrentPhotoURI;
+    String mCurrentPhotoPath;
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp;
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        mCurrentPhotoPath = image.getAbsolutePath();
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoURI = Uri.fromFile(image);
+        return image;
+    }
+
+    static final int REQUEST_TAKE_PHOTO = 501;
+
+    private void dispatchTakePictureIntent() {
+        mCurrentPhotoPath = "";
+        mCurrentPhotoURI = null;
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                        Uri.fromFile(photoFile));
+                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_TAKE_PHOTO) {
+            if (resultCode == RESULT_OK) {
+                alta();
+            } else {
+                mCurrentPhotoPath = "";
+                mCurrentPhotoURI = null;
+                Toast.makeText(Registro.this, "Debe agregar una imagen al ticket.", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
 }

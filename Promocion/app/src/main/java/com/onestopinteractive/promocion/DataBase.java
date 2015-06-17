@@ -30,7 +30,7 @@ public class DataBase  extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String Query = "create table Registro(" + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "nombreSupervisor TEXT, ubicacionSupervisor TEXT, nombre TEXT,apellidos TEXT,apellidoMaterno TEXT, email TEXT, telefono TEXT,telefonoSecundario TEXT,dia TEXT,mes TEXT,ano TEXT,numeroDeTicket TEXT,premio TEXT,medida TEXT,personalizacion TEXT,calle TEXT,noExterior TEXT,noInterior TEXT,colonia TEXT,ciudad TEXT,codigoPostal TEXT,estado TEXT,delegacion TEXT,timeStamp TEXT,tiendaReferencia TEXT,tiendaCompra TEXT)";
+                + "nombreSupervisor TEXT, ubicacionSupervisor TEXT, nombre TEXT,apellidos TEXT,apellidoMaterno TEXT, email TEXT, telefono TEXT,telefonoSecundario TEXT,dia TEXT,mes TEXT,ano TEXT,numeroDeTicket TEXT,imagenTicket TEXT,premio TEXT,medida TEXT,personalizacion TEXT,calle TEXT,noExterior TEXT,noInterior TEXT,colonia TEXT,ciudad TEXT,codigoPostal TEXT,estado TEXT,delegacion TEXT,timeStamp TEXT,tiendaReferencia TEXT,tiendaCompra TEXT)";
 
         db.execSQL(Query);
     }
@@ -40,20 +40,14 @@ public class DataBase  extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int versionAnte, int versionNue) {
         db.execSQL("drop table if exists Registro");
         db.execSQL("create table Registro(" + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "nombreSupervisor TEXT, ubicacionSupervisor TEXT, nombre TEXT,apellidos TEXT,apellidoMaterno TEXT,email TEXT, telefono TEXT,telefonoSecundario TEXT,dia TEXT,mes TEXT,ano TEXT,numeroDeTicket TEXT,premio TEXT,medida TEXT,personalizacion TEXT,calle TEXT,noExterior TEXT,noInterior TEXT,colonia TEXT,ciudad TEXT,codigoPostal TEXT,estado TEXT,delegacion TEXT,timeStamp TEXT,tiendaReferencia  TEXT,tiendaCompra TEXT)");
+                + "nombreSupervisor TEXT, ubicacionSupervisor TEXT, nombre TEXT,apellidos TEXT,apellidoMaterno TEXT,email TEXT, telefono TEXT,telefonoSecundario TEXT,dia TEXT,mes TEXT,ano TEXT,numeroDeTicket TEXT,imagenTicket TEXT,premio TEXT,medida TEXT,personalizacion TEXT,calle TEXT,noExterior TEXT,noInterior TEXT,colonia TEXT,ciudad TEXT,codigoPostal TEXT,estado TEXT,delegacion TEXT,timeStamp TEXT,tiendaReferencia  TEXT,tiendaCompra TEXT)");
 
     }
 
-
-
-
-
-
-
-    public void insertarReg(String nombreSupervisor,String ubicacionSupervisor,
+    public void insertarReg(String nombreSupervisor,String ubicacionSupervisor,String referenciaTienda,
                             String nombre,String apellidos,String apellidoMaterno,String email,
-                            String telefono,String telefonoSecundario,String dia,String mes,String ano,String numeroTicket,String premio,String medida,String personalizacion,String calle,String noExterior,String noInterior,String colonia,String ciudad,String delegacion,String codigoPostal
-                          ,String estado,String referenciaTienda,String tiendaCompra)
+                            String telefono,String telefonoSecundario,String dia,String mes,String ano,
+                            String numeroTicket,String imagenTicket,String tiendaCompra)
     {
         ContentValues valores = new ContentValues();
 
@@ -68,7 +62,29 @@ public class DataBase  extends SQLiteOpenHelper {
         valores.put("dia",dia);
         valores.put("mes",mes);
         valores.put("ano",ano);
-        valores.put("numeroDeTicket",numeroTicket);
+        valores.put("timeStamp",getDateTime());
+        valores.put("tiendaReferencia",referenciaTienda);
+        valores.put("numeroDeTicket", numeroTicket);
+        valores.put("imagenTicket", imagenTicket);
+        valores.put("tiendaCompra",tiendaCompra);
+        this.getWritableDatabase().insert("Registro", null, valores);
+    }
+
+    public int ultimoReg() {
+        Cursor row = this.getReadableDatabase().rawQuery("SELECT " + _ID + " FROM Registro ORDER BY " + _ID + " DESC LIMIT 1;", null);
+        if (row.moveToFirst()) {
+            return row.getInt(0);
+        }
+        return 0;
+    }
+
+    public void premioReg(String premio,String medida,String personalizacion,String calle,String noExterior,String noInterior,String colonia,String ciudad,String delegacion,String estado,String codigoPostal)
+    {
+        int regID = ultimoReg();
+        if (regID <= 0) { return; }
+
+        ContentValues valores = new ContentValues();
+
         valores.put("premio",premio);
         valores.put("medida",medida);
         valores.put("personalizacion",personalizacion);
@@ -81,11 +97,7 @@ public class DataBase  extends SQLiteOpenHelper {
         valores.put("estado",estado);
         valores.put("delegacion",delegacion);
         valores.put("timeStamp",getDateTime());
-        valores.put("tiendaReferencia",referenciaTienda);
-        valores.put("tiendaCompra",tiendaCompra);
-        this.getWritableDatabase().insert("Registro", null, valores);
-
-
+        this.getWritableDatabase().update("Registro", valores, _ID + " = " + Integer.toString(regID), null);
     }
 
     private String getDateTime() {
