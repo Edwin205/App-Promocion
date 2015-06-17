@@ -35,13 +35,13 @@
                     android:checked="false"
                     android:textColor="#fff"
                     android:textStyle="bold"
-                    android:textSize="18sp"
                     android:layout_marginLeft="26dp"
                     android:layout_marginStart="26dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:onClick="terminosClicked"/>
+                    android:onClick="terminosClicked"
+                    />
 
                 <Button
                     android:layout_width="wrap_content"
@@ -387,7 +387,9 @@
                     android:layout_alignTop="@+id/editText"
                     android:layout_toLeftOf="@+id/textView"
                     android:layout_alignLeft="@+id/textView2"
-                    android:layout_alignStart="@+id/textView2"/>
+                    android:layout_alignStart="@+id/textView2"
+                    android:imeOptions="actionNext"
+                    />
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -404,7 +406,9 @@
                     android:layout_alignLeft="@+id/sostenedor"
                     android:layout_alignStart="@+id/sostenedor"
                     android:layout_toLeftOf="@+id/textView3"
-                    android:layout_toStartOf="@+id/textView3"/>
+                    android:layout_toStartOf="@+id/textView3"
+                    android:imeOptions="actionNext"
+                    />
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -421,7 +425,9 @@
                     android:layout_alignTop="@+id/editText"
                     android:layout_toRightOf="@+id/textView"
                     android:layout_alignRight="@+id/textView4"
-                    android:layout_alignEnd="@+id/textView4"/>
+                    android:layout_alignEnd="@+id/textView4"
+                    android:imeOptions="actionDone"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -471,11 +477,11 @@
                     android:id="@+id/buttonFechaNaci"
                     android:textColor="@android:color/white"
                     android:background="#ff000000"
-                    android:layout_below="@+id/editTextAno"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
                     android:textStyle="bold"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:layout_above="@+id/textView4"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"/>
 
             </RelativeLayout>
 

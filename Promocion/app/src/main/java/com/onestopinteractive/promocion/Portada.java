@@ -3,6 +3,7 @@ package com.onestopinteractive.promocion;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
@@ -42,7 +43,8 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
     ImageButton buttonSync,btnSyncInfo ;
     EditText superUbicacion,superNombre,porcentajeGanador;
     TextView nombreSuper,ubicacionSuper,etNuevo,etTotales,etSincronizados,etTimeStamp;
-    String cantidadS,cantidadL,porcentaje;
+    int cantidadS,cantidadL;
+    String porcentaje;
     String ubicacion,supervisor,nombre,apellidos,apellidoMaterno,email,telefono,telefonoSecundario,dia,mes,ano,
             ticket,premio,medida,personalizacion,calle,nExterior,nInterior,
     colonia,ciudad,estado,delegacion,postal,timestamp;
@@ -140,8 +142,8 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                         porcentajeGanador = (EditText) findViewById(R.id.editTextPorcentaje);
 
 
-                        cantidadS = tallaS.getText().toString();
-                        cantidadL = tallaL.getText().toString();
+                        cantidadS = Integer.parseInt(tallaS.getText().toString());
+                        cantidadL = Integer.parseInt(tallaL.getText().toString());
                         porcentaje = porcentajeGanador.getText().toString();
 
 
@@ -149,8 +151,17 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
                         Intent intent = new Intent(Portada.this, Registro.class);
 
-                        intent.putExtra("cantidadS", cantidadS);
-                        intent.putExtra("cantidadL", cantidadL);
+
+
+
+                        /*SharedPreferences sharedPref = getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+                        SharedPreferences.Editor sharedEditor = sharedPref.edit();
+                        sharedEditor.putInt("playeraS", cantidadS);
+                        sharedEditor.putInt("playeraM", cantidadL);
+                        sharedEditor.commit();*/
+
+                        //intent.putExtra("cantidadS", cantidadS);
+                        //intent.putExtra("cantidadL", cantidadL);
                         intent.putExtra("porcentaje", porcentaje);
                         intent.putExtra("nombreSupervisor", nombreSuperv);
                         intent.putExtra("ubicacionSupervisor", ubicacionSuperv);
@@ -331,6 +342,10 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                 EditText validacionPo = (EditText) findViewById(R.id.editTextPorcentaje);
                 String validacionP = validacionPo.getText().toString();
 
+
+                int nSmall = Integer.parseInt(validacionS);
+                int nMedium = Integer.parseInt(validacionL);
+
                 boolean botonOff = true;
                 int porcentaje = Integer.parseInt(validacionP);
 
@@ -368,6 +383,11 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                   botonOff = true;
 
                 if(botonOff == true) {
+                    SharedPreferences sharedPref = getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+                        SharedPreferences.Editor sharedEditor = sharedPref.edit();
+                        sharedEditor.putInt("playeraS", nSmall);
+                        sharedEditor.putInt("playeraM", nMedium);
+                        sharedEditor.commit();
                   Toast.makeText(Portada.this, "Se guardo la sesión.", Toast.LENGTH_SHORT).show();
                   viewFlipper.setDisplayedChild(0);
               }

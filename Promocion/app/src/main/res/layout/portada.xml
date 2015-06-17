@@ -251,7 +251,9 @@
                     android:layout_toStartOf="@+id/textViewM"
                     android:maxLength="2"
                     android:hint="NN"
-                    android:layout_toLeftOf="@+id/textViewM"/>
+                    android:layout_toLeftOf="@+id/textViewM"
+                    android:imeOptions="actionNext"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -289,7 +291,9 @@
                     android:maxLength="2"
                     android:hint="NN"
                     android:layout_alignRight="@+id/textViewGana"
-                    android:layout_alignEnd="@+id/textViewGana"/>
+                    android:layout_alignEnd="@+id/textViewGana"
+                    android:imeOptions="actionNext"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -318,7 +322,9 @@
                     android:layout_above="@+id/buttonGuardar"
                     android:layout_toRightOf="@+id/editTextSmall"
                     android:layout_toLeftOf="@+id/textView7"
-                    android:layout_toStartOf="@+id/textView7"/>
+                    android:layout_toStartOf="@+id/textView7"
+                    android:imeOptions="actionDone"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -378,7 +384,7 @@
                     android:layout_height="wrap_content"
                     android:text="Selecciona tienda"
                     android:id="@+id/buttonSelecTienda"
-                    android:background="#e41d2a"
+                    android:background="#000"
                     android:layout_below="@+id/textView"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"

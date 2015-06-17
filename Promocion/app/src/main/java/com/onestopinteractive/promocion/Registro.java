@@ -2,6 +2,7 @@ package com.onestopinteractive.promocion;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,7 +32,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
     TextView nombreSuper,ubicacionSuper,prueba,pruebaFin;
     Random ganadorAleatorio;
     int ganador;
-     public int cantidadSmall,cantidadLarge,porcentaje;
+    int cantidadSmall,cantidadLarge,porcentaje;
     DataBase baseDatos;
     TextView sqlprueba;
     int diaI,mesI,anoI;
@@ -45,6 +46,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
     Button btnBodegaAhorrera,btnCasaLey,btnChedrahui,btnComercialMexicana,btnHEB,btnSoriana,btnSuperama,btnWalmart;
     String tiendaCompra;
     Registro registerl;
+    boolean S,L;
 
 
 
@@ -59,6 +61,9 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         baseDatos = new DataBase(this);
         sqlprueba = (TextView) findViewById(R.id.textViewSQLprueba);
         registerl = new Registro();
+
+        S=false;
+        L=false;
 
 
         medida = "L/XL";
@@ -117,8 +122,9 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
 
         intent = getIntent();
-        cantidadSmall = Integer.parseInt(intent.getStringExtra("cantidadS"));
-        cantidadLarge = Integer.parseInt(intent.getStringExtra("cantidadL"));
+        SharedPreferences sharedPref = getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+        cantidadSmall = sharedPref.getInt("playeraS", 0);
+        cantidadLarge = sharedPref.getInt("playeraM", 0);
         nombreSupervisor = intent.getStringExtra("nombreSupervisor");
         refernciaTienda = intent.getStringExtra("tiendaReferencia");
         ubicacionSupervisor = intent.getStringExtra("ubicacionSupervisor");
@@ -451,7 +457,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                     case R.id.buttonSuerte:
 
                         ganadorAleatorio = new Random();
-                        ganador = 1 + ganadorAleatorio.nextInt(porcentaje);
+                        ganador =  1 + ganadorAleatorio.nextInt(porcentaje);
 
                         if (ganador == porcentaje) {
 
@@ -487,51 +493,22 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
 
                 case R.id.buttonSmall:
-
+                    S=true;
                     medida = "S/M";
+                    preview=9;
+                    viewFlipper.setDisplayedChild(9);
 
-                    if (cantidadSmall == 1) {
-                        Toast.makeText(Registro.this, "Es la ultima playera M/S.", Toast.LENGTH_SHORT).show();
-                        preview=9;
-                        viewFlipper.setDisplayedChild(9);
-                        cantidadSmall -= 1;
 
-                    } else if (cantidadSmall <= 0)
-                        Toast.makeText(Registro.this, "Ya no quedan mas playeras M/S.", Toast.LENGTH_SHORT).show();
-
-                    else {
-                        preview=9;
-                        viewFlipper.setDisplayedChild(9);
-                        Toast.makeText(Registro.this, "Quedan" +" "+ cantidadSmall + " " + "playeras S/M.", Toast.LENGTH_SHORT).show();
-                        cantidadSmall -= 1;
-
-                    }
 
                     break;
 
 
             case R.id.buttonLarge:
                 medida="XL/L";
+                L=true;
+                preview=9;
+                viewFlipper.setDisplayedChild(9);
 
-
-                if(cantidadLarge == 1) {
-                    Toast.makeText(Registro.this, "Es la ultima playera XL/L.", Toast.LENGTH_SHORT).show();
-                    preview=9;
-                    viewFlipper.setDisplayedChild(9);
-                    cantidadLarge -= 1;
-
-                }
-
-                else if(cantidadLarge<=0)
-                    Toast.makeText(Registro.this,"Ya no quedan mas playeras XL/L.",Toast.LENGTH_SHORT).show();
-
-                else {
-                    preview=9;
-                    viewFlipper.setDisplayedChild(9);
-                    cantidadLarge -= 1;
-                    Toast.makeText(Registro.this,"Quedan"+" "+cantidadLarge+" "+"playeras XL/L.",Toast.LENGTH_SHORT).show();
-
-                }
 
                 break;
 
@@ -545,6 +522,52 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
 
             case R.id.buttonNO:
+
+                if(S==true)
+                {
+                    if (cantidadSmall == 1) {
+                        Toast.makeText(Registro.this, "Es la ultima playera M/S.", Toast.LENGTH_SHORT).show();
+
+                        cantidadSmall -= 1;
+                        quitarSmall();
+
+
+                    } else if (cantidadSmall <= 0)
+                        Toast.makeText(Registro.this, "Ya no quedan mas playeras M/S.", Toast.LENGTH_SHORT).show();
+
+                    else {
+
+                        cantidadSmall -= 1;
+                        Toast.makeText(Registro.this, "Quedan" +" "+ cantidadSmall + " " + "playeras S/M.", Toast.LENGTH_SHORT).show();
+
+                        quitarSmall();
+
+                    }
+
+                }
+
+
+                if(L==true)
+                {
+                    if(cantidadLarge == 1) {
+                        Toast.makeText(Registro.this, "Es la ultima playera XL/L.", Toast.LENGTH_SHORT).show();
+
+                        cantidadLarge -= 1;
+                        quitarLarge();
+
+                    }
+
+                    else if(cantidadLarge<=0)
+                        Toast.makeText(Registro.this,"Ya no quedan mas playeras XL/L.",Toast.LENGTH_SHORT).show();
+
+                    else {
+                        cantidadLarge -= 1;
+                        quitarLarge();
+                        Toast.makeText(Registro.this,"Quedan"+" "+cantidadLarge+" "+"playeras XL/L.",Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+
                 hideButtonS();
                 hideButtonL();
                 alta();
@@ -803,6 +826,22 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
 
 
+    }
+
+    public  void quitarSmall()
+    {
+        SharedPreferences sharedPref = getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedEditor = sharedPref.edit();
+        sharedEditor.putInt("playeraS", cantidadSmall);
+        sharedEditor.commit();
+    }
+
+    public void quitarLarge()
+    {
+        SharedPreferences sharedPref = getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedEditor = sharedPref.edit();
+        sharedEditor.putInt("playeraM", cantidadLarge);
+        sharedEditor.commit();
     }
 
 }
