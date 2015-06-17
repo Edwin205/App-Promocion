@@ -43,11 +43,13 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
     EditText etTiendaRef;
     TextView tvrefencia;
     EditText tallaS,tallaL;
+    boolean activador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.portada);
+
 
         tVTiendaSelec = (TextView) findViewById(R.id.textViewEleccionTienda);
         btnSelectienda = (Button) findViewById(R.id.buttonSelecTienda);
@@ -255,6 +257,19 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
                 break;
             case R.id.buttonSettings:
+                if(activador==true) {
+                    tallaL = (EditText) findViewById(R.id.editTextLarge);
+                    tallaS = (EditText) findViewById(R.id.editTextSmall);
+                    SharedPreferences sharedPrefF = getSharedPreferences("promoSettings", Context.MODE_PRIVATE);
+                    int cantidadSmall = sharedPrefF.getInt("playeraS", 0);
+                    int cantidadLarge = sharedPrefF.getInt("playeraM", 0);
+                    String cantidasS = Integer.toString(cantidadSmall);
+                    String cantidadM = Integer.toString(cantidadLarge);
+
+
+                    tallaL.setText(cantidadM);
+                    tallaS.setText(cantidasS);
+                }
                 viewFlipper.setDisplayedChild(1);
                 break;
 
@@ -270,6 +285,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                 break;
 
             case R.id.buttonSiSeg:
+                activador = false;
                 superNombre = (EditText) findViewById(R.id.editTextNombreSupervisor);
                 superUbicacion = (EditText) findViewById(R.id.editTextUbicacion);
                 nombreSuper = (TextView) findViewById(R.id.textviewSuperNombre);
@@ -296,6 +312,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                 break;
 
             case R.id.buttonGuardar:
+                activador = true;
 
                     etTiendaRef = (EditText) findViewById(R.id.editTextReferencia);
                     superNombre = (EditText) findViewById(R.id.editTextNombreSupervisor);
