@@ -57,6 +57,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
     String tiendaCompra;
     Registro registerl;
     boolean S,L;
+    boolean enBlanco;
 
 
 
@@ -71,6 +72,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         baseDatos = new DataBase(this);
         sqlprueba = (TextView) findViewById(R.id.textViewSQLprueba);
         registerl = new Registro();
+        enBlanco = false;
 
         S=false;
         L=false;
@@ -481,6 +483,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                     premio = "playera";
                     if(cantidadLarge == 0 && cantidadSmall ==0)
                     {
+                        enBlanco = true;
                         preview=10;
                         viewFlipper.setDisplayedChild(10);
                         btnCancelar.setVisibility(View.VISIBLE);
@@ -594,18 +597,22 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
             case R.id.buttonSigPersonalizacion:
 
-
-                EditText cPersonaliza= (EditText) findViewById(R.id.editTextPersonalizacion);
-                String comPersonaliza = cPersonaliza.getText().toString();
-                int lengthPer = comPersonaliza.length();
-
-                if(lengthPer>=4) {
+                if(enBlanco==true)
+                {
                     preview = 11;
                     viewFlipper.setDisplayedChild(11);
                 }
+                else {
+                    EditText cPersonaliza = (EditText) findViewById(R.id.editTextPersonalizacion);
+                    String comPersonaliza = cPersonaliza.getText().toString();
+                    int lengthPer = comPersonaliza.length();
 
-                else
-                    Toast.makeText(Registro.this, "Ingresa tu nombre completo.", Toast.LENGTH_SHORT).show();
+                    if (lengthPer >= 4) {
+                        preview = 11;
+                        viewFlipper.setDisplayedChild(11);
+                    } else
+                        Toast.makeText(Registro.this, "Ingresa tu nombre completo.", Toast.LENGTH_SHORT).show();
+                }
 
                 break;
 
