@@ -28,13 +28,12 @@
                 android:id="@+id/relativelayoutCondiciones">
 
                 <CheckBox
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/checkBoxTerminos"
+                    android:button="@drawable/checkbox"
                     android:layout_marginTop="95dp"
                     android:checked="false"
-                    android:textColor="#fff"
-                    android:textStyle="bold"
                     android:layout_marginLeft="26dp"
                     android:layout_marginStart="26dp"
                     android:layout_alignParentTop="true"
@@ -60,6 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/checkBoxPoliticas"
+                    android:button="@drawable/checkbox"
                     android:layout_marginTop="37dp"
                     android:checked="false"
                     android:textSize="18sp"
@@ -78,22 +78,22 @@
                     android:background="#e41d2a"
                     android:textColor="#fff"
                     android:textSize="12sp"
-                    android:layout_marginBottom="59dp"
-                    android:layout_alignBottom="@+id/checkBoxPoliticas"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_alignBottom="@+id/checkBoxTerminos"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toEndOf="@+id/checkBoxPoliticas"/>
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Acepto políticas de privacidad"
                     android:id="@+id/buttonPoliticas"
                     android:background="#e41d2a"
                     android:textColor="#fff"
                     android:textSize="12sp"
-                    android:layout_below="@+id/checkBoxTerminos"
-                    android:layout_alignLeft="@+id/buttonTerminos"
-                    android:layout_alignStart="@+id/buttonTerminos"
-                    android:layout_marginTop="29dp"/>
+                    android:layout_alignBottom="@+id/checkBoxPoliticas"
+                    android:layout_toRightOf="@+id/checkBoxPoliticas"
+                    android:layout_toEndOf="@+id/checkBoxPoliticas"/>
             </RelativeLayout>
 
             <RelativeLayout

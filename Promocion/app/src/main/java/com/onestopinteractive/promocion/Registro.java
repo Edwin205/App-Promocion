@@ -208,12 +208,12 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
     private void hideButtonS(){
         if(cantidadSmall == 0)
-            btnS.setVisibility(View.INVISIBLE);
+            btnS.setVisibility(View.VISIBLE);
     }
 
     private void hideButtonL(){
         if(cantidadLarge == 0)
-            btnL.setVisibility(View.INVISIBLE);
+            btnL.setVisibility(View.VISIBLE);
     }
 
     public void terminosClicked(View v) {
