@@ -29,8 +29,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
     ImageButton buttonSync,btnSyncInfo ;
     EditText superUbicacion,superNombre,porcentajeGanador;
     TextView nombreSuper,ubicacionSuper,etNuevo,etTotales,etSincronizados,etTimeStamp;
-
-
+    
     String porcentaje;
 
     int totales;
