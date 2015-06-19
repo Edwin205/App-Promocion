@@ -42,7 +42,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
     TextView nombreSuper,ubicacionSuper,prueba,pruebaFin;
     Random ganadorAleatorio;
     int ganador;
-    int cantidadSmall,cantidadLarge,porcentaje;
+    int porcentaje;
     DataBase baseDatos;
     TextView sqlprueba;
     int diaI,mesI,anoI;
@@ -52,12 +52,13 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
     Button atrasPoliticas,atrasCondiciones,btnCondiciones,btnPoliticas,btnTerminos;
     boolean checked;
     boolean politicas;
-    int preview=0;
-    Button btnBodegaAhorrera,btnCasaLey,btnChedrahui,btnComercialMexicana,btnHEB,btnSoriana,btnSuperama,btnWalmart;
+    int preview=0,atras=0;
+    Button btnBodegaAhorrera,btnCasaLey,btnChedrahui,btnComercialMexicana,btnHEB,btnSoriana,btnSuperama,btnWalmart,btnSiHay,btnNoHay;
     String tiendaCompra;
     Registro registerl;
-    boolean S,L;
     boolean enBlanco;
+    Button btnAtras;
+    int totales,nuevos;
 
 
 
@@ -74,8 +75,18 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         registerl = new Registro();
         enBlanco = false;
 
-        S=false;
-        L=false;
+       if(nuevos==0)
+       {
+           SharedPreferences sharedPref=getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+           nuevos= sharedPref.getInt("Nuevos",0);
+       }
+
+        if(totales ==0)
+        {
+            SharedPreferences sharedPref=getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+            totales= sharedPref.getInt("totales",0);
+        }
+
 
         medida = "L/XL";
         Intent registros = new Intent();
@@ -83,6 +94,9 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         //Todos los botones que se utlizan
         setContentView(R.layout.activity_registro);
 
+        btnAtras = (Button) findViewById(R.id.buttonAtras);
+        btnSiHay = (Button) findViewById(R.id.buttonSiHay);
+        btnNoHay = (Button) findViewById(R.id.buttonNoHay);
         btnNombre = (Button) findViewById(R.id.buttonNombre);
         btnEmail = (Button) findViewById(R.id.buttonEmail);
         btnTelefono = (Button) findViewById(R.id.buttonTelefono);
@@ -126,14 +140,12 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
 
 
+
         //El viewFlipper
         viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
 
 
         intent = getIntent();
-        SharedPreferences sharedPref = getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
-        cantidadSmall = sharedPref.getInt("playeraS", 0);
-        cantidadLarge = sharedPref.getInt("playeraM", 0);
         nombreSupervisor = intent.getStringExtra("nombreSupervisor");
         refernciaTienda = intent.getStringExtra("tiendaReferencia");
         ubicacionSupervisor = intent.getStringExtra("ubicacionSupervisor");
@@ -195,26 +207,20 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         btnSoriana.setOnClickListener(this);
         btnSuperama.setOnClickListener(this);
         btnWalmart.setOnClickListener(this);
+        btnNoHay.setOnClickListener(this);
+        btnSiHay.setOnClickListener(this);
+        btnAtras.setOnClickListener(this);
 
 
 
-        hideButtonS();
-        hideButtonL();
+
         checked = false;
         politicas = false;
 
     }
 
 
-    private void hideButtonS(){
-        if(cantidadSmall == 0)
-            btnS.setVisibility(View.VISIBLE);
-    }
 
-    private void hideButtonL(){
-        if(cantidadLarge == 0)
-            btnL.setVisibility(View.VISIBLE);
-    }
 
     public void terminosClicked(View v) {
         CheckBox checkBox = (CheckBox)v;
@@ -244,6 +250,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
     {
 
         preview=6;
+        atras=5;
         viewFlipper.setDisplayedChild(6);
         btnCancelar.setVisibility(View.INVISIBLE);
 
@@ -305,6 +312,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 if(checked ==true&& politicas ==true) {
                     viewFlipper.setDisplayedChild(1);
                     preview = 1;
+                    atras =0;
                     btnCancelar.setVisibility(View.VISIBLE);
                 }
 
@@ -338,11 +346,11 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
 
             case R.id.buttonCancelar:
-                InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
-                        InputMethodManager.HIDE_NOT_ALWAYS);
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(btnCancelar.getWindowToken(), 0);
                 viewFlipper.setDisplayedChild(20);
                 btnCancelar.setVisibility(View.INVISIBLE);
+                btnAtras.setVisibility(View.INVISIBLE);
                 break;
 
             case R.id.buttonSiCancelar:
@@ -353,22 +361,27 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
             case R.id.buttonNoCancelar:
                 viewFlipper.setDisplayedChild(preview);
                 btnCancelar.setVisibility(View.VISIBLE);
+                btnAtras.setVisibility(View.VISIBLE);
                 break;
 
 
             case R.id.buttonNombre:
                 preview=21;
+                atras = 1;
                 EditText cNombre= (EditText) findViewById(R.id.editTextNombrePersona);
                 String comNombre = cNombre.getText().toString();
                 int length = comNombre.length();
-                if(length>=2)
+                if(length>=2) {
                     viewFlipper.setDisplayedChild(21);
+                    btnAtras.setVisibility(View.VISIBLE);
+                }
                 else
                     Toast.makeText(Registro.this, "Ingresa tu nombre completo.", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.buttonApellidos:
                 preview=23;
+                atras =21;
 
                 EditText cApellidos= (EditText) findViewById(R.id.editTextApellidosPersona);
                 String comApellidos = cApellidos.getText().toString();
@@ -380,12 +393,14 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 break;
 
             case R.id.buttonApellidoMaterno:
+                atras =23;
                 preview=2;
                 viewFlipper.setDisplayedChild(2);
                 break;
 
             case R.id.buttonEmail:
                 preview=3;
+                atras =2;
                 EditText cEmail = (EditText) findViewById(R.id.editTextEmail);
                 String comEmial = cEmail.getText().toString();
                 int longitud = comEmial.length();
@@ -414,6 +429,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 break;
 
             case R.id.buttonTelefono:
+                atras =3;
                 preview=24;
                 EditText cTelefono= (EditText) findViewById(R.id.editTextTelefono);
                 String comTelefono = cTelefono.getText().toString();
@@ -427,12 +443,14 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 break;
 
             case R.id.buttonTelefonoSecundario:
+                atras =24;
                 preview=5;
                 viewFlipper.setDisplayedChild(5);
                 break;
 
 
             case R.id.buttonFechaNaci:
+                atras =5;
                 preview=18;
                 EditText dia = (EditText) findViewById(R.id.editTextDia);
                 EditText mes = (EditText) findViewById(R.id.editTextMes);
@@ -467,6 +485,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                     validacionFecha();
                 }
                 break;
+
             case R.id.buttonSuerte:
                 if (mCurrentPhotoURI == null) {
                     System.out.println("<<<<<<<<<<< WillPhoto");
@@ -481,25 +500,21 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 if (ganador == porcentaje) {
 
                     premio = "playera";
-                    if(cantidadLarge == 0 && cantidadSmall ==0)
-                    {
+
                         enBlanco = true;
-                        preview=10;
-                        viewFlipper.setDisplayedChild(10);
-                        btnCancelar.setVisibility(View.VISIBLE);
-                    }
-                    else {
                         preview=8;
+                        atras =18;
                         viewFlipper.setDisplayedChild(8);
                         btnCancelar.setVisibility(View.INVISIBLE);
-                    }
 
 
                 } else {
                     preview=7;
+                    atras =18;
                     viewFlipper.setDisplayedChild(7);
                     premio = "vip";
                     premio();
+                    sumaRegistros();
                     btnCancelar.setVisibility(View.INVISIBLE);
                 }
                 break;
@@ -513,7 +528,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
 
                 case R.id.buttonSmall:
-                    S=true;
+
                     medida = "S/M";
                     preview=9;
                     viewFlipper.setDisplayedChild(9);
@@ -525,7 +540,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
             case R.id.buttonLarge:
                 medida="XL/L";
-                L=true;
+
                 preview=9;
                 viewFlipper.setDisplayedChild(9);
 
@@ -533,8 +548,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 break;
 
             case R.id.buttonSI:
-                hideButtonS();
-                hideButtonL();
+
                 preview=10;
                 viewFlipper.setDisplayedChild(10);
                 btnCancelar.setVisibility(View.VISIBLE);
@@ -543,77 +557,37 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
             case R.id.buttonNO:
 
-                if(S==true)
-                {
-                    if (cantidadSmall == 1) {
-                        Toast.makeText(Registro.this, "Es la ultima playera M/S.", Toast.LENGTH_SHORT).show();
 
-                        cantidadSmall -= 1;
-                        quitarSmall();
-
-
-                    } else if (cantidadSmall <= 0)
-                        Toast.makeText(Registro.this, "Ya no quedan mas playeras M/S.", Toast.LENGTH_SHORT).show();
-
-                    else {
-
-                        cantidadSmall -= 1;
-                        Toast.makeText(Registro.this, "Quedan" +" "+ cantidadSmall + " " + "playeras S/M.", Toast.LENGTH_SHORT).show();
-
-                        quitarSmall();
-
-                    }
-
-                }
-
-
-                if(L==true)
-                {
-                    if(cantidadLarge == 1) {
-                        Toast.makeText(Registro.this, "Es la ultima playera XL/L.", Toast.LENGTH_SHORT).show();
-
-                        cantidadLarge -= 1;
-                        quitarLarge();
-
-                    }
-
-                    else if(cantidadLarge<=0)
-                        Toast.makeText(Registro.this,"Ya no quedan mas playeras XL/L.",Toast.LENGTH_SHORT).show();
-
-                    else {
-                        cantidadLarge -= 1;
-                        quitarLarge();
-                        Toast.makeText(Registro.this,"Quedan"+" "+cantidadLarge+" "+"playeras XL/L.",Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-
-                hideButtonS();
-                hideButtonL();
-                premio();
-                finish();
-                btnCancelar.setVisibility(View.VISIBLE);
+                viewFlipper.setDisplayedChild(28);
+                btnCancelar.setVisibility(View.INVISIBLE);
                 break;
 
+            case  R.id.buttonSiHay:
+                btnCancelar.setVisibility(View.VISIBLE);
+                  premio();
+                  sumaRegistros();
+                  finish();
+                break;
+
+            case  R.id.buttonNoHay:
+                btnCancelar.setVisibility(View.VISIBLE);
+                preview=10;
+                viewFlipper.setDisplayedChild(10);
+                btnCancelar.setVisibility(View.VISIBLE);
+
+                break;
+
+
+
+
+
+
             case R.id.buttonSigPersonalizacion:
+                atras =10;
 
-                if(enBlanco==true)
-                {
-                    preview = 11;
-                    viewFlipper.setDisplayedChild(11);
-                }
-                else {
-                    EditText cPersonaliza = (EditText) findViewById(R.id.editTextPersonalizacion);
-                    String comPersonaliza = cPersonaliza.getText().toString();
-                    int lengthPer = comPersonaliza.length();
-
-                    if (lengthPer >= 4) {
-                        preview = 11;
-                        viewFlipper.setDisplayedChild(11);
-                    } else
-                        Toast.makeText(Registro.this, "Ingresa tu nombre completo.", Toast.LENGTH_SHORT).show();
-                }
-
+                preview = 11;
+                viewFlipper.setDisplayedChild(11);
+                btnAtras.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.buttonCalle:
@@ -622,6 +596,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 int lenghtCall = comCalle.length();
 
                 if(lenghtCall>=4) {
+                    atras =11;
                     preview=12;
                     viewFlipper.setDisplayedChild(12);
                 }
@@ -635,6 +610,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 int lenghtExt = comExterior.length();
 
                 if(lenghtExt>=1) {
+                    atras =12;
                     preview=13;
                     viewFlipper.setDisplayedChild(13);
                 }
@@ -646,9 +622,10 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
             case R.id.buttonInterior:
                 EditText cInterior= (EditText) findViewById(R.id.editTextInterior);
                 String comInterior = cInterior.getText().toString();
+                atras =13;
                     preview=14;
                     viewFlipper.setDisplayedChild(14);
-                    Toast.makeText(Registro.this, "Ingresa un numero correcto.", Toast.LENGTH_SHORT).show();
+
 
                 break;
 
@@ -658,6 +635,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 int lenghtCol = comColonia.length();
 
                 if(lenghtCol>=5) {
+                    atras =14;
                     preview=15;
                     viewFlipper.setDisplayedChild(15);
                 }
@@ -672,6 +650,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 int lenghtCiu = comCiudad.length();
 
                 if(lenghtCiu>=4) {
+                    atras =15;
                     preview=16;
                     viewFlipper.setDisplayedChild(16);
                 }
@@ -687,6 +666,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 int lenghtCodPos = comCodigoPos.length();
 
                 if(lenghtCodPos>=3) {
+                    atras =16;
                     preview=17;
                     viewFlipper.setDisplayedChild(17);
                 }
@@ -702,6 +682,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 String comEstado = cEstado.getText().toString();
                 int lenghtEst = comEstado.length();
                 if(lenghtEst>=2){
+                    atras =17;
                     preview=22;
                     viewFlipper.setDisplayedChild(22);
                 }
@@ -718,6 +699,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                     InputMethodManager inputM = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputM.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     premio();
+                    sumaRegistros();
                     finish();
                 }
                 else
@@ -735,15 +717,21 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                     InputMethodManager inputManagerT = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputManagerT.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                             InputMethodManager.HIDE_NOT_ALWAYS);
+                    atras =22;
                     preview=27;
                     viewFlipper.setDisplayedChild(27);
                     btnCancelar.setVisibility(View.INVISIBLE);
+                    btnAtras.setVisibility(View.INVISIBLE);
 
                 }
 
                 else
                     Toast.makeText(Registro.this, "Ingresa un numero de ticket correcto.", Toast.LENGTH_SHORT).show();
 
+                break;
+
+            case  R.id.buttonAtras:
+                viewFlipper.setDisplayedChild(atras);
                 break;
         }
     }
@@ -889,6 +877,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
         else if (diaI > 0 && diaI < 32 && mesI > 0 && mesI<13 && anoI >1900 && anoI<2016) {
             viewFlipper.setDisplayedChild(18);
+            atras =5;
         }
 
         else
@@ -899,21 +888,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
     }
 
-    public  void quitarSmall()
-    {
-        SharedPreferences sharedPref = getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
-        SharedPreferences.Editor sharedEditor = sharedPref.edit();
-        sharedEditor.putInt("playeraS", cantidadSmall);
-        sharedEditor.commit();
-    }
 
-    public void quitarLarge()
-    {
-        SharedPreferences sharedPref = getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
-        SharedPreferences.Editor sharedEditor = sharedPref.edit();
-        sharedEditor.putInt("playeraM", cantidadLarge);
-        sharedEditor.commit();
-    }
 
     Uri mCurrentPhotoURI;
     String mCurrentPhotoPath;
@@ -970,6 +945,19 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 Toast.makeText(Registro.this, "Debe agregar una imagen al ticket.", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void sumaRegistros()
+    {
+        totales +=1;
+        nuevos +=1;
+        premio();
+        SharedPreferences sharedPref=getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedEditor = sharedPref.edit();
+        sharedEditor.putInt("Nuevos", nuevos);
+        sharedEditor.putInt("totales",totales);
+        sharedEditor.commit();
+
     }
 
 }

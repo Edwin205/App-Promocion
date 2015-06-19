@@ -30,10 +30,9 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
     EditText superUbicacion,superNombre,porcentajeGanador;
     TextView nombreSuper,ubicacionSuper,etNuevo,etTotales,etSincronizados,etTimeStamp;
 
-    int cantidadS,cantidadL;
+
     String porcentaje;
 
-    int cant;
     int totales;
     int sincronizados;
     int nuevos;
@@ -42,13 +41,53 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
     TextView tVTiendaSelec;
     EditText etTiendaRef;
     TextView tvrefencia;
-    EditText tallaS,tallaL;
-    boolean activador;
+    String time;
+    String nombreSupervisor,ubicacionSupervisor,referenciaSupervisor,validacionP;
+    EditText registrador,ubicacion,referencia,indice;
+    String btnTienda;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.portada);
+
+        registrador = (EditText) findViewById(R.id.editTextNombreSupervisor);
+        ubicacion = (EditText) findViewById(R.id.editTextUbicacion);
+        referencia= (EditText) findViewById(R.id.editTextReferencia);
+        indice = (EditText) findViewById(R.id.editTextPorcentaje);
+        etTiendaRef =(EditText) findViewById(R.id.editTextReferencia);
+        tVTiendaSelec = (TextView) findViewById(R.id.textViewEleccionTienda);
+        nombreSuper = (TextView) findViewById(R.id.textviewSuperNombre);
+        ubicacionSuper = (TextView) findViewById(R.id.textViewSuperUbicacion);
+        tvrefencia = (TextView) findViewById(R.id.textViewReferencia);
+
+        SharedPreferences sharedPref=getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+        String regi=sharedPref.getString("registrador", "");
+        String ubic=sharedPref.getString("ubicacion", "");
+        String refe=sharedPref.getString("referencia", "");
+        String indi=sharedPref.getString("indice", "5");
+
+        registrador.setText(regi);
+        ubicacion.setText(ubic);
+        referencia.setText(refe);
+        indice.setText(indi);
+
+        nombreSuper.setText(regi);
+        ubicacionSuper.setText(ubic);
+        tvrefencia.setText(refe);
+
+
+
+
+
+
+
+        if(sincronizados==0)
+        {
+            SharedPreferences sharedPrefsss=getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+            sincronizados = sharedPref.getInt("sincronizados",0);
+        }
 
 
         tVTiendaSelec = (TextView) findViewById(R.id.textViewEleccionTienda);
@@ -94,6 +133,11 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
         btnSuperama.setOnClickListener(this);
         btnWalmart.setOnClickListener(this);
 
+        btnTienda= sharedPref.getString("btntienda", "Selecciona tienda");;
+        btnSelectienda.setText(btnTienda);
+        tVTiendaSelec = (TextView) findViewById(R.id.textViewEleccionTienda);
+        tVTiendaSelec.setText(btnTienda);
+
         siguiente = (Button) findViewById(R.id.btnPortada);
 
             siguiente.setOnClickListener(new View.OnClickListener() {
@@ -116,13 +160,11 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
                     if (darError == false) {
 
-                        tallaS = (EditText) findViewById(R.id.editTextSmall);
-                        tallaL = (EditText) findViewById(R.id.editTextLarge);
+
                         porcentajeGanador = (EditText) findViewById(R.id.editTextPorcentaje);
 
 
-                        cantidadS = Integer.parseInt(tallaS.getText().toString());
-                        cantidadL = Integer.parseInt(tallaL.getText().toString());
+
                         porcentaje = porcentajeGanador.getText().toString();
 
 
@@ -133,14 +175,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
 
 
-                        /*SharedPreferences sharedPref = getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
-                        SharedPreferences.Editor sharedEditor = sharedPref.edit();
-                        sharedEditor.putInt("playeraS", cantidadS);
-                        sharedEditor.putInt("playeraM", cantidadL);
-                        sharedEditor.commit();*/
 
-                        //intent.putExtra("cantidadS", cantidadS);
-                        //intent.putExtra("cantidadL", cantidadL);
                         intent.putExtra("porcentaje", porcentaje);
                         intent.putExtra("nombreSupervisor", nombreSuperv);
                         intent.putExtra("ubicacionSupervisor", ubicacionSuperv);
@@ -170,13 +205,14 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
             case R.id.buttonBAurrera:
                 btnSelectienda.setText("Bodega Aurrera");
-
+                btnSetText("Bodega Aurrera");
                 tVTiendaSelec.setText("Bodega Aurrera");
                 viewFlipper.setDisplayedChild(1);
                 break;
 
             case R.id.buttonCasaLey:
                 btnSelectienda.setText("Casa Ley");
+                btnSetText("Casa Ley");
 
                 tVTiendaSelec.setText("Casa Ley");
                 viewFlipper.setDisplayedChild(1);
@@ -184,6 +220,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
             case R.id.buttonChedrahui:
                 btnSelectienda.setText("Chedrahui");
+                btnSetText("Chedrahui");
 
                 tVTiendaSelec.setText("Chedrahui");
                 viewFlipper.setDisplayedChild(1);
@@ -191,6 +228,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
             case R.id.buttonCMexicana:
                 btnSelectienda.setText("Comercial Mexicana");
+                btnSetText("Comercial Mexicana");
 
                 tVTiendaSelec.setText("Comercial Mexicana ");
                 viewFlipper.setDisplayedChild(1);
@@ -198,6 +236,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
             case R.id.buttonHeb:
                 btnSelectienda.setText("HEB");
+                btnSetText("HEB");
 
                 tVTiendaSelec.setText("HEB");
                 viewFlipper.setDisplayedChild(1);
@@ -205,6 +244,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
             case R.id.buttonSoriana:
                 btnSelectienda.setText("Soriana");
+                btnSetText("Soriana");
 
                 tVTiendaSelec.setText("Soriana ");
                 viewFlipper.setDisplayedChild(1);
@@ -212,12 +252,14 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
             case R.id.buttonSuperama:
                 btnSelectienda.setText("Superama");
+                btnSetText("Superama");
                 tVTiendaSelec.setText("Superama");
                 viewFlipper.setDisplayedChild(1);
                 break;
 
             case R.id.buttonWalmart:
                 btnSelectienda.setText("Walmart");
+                btnSetText("Walmart");
                 tVTiendaSelec.setText("Walmart");
                 viewFlipper.setDisplayedChild(1);
                 break;
@@ -227,25 +269,17 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                 break;
 
             case R.id.buttonInfo:
-                Sync osiSync = new Sync(this);
-                if(osiSync.countRecords() > 0)
-                {
-                    Toast.makeText(this,"Sincroniza antes de verificar",Toast.LENGTH_SHORT).show();
-                }
-                else {
 
-                    etTimeStamp.setText("Ultima sincronización:" + getDateTime());
+                    SharedPreferences sharedPref=getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+                    nuevos =  sharedPref.getInt("Nuevos",0);
+                    totales = sharedPref.getInt("totales",0);
+
                     etSincronizados.setText("Registros Sincronizados:" + sincronizados);
-                    etNuevo.setText("Registros nuevos:"+0);
-                    totales = sincronizados + nuevos;
-                    etTotales.setText("Registros totales:" + totales);
-                    if(sincronizados ==0)
-                    {
-                        Toast.makeText(this,"No hay datos que verificar",Toast.LENGTH_SHORT).show();
-                    }
-                    else
+                    etTimeStamp.setText("Ultima sincronización:" + setTimeStamp());
+                    etNuevo.setText("Registros nuevos:"+nuevos);
+                    etTotales.setText("Registros totales:"+totales);
                     viewFlipper.setDisplayedChild(3);
-                }
+
                 break;
 
             case R.id.buttonSyncInfo:
@@ -253,23 +287,19 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                 break;
 
             case R.id.buttonSync:
+                SharedPreferences sharedPrefs=getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+                nuevos =  sharedPrefs.getInt("Nuevos",0);
+                totales = sharedPrefs.getInt("totales",0);
+
+                etSincronizados.setText("Registros Sincronizados:" + sincronizados);
+                etTimeStamp.setText("Ultima sincronización:" + setTimeStamp());
+                etNuevo.setText("Registros nuevos:"+nuevos);
+                etTotales.setText("Registros totales:"+totales);
                 enviarRegistro();
 
                 break;
             case R.id.buttonSettings:
-                if(activador==true) {
-                    tallaL = (EditText) findViewById(R.id.editTextLarge);
-                    tallaS = (EditText) findViewById(R.id.editTextSmall);
-                    SharedPreferences sharedPrefF = getSharedPreferences("promoSettings", Context.MODE_PRIVATE);
-                    int cantidadSmall = sharedPrefF.getInt("playeraS", 0);
-                    int cantidadLarge = sharedPrefF.getInt("playeraM", 0);
-                    String cantidasS = Integer.toString(cantidadSmall);
-                    String cantidadM = Integer.toString(cantidadLarge);
 
-
-                    tallaL.setText(cantidadM);
-                    tallaS.setText(cantidasS);
-                }
                 viewFlipper.setDisplayedChild(1);
                 break;
 
@@ -285,34 +315,43 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                 break;
 
             case R.id.buttonSiSeg:
-                activador = false;
+
                 superNombre = (EditText) findViewById(R.id.editTextNombreSupervisor);
                 superUbicacion = (EditText) findViewById(R.id.editTextUbicacion);
                 nombreSuper = (TextView) findViewById(R.id.textviewSuperNombre);
                 ubicacionSuper = (TextView) findViewById(R.id.textViewSuperUbicacion);
                 porcentajeGanador = (EditText) findViewById(R.id.editTextPorcentaje);
-                tallaL = (EditText) findViewById(R.id.editTextLarge);
-                tallaS = (EditText) findViewById(R.id.editTextSmall);
                 tVTiendaSelec.setText("");
                 btnSelectienda.setText("Seleciona tienda");
-
+                etTiendaRef.setText("");
                 superNombre.setText("");
                 superUbicacion.setText("");
                 nombreSuper.setText("");
                 ubicacionSuper.setText("");
-                tallaS.setText("");
-                tallaL.setText("");
                 porcentajeGanador.setText("5");
-                viewFlipper.setDisplayedChild(0);
+
+
+
+                btnSetText("Seleciona tienda");
+                SharedPreferences sharedPrefS=getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+                SharedPreferences.Editor sharedEditorS = sharedPrefS.edit();
+                sharedEditorS.putString("registrador", "");
+                sharedEditorS.putString("ubicacion", "");
+                sharedEditorS.putString("referencia", "");
+                sharedEditorS.putString("indice", "5");
+                sharedEditorS.commit();
                 Toast.makeText(this,"Se cerro la sesión correctamente.",Toast.LENGTH_SHORT).show();
+                viewFlipper.setDisplayedChild(0);
+
                 break;
 
             case R.id.buttonNOSeguro:
-                viewFlipper.setDisplayedChild(1);
+                viewFlipper.setDisplayedChild(0);
                 break;
 
             case R.id.buttonGuardar:
-                activador = true;
+
+
 
                     etTiendaRef = (EditText) findViewById(R.id.editTextReferencia);
                     superNombre = (EditText) findViewById(R.id.editTextNombreSupervisor);
@@ -320,44 +359,23 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                     nombreSuper = (TextView) findViewById(R.id.textviewSuperNombre);
                     ubicacionSuper = (TextView) findViewById(R.id.textViewSuperUbicacion);
                     tvrefencia = (TextView) findViewById(R.id.textViewReferencia);
-
-
-
-                    String nombreSupervisor = superNombre.getText().toString();
-                    String ubicacionSupervisor = tVTiendaSelec.getText().toString();
-                    String referenciaSupervisor = etTiendaRef.getText().toString();
-
-
+                     nombreSupervisor = superNombre.getText().toString();
+                     ubicacionSupervisor = tVTiendaSelec.getText().toString();
+                     referenciaSupervisor = etTiendaRef.getText().toString();
                     nombreSuper.setText(nombreSupervisor);
                     ubicacionSuper.setText(ubicacionSupervisor);
                     tvrefencia.setText(referenciaSupervisor);
 
-                EditText validacionSm = (EditText) findViewById(R.id.editTextSmall);
-                String validacionS = validacionSm.getText().toString();
-                EditText validacionGr = (EditText) findViewById(R.id.editTextLarge);
-                String validacionL = validacionGr.getText().toString();
-                EditText validacionPo = (EditText) findViewById(R.id.editTextPorcentaje);
-                String validacionP = validacionPo.getText().toString();
+                 EditText validacionPo = (EditText) findViewById(R.id.editTextPorcentaje);
+                 validacionP = validacionPo.getText().toString();
 
-
-                int nSmall = Integer.parseInt(validacionS);
-                int nMedium = Integer.parseInt(validacionL);
 
                 boolean botonOff = true;
                 int porcentaje = Integer.parseInt(validacionP);
 
 
-                if(validacionS.equals("")) {
-                    Toast.makeText(Portada.this, "Ha dejado campos vacios.", Toast.LENGTH_SHORT).show();
-                    botonOff = false;
-                }
 
-                else if(validacionL.equals("")){
-                    Toast.makeText(Portada.this, "Ha dejado campos vacios.", Toast.LENGTH_SHORT).show();
-                    botonOff = false;
-                }
-
-                else if (porcentaje>10){
+                 if (porcentaje>10){
                     Toast.makeText(Portada.this, "Ingresa una probabilidad de 5 a 10 .", Toast.LENGTH_SHORT).show();
                     botonOff = false;
                }
@@ -375,17 +393,26 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                     Toast.makeText(Portada.this, "Ha dejado campos vacios.", Toast.LENGTH_SHORT).show();
                     botonOff = false;
                 }
+                 else if(referenciaSupervisor.equals(""))
+                 {
+                     Toast.makeText(Portada.this, "Ha dejado campos vacios.", Toast.LENGTH_SHORT).show();
+                     botonOff = false;
+
+                 }
 
                 else
                   botonOff = true;
 
                 if(botonOff == true) {
-                    SharedPreferences sharedPref = getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
-                        SharedPreferences.Editor sharedEditor = sharedPref.edit();
-                        sharedEditor.putInt("playeraS", nSmall);
-                        sharedEditor.putInt("playeraM", nMedium);
-                        sharedEditor.commit();
+                    SharedPreferences sharedPrefss=getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+                    SharedPreferences.Editor sharedEditor = sharedPrefss.edit();
+                    sharedEditor.putString("registrador", nombreSupervisor);
+                    sharedEditor.putString("ubicacion", ubicacionSupervisor);
+                    sharedEditor.putString("referencia", referenciaSupervisor);
+                    sharedEditor.putString("indice", validacionP);
+                    sharedEditor.commit();
                   Toast.makeText(Portada.this, "Se guardo la sesión.", Toast.LENGTH_SHORT).show();
+
                   viewFlipper.setDisplayedChild(0);
               }
 
@@ -402,11 +429,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
         if (recordsCount <= 0) {
             Toast.makeText(getApplicationContext(), "Todos los registros se han sincronizado correctamente.", Toast.LENGTH_SHORT).show();
-            etTimeStamp.setText("Ultima sincronización:" + getDateTime());
-            etSincronizados.setText("Registros Sincronizados:" + sincronizados);
-            etNuevo.setText("Registros nuevos:"+0);
-            totales = sincronizados + nuevos;
-            etTotales.setText("Registros totales:"+totales);
+
             return;
         }
 
@@ -419,6 +442,9 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                 while (recordID > 0) {
                     if (osiSync.postRecord(recordID)) {
                         sincronizados += 1;
+                        nuevos -=1;
+
+
                         osiSync.deleteRecord(recordID);
                     } else {
                         runOnUiThread(new Runnable() {
@@ -434,6 +460,12 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                 if (osiSync.countRecords() <= 0) {
                     runOnUiThread(new Runnable() {
                         public void run() {
+                            etTimeStamp.setText("Ultima sincronización:" + getDateTime());
+                            etSincronizados.setText("Registros Sincronizados:" + sincronizados);
+                            etNuevo.setText("Registros nuevos:"+nuevos);
+                            sincronizados();
+                            borrarNuevos();
+                            timeStamp();
                             Toast.makeText(getApplicationContext(), "Todos los registros se han sincronizado correctamente.", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -449,5 +481,45 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
         Date date = new Date();
         return dateFormat.format(date);
     }
+
+    private String setTimeStamp()
+    {
+        SharedPreferences sharedPref=getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+        time =  sharedPref.getString("timeStamp","");
+        return time;
+    }
+
+    private void timeStamp() {
+        SharedPreferences sharedPref=getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedEditor = sharedPref.edit();
+        sharedEditor.putString("timeStamp", getDateTime());
+        sharedEditor.commit();
+
+    }
+
+    private void sincronizados()
+    {
+        SharedPreferences sharedPref=getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedEditor = sharedPref.edit();
+        sharedEditor.putInt("sincronizados", sincronizados);
+        sharedEditor.commit();
+    }
+    private void borrarNuevos()
+    {
+        SharedPreferences sharedPref=getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedEditor = sharedPref.edit();
+        sharedEditor.putInt("Nuevos", nuevos);
+        sharedEditor.commit();
+    }
+
+    public void btnSetText(String ubicacion)
+    {
+        SharedPreferences sharedPrefX=getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedEditor = sharedPrefX.edit();
+        sharedEditor.putString("btntienda", ubicacion);
+        sharedEditor.commit();
+    }
+
+
 
 }

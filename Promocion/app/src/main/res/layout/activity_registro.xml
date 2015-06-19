@@ -188,7 +188,6 @@
 
             </RelativeLayout>
 
-
             <RelativeLayout
                 android:id="@+id/relativelayoutEmail"
                 android:layout_width="match_parent"
@@ -626,11 +625,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="¿Quieres personalizarla? "
+                    android:text="¿Quieres que te la enviemos? "
                     android:id="@+id/textView6"
                     android:layout_marginTop="25dp"
                     android:textColor="#fff"
-                    android:textSize="27sp"
+                    android:textSize="35sp"
                     android:layout_centerHorizontal="true"
                     android:textStyle="bold"/>
 
@@ -645,7 +644,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Personaliza tu playera"
+                    android:text="Ponle nombre o deja el campo vacio"
                     android:id="@+id/textView5"
                     android:layout_marginTop="23dp"
                     android:textSize="30sp"
@@ -661,15 +660,15 @@
                     android:inputType="textPersonName"
                     android:ems="10"
                     android:id="@+id/editTextPersonalizacion"
-                    android:layout_marginTop="39dp"
                     android:hint="Nombre*"
                     android:textColor="#fff"
                     android:textSize="22sp"
+                    android:textColorHint="#fff"
+                    android:maxLength="10"
+                    android:layout_marginTop="5dp"
                     android:layout_below="@+id/textView5"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:textColorHint="#fff"
-                    android:maxLength="10"/>
+                    android:layout_alignParentStart="true"/>
 
                 <Button
                     android:layout_width="wrap_content"
@@ -678,12 +677,12 @@
                     android:id="@+id/buttonSigPersonalizacion"
                     android:background="#ff000000"
                     android:textColor="@android:color/white"
-                    android:layout_marginTop="36dp"
                     android:textStyle="bold"
                     android:textSize="17sp"
                     android:layout_below="@+id/editTextPersonalizacion"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="33dp"/>
 
 
 
@@ -1596,6 +1595,50 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativelayoutHayentienda">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¿Hay en tienda?"
+                    android:id="@+id/textView13"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="33dp"
+                    android:textColor="#fff"
+                    android:textSize="30sp"
+                    android:textStyle="bold"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Si"
+                    android:id="@+id/buttonSiHay"
+                    android:layout_below="@+id/textView13"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="138dp"
+                    android:background="#000"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No"
+                    android:id="@+id/buttonNoHay"
+                    android:layout_alignTop="@+id/buttonSiHay"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="#000"
+                    android:textColor="#fff"
+                    android:textSize="18sp"/>
+            </RelativeLayout>
+
 
         </ViewFlipper>
 
@@ -1616,15 +1659,29 @@
         android:layout_height="wrap_content"
         android:text="Cancelar registro"
         android:id="@+id/buttonCancelar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="298dp"
+        android:layout_marginBottom="162dp"
         android:background="#000"
         android:textColor="#fff"
         android:textStyle="bold"
         android:textSize="14sp"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Atras"
+        android:id="@+id/buttonAtras"
+        android:layout_marginTop="186dp"
+        android:background="#000"
+        android:textColor="#fff"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
 
 </RelativeLayout>

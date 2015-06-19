@@ -93,7 +93,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Versión 1.0"
+                    android:text="Versión 1.1"
                     android:id="@+id/textView9"
                     android:textSize="16sp"
                     android:textColor="#fff"
@@ -137,6 +137,19 @@
                     android:layout_toEndOf="@+id/textViewSuperUbicacion"
                     android:layout_marginBottom="58dp"
                     android:visibility="invisible"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="cerrar sesión"
+                    android:id="@+id/buttonCerrarSesion"
+                    android:background="#000"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:layout_alignTop="@+id/textViewReferencia"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
 
 
             </RelativeLayout>
@@ -196,8 +209,11 @@
                     android:maxLength="30"
                     android:textColor="#fff"
                     android:textColorHint="#fff"
-                    android:layout_below="@+id/textView"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible"
+                    android:layout_above="@+id/editTextReferencia"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="20dp"/>
 
                 <Button
                     android:layout_width="wrap_content"
@@ -206,54 +222,12 @@
                     android:id="@+id/buttonGuardar"
                     android:background="#ff000000"
                     android:textColor="@android:color/white"
-                    android:layout_marginTop="23dp"
+                    android:layout_marginTop="33dp"
                     android:textStyle="bold"
                     android:textSize="17sp"
-                    android:layout_below="@+id/textViewunoDe"
-                    android:layout_centerHorizontal="true"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Inventario:"
-                    android:id="@+id/textViewInventario"
-                    android:textSize="30sp"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold"
-                    android:layout_marginTop="39dp"
-                    android:layout_below="@+id/buttonSelecTienda"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="M/S:"
-                    android:id="@+id/textView2"
-                    android:textSize="25sp"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold"
-                    android:layout_below="@+id/textViewInventario"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="5dp"/>
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:ems="10"
-                    android:id="@+id/editTextSmall"
-                    android:textColor="#fff"
-                    android:textColorHint="#fff"
-                    android:layout_alignTop="@+id/textView2"
-                    android:layout_toRightOf="@+id/textView2"
-                    android:layout_toStartOf="@+id/textViewM"
-                    android:maxLength="2"
-                    android:hint="NN"
-                    android:layout_toLeftOf="@+id/textViewM"
-                    android:imeOptions="actionNext"
-                    />
+                    android:layout_below="@+id/editTextPorcentaje"
+                    android:layout_alignRight="@+id/textView"
+                    android:layout_alignEnd="@+id/textView"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -262,50 +236,20 @@
                     android:textSize="25sp"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
-                    android:layout_alignTop="@+id/editTextSmall"
                     android:layout_alignLeft="@+id/buttonGuardar"
-                    android:layout_alignStart="@+id/buttonGuardar"/>
+                    android:layout_alignStart="@+id/buttonGuardar"
+                    android:layout_below="@+id/buttonSelecTienda"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="XL/L:"
-                    android:id="@+id/textViewL"
-                    android:textSize="25sp"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold"
-                    android:layout_alignRight="@+id/textView"
-                    android:layout_alignEnd="@+id/textView"
-                    android:layout_alignTop="@+id/textViewM"/>
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:ems="10"
-                    android:id="@+id/editTextLarge"
-                    android:textColor="#fff"
-                    android:textColorHint="#fff"
-                    android:layout_alignTop="@+id/textViewL"
-                    android:layout_toRightOf="@+id/textViewL"
-                    android:maxLength="2"
-                    android:hint="NN"
-                    android:layout_alignRight="@+id/textViewGana"
-                    android:layout_alignEnd="@+id/textViewGana"
-                    android:imeOptions="actionNext"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Indice"
+                    android:text="Indice:"
                     android:id="@+id/textViewunoDe"
-                    android:layout_marginTop="29dp"
                     android:textColor="@android:color/white"
                     android:textSize="25sp"
-                    android:layout_below="@+id/editTextSmall"
-                    android:layout_alignRight="@+id/editTextSmall"
-                    android:layout_alignEnd="@+id/editTextSmall"/>
+                    android:layout_centerVertical="true"
+                    android:layout_alignLeft="@+id/textViewSupervisor"
+                    android:layout_alignStart="@+id/textViewSupervisor"/>
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -319,12 +263,12 @@
                     android:textColorHint="#fff"
                     android:hint="N"
                     android:text="5"
-                    android:layout_above="@+id/buttonGuardar"
-                    android:layout_toRightOf="@+id/editTextSmall"
-                    android:layout_toLeftOf="@+id/textView7"
-                    android:layout_toStartOf="@+id/textView7"
                     android:imeOptions="actionDone"
-                    />
+                    android:layout_centerVertical="true"
+                    android:layout_alignLeft="@+id/textView7"
+                    android:layout_alignStart="@+id/textView7"
+                    android:layout_alignRight="@+id/buttonGuardar"
+                    android:layout_alignEnd="@+id/buttonGuardar"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -351,33 +295,20 @@
                     android:id="@+id/textView8"
                     android:layout_marginLeft="36dp"
                     android:layout_marginStart="36dp"
-                    android:layout_alignBottom="@+id/textViewL"
                     android:layout_toRightOf="@+id/textView7"
                     android:layout_toEndOf="@+id/textView7"/>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="cerrar sesión"
-                    android:id="@+id/buttonCerrarSesion"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:background="#000"
-                    android:textColor="#fff"
-                    android:textStyle="bold"
-                    android:textSize="14sp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewEleccionTienda"
+                    android:textColor="#fff"
+                    android:textSize="1sp"
+                    android:visibility="visible"
                     android:layout_alignBaseline="@+id/editTextUbicacion"
                     android:layout_alignBottom="@+id/editTextUbicacion"
-                    android:layout_centerHorizontal="true"
-                    android:textColor="#fff"
-                    android:textSize="16sp"
-                    android:visibility="visible"/>
+                    android:layout_toLeftOf="@+id/editTextPorcentaje"
+                    android:layout_toStartOf="@+id/editTextPorcentaje"/>
 
                 <Button
                     android:layout_width="match_parent"
@@ -385,24 +316,27 @@
                     android:text="Selecciona tienda"
                     android:id="@+id/buttonSelecTienda"
                     android:background="#000"
+                    android:textColor="#fff"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
                     android:layout_below="@+id/textView"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:textColor="#fff"
-                    android:textAllCaps="false"
-                    android:textSize="18sp"/>
+                    android:layout_marginTop="12dp"/>
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/editTextReferencia"
-                    android:layout_below="@+id/buttonSelecTienda"
                     android:inputType="textPersonName"
-                    android:layout_centerHorizontal="true"
                     android:hint="Referencia de tienda"
                     android:textColor="#fff"
                     android:textColorHint="#fff"
-                    android:maxLength="25"/>
+                    android:maxLength="25"
+                    android:layout_above="@+id/editTextPorcentaje"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="10dp"/>
 
 
             </RelativeLayout>
