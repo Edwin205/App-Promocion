@@ -45,12 +45,14 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
     String nombreSupervisor,ubicacionSupervisor,referenciaSupervisor,validacionP;
     EditText registrador,ubicacion,referencia,indice;
     String btnTienda;
+    boolean sync;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.portada);
+        sync=false;
 
         registrador = (EditText) findViewById(R.id.editTextNombreSupervisor);
         ubicacion = (EditText) findViewById(R.id.editTextUbicacion);
@@ -283,10 +285,14 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                 break;
 
             case R.id.buttonSyncInfo:
-                enviarRegistro();
+
+                if(sync==false) {
+                    enviarRegistro();
+                }
                 break;
 
             case R.id.buttonSync:
+
                 SharedPreferences sharedPrefs=getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
                 nuevos =  sharedPrefs.getInt("Nuevos",0);
                 totales = sharedPrefs.getInt("totales",0);
@@ -295,7 +301,10 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                 etTimeStamp.setText("Ultima sincronización:" + setTimeStamp());
                 etNuevo.setText("Registros nuevos:"+nuevos);
                 etTotales.setText("Registros totales:"+totales);
-                enviarRegistro();
+
+                if(sync==false) {
+                    enviarRegistro();
+                }
 
                 break;
             case R.id.buttonSettings:
@@ -322,7 +331,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                 ubicacionSuper = (TextView) findViewById(R.id.textViewSuperUbicacion);
                 porcentajeGanador = (EditText) findViewById(R.id.editTextPorcentaje);
                 tVTiendaSelec.setText("");
-                btnSelectienda.setText("Seleciona tienda");
+                btnSelectienda.setText("Selecciona tienda");
                 etTiendaRef.setText("");
                 superNombre.setText("");
                 superUbicacion.setText("");
@@ -332,7 +341,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
 
 
-                btnSetText("Seleciona tienda");
+                btnSetText("Selecciona tienda");
                 SharedPreferences sharedPrefS=getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
                 SharedPreferences.Editor sharedEditorS = sharedPrefS.edit();
                 sharedEditorS.putString("registrador", "");
@@ -423,7 +432,9 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
     Thread thread;
 
+
     private void enviarRegistro(){
+        sync = true;
         final Sync osiSync = new Sync(this);
         int recordsCount = osiSync.countRecords();
 
@@ -450,6 +461,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                         runOnUiThread(new Runnable() {
                             public void run() {
                                 Toast.makeText(getApplicationContext(), "Error al sincronizar los registros vuelva a intentar.", Toast.LENGTH_SHORT).show();
+                                sync = false;
                             }
                         });
                         break;
@@ -467,6 +479,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
                             borrarNuevos();
                             timeStamp();
                             Toast.makeText(getApplicationContext(), "Todos los registros se han sincronizado correctamente.", Toast.LENGTH_SHORT).show();
+                            sync = false;
                         }
                     });
                 }
