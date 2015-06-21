@@ -1,8 +1,10 @@
 package com.onestopinteractive.promocion;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,13 +16,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.android.volley.VolleyError;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 ;
 
 
-public class Portada extends ActionBarActivity implements View.OnClickListener {
+public class Portada extends ActionBarActivity implements View.OnClickListener, SyncListener {
 
     Button siguiente;
     ViewFlipper viewFlipper;
@@ -383,12 +387,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
 
 
-                 if (porcentaje>10){
-                    Toast.makeText(Portada.this, "Ingresa una probabilidad de 5 a 10 .", Toast.LENGTH_SHORT).show();
-                    botonOff = false;
-               }
-
-                else if ( porcentaje<5){
+                 if (porcentaje > 10 || porcentaje < 5){
                     Toast.makeText(Portada.this, "Ingresa una probabilidad de 5 a 10 .", Toast.LENGTH_SHORT).show();
                     botonOff = false;
                }
@@ -429,62 +428,19 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
     }
 
 
-    Thread thread;
-
-
-    private void enviarRegistro(){
+    Sync osiSync;
+    private void enviarRegistro() {
         sync = true;
-        final Sync osiSync = new Sync(this);
+        osiSync = Sync.getSharedInstance(this);
         int recordsCount = osiSync.countRecords();
 
         if (recordsCount <= 0) {
             Toast.makeText(getApplicationContext(), "Todos los registros se han sincronizado correctamente.", Toast.LENGTH_SHORT).show();
-
+            sync = false;
             return;
         }
 
-        Toast.makeText(getApplicationContext(), "Espere mientras se sincronizan " + Integer.toString(recordsCount) + " registros.", Toast.LENGTH_SHORT).show();
-
-        thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                int recordID = osiSync.nextRecord();
-                while (recordID > 0) {
-                    if (osiSync.postRecord(recordID)) {
-                        sincronizados += 1;
-                        nuevos -=1;
-
-
-                        osiSync.deleteRecord(recordID);
-                    } else {
-                        runOnUiThread(new Runnable() {
-                            public void run() {
-                                Toast.makeText(getApplicationContext(), "Error al sincronizar los registros vuelva a intentar.", Toast.LENGTH_SHORT).show();
-                                sync = false;
-                            }
-                        });
-                        break;
-                    }
-                    recordID = osiSync.nextRecord();
-                }
-
-                if (osiSync.countRecords() <= 0) {
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            etTimeStamp.setText("Ultima sincronización:" + getDateTime());
-                            etSincronizados.setText("Registros Sincronizados:" + sincronizados);
-                            etNuevo.setText("Registros nuevos:"+nuevos);
-                            sincronizados();
-                            borrarNuevos();
-                            timeStamp();
-                            Toast.makeText(getApplicationContext(), "Todos los registros se han sincronizado correctamente.", Toast.LENGTH_SHORT).show();
-                            sync = false;
-                        }
-                    });
-                }
-            }
-        });
-        thread.start();
+        osiSync.beginSync(this);
     }
 
     private String getDateTime() {
@@ -502,7 +458,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
     }
 
     private void timeStamp() {
-        SharedPreferences sharedPref=getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+        SharedPreferences sharedPref=getSharedPreferences("promoSettings", Context.MODE_PRIVATE);
         SharedPreferences.Editor sharedEditor = sharedPref.edit();
         sharedEditor.putString("timeStamp", getDateTime());
         sharedEditor.commit();
@@ -511,7 +467,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
 
     private void sincronizados()
     {
-        SharedPreferences sharedPref=getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
+        SharedPreferences sharedPref=getSharedPreferences("promoSettings", Context.MODE_PRIVATE);
         SharedPreferences.Editor sharedEditor = sharedPref.edit();
         sharedEditor.putInt("sincronizados", sincronizados);
         sharedEditor.commit();
@@ -532,6 +488,54 @@ public class Portada extends ActionBarActivity implements View.OnClickListener {
         sharedEditor.commit();
     }
 
+    ProgressDialog progressDialog;
+    public void syncStarted(int count) {
+        nuevos = count;
 
+        progressDialog = ProgressDialog.show(this, "Sincronizar", "Espere mientras se sincronizan " + Integer.toString(nuevos) + " registros.", true);
+    }
+    public void syncProgress(int count) {
+        sincronizados += 1;
+        nuevos = count;
+
+        progressDialog.setMessage("Espere mientras se sincronizan " + Integer.toString(nuevos) + " registros.");
+    }
+    public void syncCompleted() {
+        etTimeStamp.setText("Ultima sincronización:" + getDateTime());
+        etSincronizados.setText("Registros Sincronizados:" + sincronizados);
+        etNuevo.setText("Registros nuevos:"+nuevos);
+        sincronizados();
+        borrarNuevos();
+        timeStamp();
+
+        progressDialog.setMessage("Todos los registros se han sincronizado correctamente.");
+        dismissProgressDialog();
+
+        sync = false;
+    }
+    public void syncEndedWithError(VolleyError error) {
+        nuevos = osiSync.countRecords();
+
+        etTimeStamp.setText("Ultima sincronización:" + getDateTime());
+        etSincronizados.setText("Registros Sincronizados:" + sincronizados);
+        etNuevo.setText("Registros nuevos:"+nuevos);
+        sincronizados();
+        borrarNuevos();
+        timeStamp();
+
+        progressDialog.setMessage("Error al sincronizar los registros. Vuelva a intentar.");
+        dismissProgressDialog();
+
+        sync = false;
+    }
+
+    public void dismissProgressDialog() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.dismiss();
+            }
+        }, 3000);
+    }
 
 }

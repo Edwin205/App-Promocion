@@ -712,8 +712,14 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 String comTicket = cTicket.getText().toString();
                 int lenghtTicket = comTicket.length();
 
-                if(lenghtTicket>=6)
-                {
+                if(lenghtTicket>=6) {
+                    Sync osiSync = new Sync(this);
+                    if (osiSync.hasRecordWithTicket(comTicket)) {
+                        Toast.makeText(Registro.this, "El ticket ya ha sido registrado.", Toast.LENGTH_SHORT).show();
+                        cTicket.setText("");
+                        break;
+                    }
+
                     InputMethodManager inputManagerT = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputManagerT.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                             InputMethodManager.HIDE_NOT_ALWAYS);
