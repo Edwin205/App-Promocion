@@ -12,6 +12,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -82,6 +83,16 @@ public class Sync {
 
     public void deleteRecord(int recordID) {
         System.out.println("Deleting: " + Integer.toString(recordID));
+
+        String imagePath = imagePathForRecord(recordID);
+        if (imagePath != null && imagePath.length() > 0) {
+            File imageFile = new File(imagePath);
+            if (imageFile.exists()) {
+                imageFile.delete();
+                System.out.println("Deleted Image " + Integer.toString(recordID));
+            }
+        }
+
         sqliteDB.delete("Registro", _ID + " = " + Integer.toString(recordID), null);
     }
 
@@ -166,20 +177,23 @@ public class Sync {
     }
 
     public void uploadRecordPhoto(int recordID) {
-        Cursor row;
-        String file = "";
-        row = sqliteDB.rawQuery("SELECT imagenTicket FROM Registro WHERE " + _ID + " = " + Integer.toString(recordID) + ";", null);
-        if (!row.moveToFirst()) {
+        String fileName = imagePathForRecord(recordID);
+        if (fileName == null || fileName.length() <= 0) {
+            mSyncListener.syncEndedWithError(null);
             return;
         }
-        file = row.getString(0);
 
+        File file = new File(fileName);
+        if (!file.exists()) {
+            System.out.println(">>> Image missing: " + file.getName() + " <<<");
+            mSyncListener.syncEndedWithError(null);
+        }
 
         System.out.println(">>> Image: " + Integer.toString(recordID) + " <<<");
 
         final int _recordID = recordID;
 
-        StringRequest sr = new StringRequest(Request.Method.POST, "http://promococacola.azteca.click/api/add.php", new Response.Listener<String>() {
+        ImageUploadRequest iur = new ImageUploadRequest("http://promococacola.azteca.click/api/upload.php", file, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 System.out.println(">>>" + response + "<<<");
@@ -198,17 +212,18 @@ public class Sync {
                 shouldContinue = false;
                 mSyncListener.syncEndedWithError(error);
             }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/x-www-form-urlencoded");
-                return params;
-            }
-        };
+        });
 
-        getRequestQueue().add(sr);
+        getRequestQueue().add(iur);
         return;
+    }
+
+    public String imagePathForRecord(int recordID) {
+        Cursor row = sqliteDB.rawQuery("SELECT imagenTicket FROM Registro WHERE " + _ID + " = " + Integer.toString(recordID) + ";", null);
+        if (!row.moveToFirst()) {
+            return null;
+        }
+        return row.getString(0);
     }
 
     public Map<String, String> paramsForRecord(int recordID) {
