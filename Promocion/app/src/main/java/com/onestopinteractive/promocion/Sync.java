@@ -229,7 +229,7 @@ public class Sync {
     public Map<String, String> paramsForRecord(int recordID) {
         Map<String, String> params = null;
         Cursor row;
-        row = sqliteDB.rawQuery("SELECT nombreSupervisor,ubicacionSupervisor,nombre,apellidos,apellidoMaterno,email,telefono,telefonoSecundario,dia,mes,ano,numeroDeTicket,premio,medida,personalizacion,calle,noExterior,noInterior,colonia,ciudad,codigoPostal,estado,delegacion,timeStamp,tiendaReferencia,tiendaCompra FROM Registro WHERE " + _ID + " = " + Integer.toString(recordID) + ";", null);
+        row = sqliteDB.rawQuery("SELECT nombreSupervisor,ubicacionSupervisor,nombre,apellidos,apellidoMaterno,email,telefono,telefonoSecundario,dia,mes,ano,numeroDeTicket,premio,medida,personalizacion,calle,noExterior,noInterior,colonia,ciudad,codigoPostal,estado,delegacion,timeStamp,tiendaReferencia,tiendaCompra,imagenTicket FROM Registro WHERE " + _ID + " = " + Integer.toString(recordID) + ";", null);
         if (row.moveToFirst()) {
             params = new HashMap<String, String>();
             params.put("supervisor", row.getString(0));
@@ -247,7 +247,9 @@ public class Sync {
             params.put("byear", row.getString(10));
             params.put("ticket", row.getString(11));
             params.put("ticket_store", row.getString(25));
-            params.put("ticket_image", "blah");
+
+            String[] imagePath = row.getString(26).split("/");
+            params.put("ticket_image", imagePath[imagePath.length - 1]);
 
             params.put("prize", row.getString(12));
             params.put("prize_size", row.getString(13));

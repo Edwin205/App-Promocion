@@ -1041,7 +1041,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 int id = imageCursor.getInt(imageCursor.getColumnIndex(MediaStore.Images.Media._ID));
                 String path = imageCursor.getString(imageCursor.getColumnIndex(MediaStore.Images.Media.DATA));
 //                Long size = imageCursor.getLong(imageCursor.getColumnIndex(MediaStore.Images.Media.SIZE));
-                System.out.println(">>> CameraPhoto: " + path + " <<<");
+//                System.out.println(">>> CameraPhoto: " + path + " <<<");
                 if(path.length() > 0){
                     // Remove it
                     ContentResolver cr = getContentResolver();
