@@ -533,15 +533,15 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 break;
 
 
-                case R.id.buttonSmall:
+            case R.id.buttonSmall:
 
-                    medida = "S/M";
-                    preview=9;
-                    viewFlipper.setDisplayedChild(9);
+                medida = "S/M";
+                preview=9;
+                viewFlipper.setDisplayedChild(9);
 
 
 
-                    break;
+                break;
 
 
             case R.id.buttonLarge:
@@ -1056,7 +1056,6 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
     {
         totales +=1;
         nuevos +=1;
-        premio();
         SharedPreferences sharedPref=getSharedPreferences("promoSettings",Context.MODE_PRIVATE);
         SharedPreferences.Editor sharedEditor = sharedPref.edit();
         sharedEditor.putInt("Nuevos", nuevos);
