@@ -1,9 +1,11 @@
 package com.onestopinteractive.promocion;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -900,31 +902,17 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
 
 
+    int lastCameraPhotoID;
     Uri mCurrentPhotoURI;
     String mCurrentPhotoPath;
-
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp;
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-
-        mCurrentPhotoPath = image.getAbsolutePath();
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoURI = Uri.fromFile(image);
-        return image;
-    }
 
     static final int REQUEST_TAKE_PHOTO = 501;
 
     private void dispatchTakePictureIntent() {
         mCurrentPhotoPath = "";
         mCurrentPhotoURI = null;
+        lastCameraPhotoID = -1;
+
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -939,6 +927,9 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
             if (photoFile != null) {
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
                         Uri.fromFile(photoFile));
+
+                lastCameraPhotoID = getLastImageID();
+
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
             }
         }
@@ -961,12 +952,33 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 } catch (IOException ex) {
                     System.out.println(">>> Error downsampling file. <<<");
                 }
+
+                if (lastCameraPhotoID >= 0) {
+                    removeCameraPhotosAfterID(lastCameraPhotoID);
+                }
             } else {
                 mCurrentPhotoPath = "";
                 mCurrentPhotoURI = null;
                 Toast.makeText(Registro.this, "Debe agregar una imagen al ticket.", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp;
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        mCurrentPhotoPath = image.getAbsolutePath();
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoURI = Uri.fromFile(image);
+        return image;
     }
 
     public static Bitmap decodeSampledBitmapAtPath(String path, int reqWidth, int reqHeight) {
@@ -1003,6 +1015,41 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         }
 
         return inSampleSize;
+    }
+
+    private int getLastImageID() {
+        final String[] imageColumns = { MediaStore.Images.Media._ID };
+        final String imageOrderBy = MediaStore.Images.Media._ID + " DESC";
+        final String imageWhere = null;
+        final String[] imageArguments = null;
+        Cursor imageCursor = managedQuery(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, imageColumns, imageWhere, imageArguments, imageOrderBy);
+        if(imageCursor.moveToFirst()){
+            return imageCursor.getInt(imageCursor.getColumnIndex(MediaStore.Images.Media._ID));
+        }else{
+            return 0;
+        }
+    }
+
+    private void removeCameraPhotosAfterID(int lastPhotoID) {
+        final String[] imageColumns = { MediaStore.Images.Media.DATA, MediaStore.Images.Media.DATE_TAKEN, MediaStore.Images.Media.SIZE, MediaStore.Images.Media._ID };
+        final String imageOrderBy = MediaStore.Images.Media._ID + " DESC";
+        final String imageWhere = MediaStore.Images.Media._ID + ">?";
+        final String[] imageArguments = { Integer.toString(lastPhotoID) };
+        Cursor imageCursor = managedQuery(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, imageColumns, imageWhere, imageArguments, imageOrderBy);
+        if(imageCursor.getCount() > 0){
+            while(imageCursor.moveToNext()){
+                int id = imageCursor.getInt(imageCursor.getColumnIndex(MediaStore.Images.Media._ID));
+                String path = imageCursor.getString(imageCursor.getColumnIndex(MediaStore.Images.Media.DATA));
+//                Long size = imageCursor.getLong(imageCursor.getColumnIndex(MediaStore.Images.Media.SIZE));
+                System.out.println(">>> CameraPhoto: " + path + " <<<");
+                if(path.length() > 0){
+                    // Remove it
+                    ContentResolver cr = getContentResolver();
+                    cr.delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStore.Images.Media._ID + "=?", new String[]{ Long.toString(id) } );
+                    break;
+                }
+            }
+        }
     }
 
     private void sumaRegistros()
