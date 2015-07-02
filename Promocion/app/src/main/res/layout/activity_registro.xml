@@ -761,7 +761,7 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:ems="10"
                     android:id="@+id/editTextExterior"
                     android:layout_marginTop="35dp"
@@ -813,7 +813,6 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
                     android:ems="10"
                     android:id="@+id/editTextInterior"
                     android:layout_marginTop="33dp"
@@ -823,7 +822,8 @@
                     android:textSize="22sp"
                     android:layout_below="@+id/textViewInterior"
                     android:layout_centerHorizontal="true"
-                    android:maxLength="10"/>
+                    android:maxLength="10"
+                    android:inputType="text" />
 
                 <Button
                     android:layout_width="wrap_content"
