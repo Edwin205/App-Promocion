@@ -71,7 +71,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener, 
         String regi=sharedPref.getString("registrador", "");
         String ubic=sharedPref.getString("ubicacion", "");
         String refe=sharedPref.getString("referencia", "");
-        String indi=sharedPref.getString("indice", "5");
+        String indi=sharedPref.getString("indice", "2");
 
         registrador.setText(regi);
         ubicacion.setText(ubic);
@@ -340,7 +340,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener, 
                 superUbicacion.setText("");
                 nombreSuper.setText("");
                 ubicacionSuper.setText("");
-                porcentajeGanador.setText("5");
+                porcentajeGanador.setText("2");
 
 
 
@@ -350,7 +350,7 @@ public class Portada extends ActionBarActivity implements View.OnClickListener, 
                 sharedEditorS.putString("registrador", "");
                 sharedEditorS.putString("ubicacion", "");
                 sharedEditorS.putString("referencia", "");
-                sharedEditorS.putString("indice", "5");
+                sharedEditorS.putString("indice", "2");
                 sharedEditorS.commit();
                 Toast.makeText(this,"Se cerro la sesión correctamente.",Toast.LENGTH_SHORT).show();
                 viewFlipper.setDisplayedChild(0);
@@ -387,8 +387,8 @@ public class Portada extends ActionBarActivity implements View.OnClickListener, 
 
 
 
-                 if (porcentaje > 10 || porcentaje < 5){
-                    Toast.makeText(Portada.this, "Ingresa una probabilidad de 5 a 10 .", Toast.LENGTH_SHORT).show();
+                 if (porcentaje > 10 || porcentaje < 2){
+                    Toast.makeText(Portada.this, "Ingresa una probabilidad de 2 a 10 .", Toast.LENGTH_SHORT).show();
                     botonOff = false;
                }
 

@@ -589,12 +589,21 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
 
             case R.id.buttonSigPersonalizacion:
-                atras =10;
 
-                preview = 11;
-                viewFlipper.setDisplayedChild(11);
-                btnAtras.setVisibility(View.VISIBLE);
+                EditText cPersonalizacion= (EditText) findViewById(R.id.editTextPersonalizacion);
+                String comPersonalizaion = cPersonalizacion.getText().toString();
+                int lenghtPers = comPersonalizaion.length();
+
+                if(lenghtPers<=8) {
+                    atras =10;
+                    preview = 11;
+                    viewFlipper.setDisplayedChild(11);
+                    btnAtras.setVisibility(View.VISIBLE);
+                }
+                else
+                    Toast.makeText(Registro.this, "Máximo 8 caracteres", Toast.LENGTH_SHORT).show();
                 break;
+
 
             case R.id.buttonCalle:
                 EditText cCalle= (EditText) findViewById(R.id.editTextCalle);
