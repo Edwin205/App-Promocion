@@ -31,17 +31,26 @@ public class DataBase  extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String Query = "create table Registro(" + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "nombreSupervisor TEXT, ubicacionSupervisor TEXT, nombre TEXT,apellidos TEXT,apellidoMaterno TEXT, email TEXT, telefono TEXT,telefonoSecundario TEXT,dia TEXT,mes TEXT,ano TEXT,numeroDeTicket TEXT,imagenTicket TEXT,premio TEXT,medida TEXT,personalizacion TEXT,calle TEXT,noExterior TEXT,noInterior TEXT,colonia TEXT,ciudad TEXT,codigoPostal TEXT,estado TEXT,delegacion TEXT,timeStamp TEXT,tiendaReferencia TEXT,tiendaCompra TEXT)";
-
         db.execSQL(Query);
+        db.execSQL("create table numeroTicket(nticket TEXT PRIMARY KEY )");
+
     }
 
     //borrar la tabla y crear la nueva tabla
     @Override
     public void onUpgrade(SQLiteDatabase db, int versionAnte, int versionNue) {
         db.execSQL("drop table if exists Registro");
+        db.execSQL("drop table if exists numeroTicket");
         db.execSQL("create table Registro(" + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "nombreSupervisor TEXT, ubicacionSupervisor TEXT, nombre TEXT,apellidos TEXT,apellidoMaterno TEXT,email TEXT, telefono TEXT,telefonoSecundario TEXT,dia TEXT,mes TEXT,ano TEXT,numeroDeTicket TEXT,imagenTicket TEXT,premio TEXT,medida TEXT,personalizacion TEXT,calle TEXT,noExterior TEXT,noInterior TEXT,colonia TEXT,ciudad TEXT,codigoPostal TEXT,estado TEXT,delegacion TEXT,timeStamp TEXT,tiendaReferencia  TEXT,tiendaCompra TEXT)");
+        db.execSQL("create table numeroTicket(nticket TEXT PRIMARY KEY )");
+    }
 
+    public void insertarTicket(String nticket)
+    {
+        ContentValues valorTicket = new ContentValues();
+        valorTicket.put("nticket",nticket);
+        this.getWritableDatabase().insert("numeroTicket", null, valorTicket);
     }
 
     public void insertarReg(String nombreSupervisor,String ubicacionSupervisor,String referenciaTienda,
