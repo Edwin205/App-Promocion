@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -728,21 +729,26 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
                 int lenghtTicket = comTicket.length();
 
                 if(lenghtTicket>=6) {
-                    Sync osiSync = new Sync(this);
-                    if (osiSync.hasRecordWithTicket(comTicket)) {
-                        Toast.makeText(Registro.this, "El ticket ya ha sido registrado.", Toast.LENGTH_SHORT).show();
-                        cTicket.setText("");
-                        break;
+                    DataBase admin = new DataBase(this);
+                    SQLiteDatabase bd = admin.getReadableDatabase();
+                    String Query = "Select nticket from numeroTicket where nticket ="+comTicket;
+                    Cursor cursor = bd.rawQuery(Query, null);
+                    if (cursor.moveToFirst()) {
+                     // record exists
+                        Toast.makeText(Registro.this, "Este numero de ticket ya fue registrado.", Toast.LENGTH_SHORT).show();
+                    } else {
+                       // record not found
+                        InputMethodManager inputManagerT = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        inputManagerT.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                                InputMethodManager.HIDE_NOT_ALWAYS);
+                        atras =22;
+                        preview=27;
+                        viewFlipper.setDisplayedChild(27);
+                        btnCancelar.setVisibility(View.INVISIBLE);
+                        btnAtras.setVisibility(View.INVISIBLE);
                     }
 
-                    InputMethodManager inputManagerT = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inputManagerT.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
-                            InputMethodManager.HIDE_NOT_ALWAYS);
-                    atras =22;
-                    preview=27;
-                    viewFlipper.setDisplayedChild(27);
-                    btnCancelar.setVisibility(View.INVISIBLE);
-                    btnAtras.setVisibility(View.INVISIBLE);
+
 
                 }
 
@@ -776,6 +782,7 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         etFrase = (EditText) findViewById(R.id.editTextPersonalizacion);
         etCalle = (EditText) findViewById(R.id.editTextCalle);
         etExterior = (EditText) findViewById(R.id.editTextExterior);
+
         etInterior = (EditText) findViewById(R.id.editTextInterior);
         etColonia = (EditText) findViewById(R.id.editTextColonia);
         etCiudad = (EditText) findViewById(R.id.editTextCiudad);
@@ -805,10 +812,11 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
         String ticket = etTicket.getText().toString();
 
         prueba = (TextView) findViewById(R.id.textPrueba);
-        pruebaFin= (TextView) findViewById(R.id.textViewPruebaFin);
+        pruebaFin = (TextView) findViewById(R.id.textViewPruebaFin);
         baseDatos.abrir();
         baseDatos.insertarReg(nombreSupervisor, ubicacionSupervisor, referenciaTiendita, nombre, apellidos, apellidoMaterno, email,
                 telefono, telefonoSecundario, dia, mes, ano, ticket, mCurrentPhotoPath, tiendaCompra);
+        baseDatos.insertarTicket(ticket);
         baseDatos.cerrar();
 
         etNombre.setText("");
@@ -903,9 +911,6 @@ public class Registro extends ActionBarActivity implements View.OnClickListener 
 
         else
             Toast.makeText(Registro.this, "Ingresa una fecha valida.", Toast.LENGTH_SHORT).show();
-
-
-
 
     }
 
