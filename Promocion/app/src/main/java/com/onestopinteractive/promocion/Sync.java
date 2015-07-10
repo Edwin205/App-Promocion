@@ -3,6 +3,7 @@ package com.onestopinteractive.promocion;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.inputmethodservice.Keyboard;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -232,39 +233,48 @@ public class Sync {
         row = sqliteDB.rawQuery("SELECT nombreSupervisor,ubicacionSupervisor,nombre,apellidos,apellidoMaterno,email,telefono,telefonoSecundario,dia,mes,ano,numeroDeTicket,premio,medida,personalizacion,calle,noExterior,noInterior,colonia,ciudad,codigoPostal,estado,delegacion,timeStamp,tiendaReferencia,tiendaCompra,imagenTicket FROM Registro WHERE " + _ID + " = " + Integer.toString(recordID) + ";", null);
         if (row.moveToFirst()) {
             params = new HashMap<String, String>();
-            params.put("supervisor", row.getString(0));
-            params.put("location", row.getString(1));
-            params.put("location_ref", row.getString(24));
+            params.put("supervisor", RowGetStringSafe(row, 0));
+            params.put("location", RowGetStringSafe(row, 1));
+            params.put("location_ref", RowGetStringSafe(row, 24));
 
-            params.put("full_name", row.getString(2));
-            params.put("surname", row.getString(3));
-            params.put("surname_m", row.getString(4));
-            params.put("email", row.getString(5));
-            params.put("phone", row.getString(6));
-            params.put("phone_alt", row.getString(7));
-            params.put("bday", row.getString(8));
-            params.put("bmonth", row.getString(9));
-            params.put("byear", row.getString(10));
-            params.put("ticket", row.getString(11));
-            params.put("ticket_store", row.getString(25));
+            params.put("full_name", RowGetStringSafe(row, 2));
+            params.put("surname", RowGetStringSafe(row, 3));
+            params.put("surname_m", RowGetStringSafe(row, 4));
+            params.put("email", RowGetStringSafe(row, 5));
+            params.put("phone", RowGetStringSafe(row, 6));
+            params.put("phone_alt", RowGetStringSafe(row, 7));
+            params.put("bday", RowGetStringSafe(row, 8));
+            params.put("bmonth", RowGetStringSafe(row, 9));
+            params.put("byear", RowGetStringSafe(row, 10));
+            params.put("ticket", RowGetStringSafe(row, 11));
+            params.put("ticket_store", RowGetStringSafe(row, 25));
 
-            String[] imagePath = row.getString(26).split("/");
+            String imageFullPath = RowGetStringSafe(row, 26);
+            String[] imagePath = imageFullPath.split("/");
             params.put("ticket_image", imagePath[imagePath.length - 1]);
 
-            params.put("prize", row.getString(12));
-            params.put("prize_size", row.getString(13));
-            params.put("prize_text", row.getString(14));
-            params.put("prize_calle", row.getString(15));
-            params.put("prize_nexterior", row.getString(16));
-            params.put("prize_ninterior", row.getString(17));
-            params.put("prize_colonia", row.getString(18));
-            params.put("prize_ciudad", row.getString(19));
-            params.put("prize_postal", row.getString(20));
-            params.put("prize_estado", row.getString(21));
-            params.put("prize_delegacion", row.getString(22));
+            params.put("prize", RowGetStringSafe(row, 12));
+            params.put("prize_size", RowGetStringSafe(row, 13));
+            params.put("prize_text", RowGetStringSafe(row, 14));
+            params.put("prize_calle", RowGetStringSafe(row, 15));
+            params.put("prize_nexterior", RowGetStringSafe(row, 16));
+            params.put("prize_ninterior", RowGetStringSafe(row, 17));
+            params.put("prize_colonia", RowGetStringSafe(row, 18));
+            params.put("prize_ciudad", RowGetStringSafe(row, 19));
+            params.put("prize_postal", RowGetStringSafe(row, 20));
+            params.put("prize_estado", RowGetStringSafe(row, 21));
+            params.put("prize_delegacion", RowGetStringSafe(row, 22));
 
-            params.put("created_at", row.getString(23));
+            params.put("created_at", RowGetStringSafe(row, 23));
         }
         return params;
+    }
+
+    public String RowGetStringSafe(Cursor row, Integer pos) {
+        String attrValue = row.getString(pos);
+        if (attrValue == null) { attrValue = ""; }
+        if (pos == 12 && attrValue == "") { attrValue = "vip"; } // Prize can't be empty
+//        System.out.println(">>> Attr: " + Integer.toString(pos) + " - " + attrValue + " <<<");
+        return attrValue;
     }
 }

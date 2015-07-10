@@ -8,8 +8,8 @@ android {
         applicationId "com.onestopinteractive.promocion"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 6
-        versionName "1.4.2"
+        versionCode 11
+        versionName "1.4.7"
     }
     buildTypes {
         release {
