@@ -73,6 +73,10 @@ public class Portada extends ActionBarActivity implements View.OnClickListener, 
         String refe=sharedPref.getString("referencia", "");
         String indi=sharedPref.getString("indice", "2");
 
+        if (ubic == "Selecciona tienda") {
+            ubic = "";
+        }
+
         registrador.setText(regi);
         ubicacion.setText(ubic);
         referencia.setText(refe);
@@ -81,12 +85,6 @@ public class Portada extends ActionBarActivity implements View.OnClickListener, 
         nombreSuper.setText(regi);
         ubicacionSuper.setText(ubic);
         tvrefencia.setText(refe);
-
-
-
-
-
-
 
         if(sincronizados==0)
         {
@@ -157,29 +155,21 @@ public class Portada extends ActionBarActivity implements View.OnClickListener, 
                     String referenciaSuperv = tvrefencia.getText().toString();
                     boolean darError = true;
 
-                    if (nombreSuperv != "" && ubicacionSuperv != "")
+                    if (ubicacionSuperv == "Selecciona tienda") {
+                        ubicacionSuperv = "";
+                    }
+
+                    if (nombreSuperv != "" && ubicacionSuperv != "" && referenciaSuperv != "")
                         darError = false;
 
                     else
                         Toast.makeText(Portada.this, "Ingresa tus datos antes de continuar.", Toast.LENGTH_SHORT).show();
 
                     if (darError == false) {
-
-
                         porcentajeGanador = (EditText) findViewById(R.id.editTextPorcentaje);
-
-
-
                         porcentaje = porcentajeGanador.getText().toString();
 
-
-
-
                         Intent intent = new Intent(Portada.this, Registro.class);
-
-
-
-
 
                         intent.putExtra("porcentaje", porcentaje);
                         intent.putExtra("nombreSupervisor", nombreSuperv);
@@ -190,9 +180,6 @@ public class Portada extends ActionBarActivity implements View.OnClickListener, 
 
                 }
             });
-
-
-
     }
 
     @Override
